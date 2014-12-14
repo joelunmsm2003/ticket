@@ -1,0 +1,282 @@
+<header>
+
+<script type='text/javascript' src='http://code.jquery.com/jquery-1.8.2.js'></script>
+  <h1><a href='/ticket/1'>Logos {{grupo}}</a></h1>
+
+
+<title class='title'>Logos</title>
+
+<nav>
+
+<div id="top-menu">
+    <ul class="nav">
+
+<li><a href="/agregar_ticket">Agregar Ticket</a></li>
+
+
+
+    </li>
+     <li><a href="">Tickets</a>
+
+         <ul class ='ticket_tipo'>
+
+            <li><a href="/ticket/1">Nuevos</a></li>
+            <li><a href="/ticket/2">Atendidos</a></li>
+            <li><a href="/ticket/3">En Prueba</a></li>
+            <li><a href="/ticket/4">Cerrados</a></li>
+            <li><a href="/realtime">RealTime</a></li>
+          
+        </ul>
+
+
+
+    </li>
+
+        
+        <ul>
+
+        </ul>
+
+      </li>
+   
+
+      
+      <li><a href="">Logos</a>
+        <ul class ='ticket_tipo'>
+          <li><a href="">Monitoreo</a></li>
+          <li><a href="">Reportes</a></li>
+     
+          
+        </ul>
+      </li>
+
+   <li><a href="">Bienvenido, {{username}}</a>
+
+        <ul class ='ticket_tipo'>
+          <li><a href="/salir">Salir</a></li>
+     
+     
+          
+        </ul>
+
+   </li>
+    <li><a href="">Notificaciones  <div id ='numero_notis'></div></a>
+ <ul class ='ticket_tipo'>
+         <div id='notificacion'></div>
+
+          {% for noti in noti %}
+
+            
+         
+            {% if noti.name == 'Ticket evento-' %}
+
+             <li><a href="/ver_evento_all/{{noti.ticket_id}}">  {{noti.name}} {{noti.ticket}}</a></li>
+             {% else %}
+              <li><a href="/detalle_ticket/{{noti.ticket_id}}">  {{noti.name}} {{noti.ticket}}</a></li>
+
+            {% endif %}
+          {% endfor %}
+          <li><a href="/notificaciones">Ver todas las Notificaciones</a></li>
+     
+     
+          
+        </ul>
+
+
+   </li>
+
+
+
+</div>
+</nav>
+
+
+
+</header>
+
+<div id='audio'></div>
+<div id='count'>{{count}}</div>
+<div id='soportex'>{{nsoporte}}</div>
+<div id='evento'>{{event}}</div>
+
+<script type="text/javascript">
+
+i=0  
+setInterval('moverItem()',1000);
+
+
+
+function moverItem() {
+
+    f=0
+    $( "#count" ).hide();
+    $( "#soportex" ).hide();
+    $( "#evento" ).hide();
+
+
+
+      count = $('#count').text()
+      nsoporte = $('#soportex').text()
+      nevento = $('#evento').text()
+       
+       $.ajax({
+                        url : "/realtime_post", 
+                        type : "POST",   
+                        dataType:"json",                
+                        data : {
+                            count: count,
+                            soportez: nsoporte,
+                            eventox:nevento,
+                            csrfmiddlewaretoken: '{{ csrf_token }}'
+                            },
+                            success : function(json) {
+
+
+                var trs=$("#orillamada tr").length;
+                
+                if(trs==20){
+                $("#orillamada tr:last").remove();
+
+                }
+
+           
+              if (typeof(json.n)!='undefined'){
+
+                
+             
+                
+                x = $.parseJSON(json.n).counter_act;
+                c = $.parseJSON(json.data)
+                y = $.parseJSON(json.n).soporte_act
+                z= $.parseJSON(json.n).evento_act
+                sop = $.parseJSON(json.snuevo)
+                sev = $.parseJSON(json.sevento)
+               
+         
+                $('#audio').append('<audio src="http://k10.offliberty.com/wmLmjawU62o.mp3" autoplay></audio>')
+
+
+              
+                if (parseInt(y)>parseInt(nsoporte)){
+                
+                console.log('entro')
+
+                if(json.grupo=='Soporte'){
+                  f=1
+                  i=i+1
+                   $('#notificacion').prepend('<li><a href="/detalle_ticket/'+sop[0].fields.ticket+
+                  '">Se atendio el ticket '+c[0].fields.asunto+'</a></li>')
+
+                   $('#notificacion').css( "color", "red" );
+                }
+                else{
+                    if(json.id==c[0].fields.cliente){
+                      f=1
+                      i=i+1
+                       $('#notificacion').prepend('<li><a href="/detalle_ticket/'+sop[0].fields.ticket+
+                  '">Se atendio el ticket '+c[0].fields.asunto+'</a></li>')
+
+                    }
+
+                }
+            
+
+                }
+                console.log(c[0].fields.cliente)
+                console.log(json.id)
+                console.log(json.grupo)
+
+                if (parseInt(x)>parseInt(count)){
+                
+                
+                if(json.grupo=='Soporte'){
+                  f=1
+                  i=i+1
+                  $('#notificacion').prepend('<li><a href="/detalle_ticket/'+c[0].pk+'">Nuevo ticket '+c[0].fields.asunto+'</a></li>')
+                }
+                else{
+                    if(json.id==c[0].fields.cliente){
+                      f=1
+                      i=i+1
+                      $('#notificacion').prepend('<li><a href="/detalle_ticket/'+c[0].pk+'">Nuevo ticket '+c[0].fields.asunto+'</a></li>')
+
+                    }
+
+                }
+                
+
+                }
+
+            
+
+                if (parseInt(z)>parseInt(nevento)){
+                i=i+1
+
+                if(json.grupo=='Soporte'){
+                  f=1
+                  i=i+1
+
+                 $('#notificacion').prepend('<li><a href="/ver_evento_all/'+c[0].pk+'">Nuevo evento '+c[0].fields.asunto+'</a></li>')
+                }
+                else{
+                    if(json.id==c[0].fields.cliente){
+                      f=1
+                      i=i+1
+                  $('#notificacion').prepend('<li><a href="/ver_evento/'+c[0].pk+'">Nuevo evento '+c[0].fields.asunto+'</a></li>')
+
+                    }
+
+                }
+                
+
+
+                }
+
+
+
+                
+               
+                   if (parseInt(i)==parseInt(0) & f!=1){
+
+                   }
+                   else{
+                    $('.noti').remove();
+                    $('#numero_notis').append('<div class="noti">'+i+'</div>')
+                    $('.title').text('('+i+')'+' Logos')
+                   }
+                   
+                
+               
+                
+              }
+              else{
+
+                x=json.counter_act
+                y = json.soporte_act
+                z = json.evento_act
+              }
+
+              $("#soportex").text(parseInt(y))
+               $("#count").text(parseInt(x))
+              $("#evento").text(parseInt(z))
+              
+
+                            },
+                    });
+                    return false;
+}
+
+</script>
+
+<script>
+var ancho = $("header").css("width");
+
+ancho  = parseInt(ancho);
+console.log(ancho)
+
+
+
+if (ancho <= 720){
+ // $( ".ticket_tipo" ).remove();
+}
+</script>

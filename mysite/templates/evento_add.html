@@ -1,0 +1,79 @@
+
+
+{% include "layout.html" %}
+
+<body>
+
+{% include "header.html" %}
+
+
+
+<div id='contenedor'>
+<div id='form'>
+
+<a>Soporte del ticket {{ticket.asunto}}</a>
+
+
+<form action="/evento_add/" method="post" class='ticket' enctype="multipart/form-data">
+    
+    {% csrf_token %}
+    
+    <label class='etiqueta'></label><div id='field'><input value="{{ticket.id}}" id="field" type="hidden" name="id_ticket" maxlength="100"></div>
+
+    <label class='etiqueta'></label><div id='field'><input value="{{soporte.id}}" id="field" type="hidden" name="id" maxlength="100"></div>
+
+        <br>
+    
+
+    <label class='etiqueta'>Evento :</label><br>
+    <textarea id="field" name="name" rows="10" cols="30">
+
+    </textarea>
+  
+    
+    <div class='file_upload'><a> Adjuntar Archivo</a></div>
+
+    <div id='files'></div>
+    <input type='hidden' name='cont' value='0' id='cont'></input>
+
+    <label class='etiqueta'></label><div id='field'><br><input  id="field1" type="submit" value="Agregar Evento" /></div>
+
+</form>
+
+
+</div>
+</div>
+
+
+<script type="text/javascript">
+	
+
+	i=0
+
+$( ".file_upload" ).click(function() {
+
+	i=i+1
+	x=i
+	console.log(i)
+
+	$("#files").append('<input type="file" id="file" name="docfile'+i+'">')
+	
+
+	$("input#cont").val(i)
+
+});
+
+function Eliminar(i)
+{
+    
+    x = $("#cont").text()
+    console.log(x)
+    var d=document.getElementById('#file'.i)
+    console.log(d)
+}
+
+
+</script>
+
+
+</body>

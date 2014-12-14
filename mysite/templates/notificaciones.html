@@ -1,0 +1,30 @@
+
+{% include "layout.html" %}
+
+<body>
+
+{% include "header.html" %}
+
+<table>
+  <tr>
+	Notificaciones
+  </tr>
+   <tr>
+    <td>Evento</td>
+    <td>Asunto</td>
+    <td>Detalle</td>
+
+  </tr>
+
+		{% for noti in noti %}
+
+	 <tr>
+	  <td width='20%'>{{noti.name}}</td>
+    <td width='20%'>{{noti.ticket}}</td>
+   <td width='20%'><a href='/detalle_ticket/{{noti.ticket_id}}'>Mas detalle</a></td>
+	
+
+  </tr>
+			
+		{% endfor %}
+</table>

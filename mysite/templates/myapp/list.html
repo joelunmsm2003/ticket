@@ -1,0 +1,102 @@
+{% include "layout.html" %}
+
+
+{% include "header.html" %}
+
+
+<body>
+
+
+
+
+
+
+
+<div id='contenedor'>
+<div id='form'>
+	<form action="{% url "list" %}" method="post" enctype="multipart/form-data">
+
+
+	{% csrf_token %}
+
+
+	<label class='etiqueta'>Asunto :</label><div id='field'><input id="field" type="text" name="asunto" maxlength="100"></div>
+    <label class='etiqueta'>Tipo :</label><br>
+
+    <select name="tipo" id="tipo">
+    {% for tipos in tipos%}
+     <option value="{{tipos.id}}">{{tipos.name}}</option>
+	{% endfor %}
+    </select>
+
+    <br>
+    <label class='etiqueta'>Descripcion :</label><br>
+    <textarea id="field" name="descripcion" rows="10" cols="30"></textarea>
+			<!--<p>{{ form.non_field_errors }}</p>
+			<p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
+			<p>
+				{{ form.docfile.errors }}
+				{{ form.docfile }}
+				{{ form.docfile }}-->
+				<div class='file_upload'><a> Adjuntar Archivo</a></div>
+				
+				<input type='hidden' name='cont' value='0' id='cont'>
+				
+				<div id='files'></div>
+				<br>
+			</p>
+			<p><input type="submit" value="Upload"  id="field1" /></p>
+		</form>
+
+</div>
+</div>
+
+<script type="text/javascript">
+	
+
+	i=0
+
+$( ".file_upload" ).click(function() {
+
+	i=i+1
+	x=i
+	console.log(i)
+
+	$("#files").append('<input type="file" id="file" name="docfile'+i+'">')
+	
+
+	$("input#cont").val(i)
+
+});
+
+function Eliminar(i)
+{
+    
+    x = $("#cont").text()
+    console.log(x)
+    var d=document.getElementById('#file'.i)
+    console.log(d)
+}
+
+
+
+
+</script>
+
+		<!-- List of uploaded documents -
+		{% if documents %}
+			<ul>
+			{% for document in documents %}
+				<li><a href="http://localhost/{{document.docfile.name}}">{{ document.docfile.name }}</a></li>
+			{% endfor %}
+			</ul>
+		{% else %}
+			<p>No documents.</p>
+		{% endif %}
+
+		<!-- Upload form. Note enctype attribute! -->
+		
+	</body>
+
+</html> 
+

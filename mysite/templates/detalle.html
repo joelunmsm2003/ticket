@@ -1,0 +1,63 @@
+
+
+{% include "layout.html" %}
+
+<body>
+
+{% include "header.html" %}
+
+
+
+
+{{msj}}
+<div id='contenedor'>
+
+<div id= 'tickets'>
+
+<div id='pendientes'>
+
+<table>
+ <tr>
+Ticket {{ticket.id}}
+  </tr>
+   <tr>
+    <td>Asunto</td>
+    <td>Tipo</td> 
+    <td>Fecha de Inicio</td>
+    <td>Fecha de Fin</td>
+    <td>Estado</td>
+    <td>Descripcion</td>
+
+  </tr>
+
+
+
+	<tr>
+	<td width='30%'>{{ticket.asunto}}</td>
+	<td width='10%'>{{ticket.tipo}}</td>
+	<td width='18%'>{{ticket.fecha_inicio}}</td>
+	<td width='18%'>{{ticket.fecha_fin}}</td>
+	<td width='10%'>{{ticket.estado}}</td>
+    <td width='10%'>{{ticket.descripcion}}</td>
+
+	</tr>
+
+</table>
+
+</div>
+
+
+
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+</body>
+</html>

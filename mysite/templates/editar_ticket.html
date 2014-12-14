@@ -1,0 +1,28 @@
+{% include "layout.html" %}
+
+<body>
+
+{% include "header.html" %}
+Ticket
+
+{{ticket.id}}
+<form action="" method="post" class='ticket'>
+    
+    {% csrf_token %}
+    
+
+    <label class='etiqueta'>Asunto :</label><div id='field'><input id="field" type="text" name="asunto" maxlength="100" value = '{{ticket.asunto}}'></div>
+    <label class='etiqueta'>Tipo :</label><br>
+    <select name="tipo" id="tipo" value ='{{ticket.tipo}}'>
+    {% for tipos in tipos%}
+     <option value="{{tipos.id}}">{{ tipos.name }}</option>
+	{% endfor %}
+    </select>
+
+    <br>
+  
+    <label class='etiqueta'>Descripcion :</label><div id='field'><input id="descripcion" type="text" name="descripcion" value = '{{ticket.descripcion}}' ></div><br>
+
+    <!--<label class='etiqueta'></label><div id='field'><input  id="field1" type="submit" value="Actualizar Ticket" /></div>-->
+
+</form>

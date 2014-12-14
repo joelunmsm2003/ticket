@@ -1,0 +1,24 @@
+mysql
+~~~~~
+
+mysql -u root
+
+show databases;
+CREATE DATABASE database_name;
+SHOW DATABASES;
+DROP DATABASE database name;
+USE events;
+SHOW tables;
+
+CREATE TABLE potluck (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+name VARCHAR(20),
+food VARCHAR(30),
+confirmed CHAR(1), 
+signup_date DATE);
+
+SHOW TABLES;
+
+DESCRIBE potluck;
+INSERT INTO `potluck` (`id`,`name`,`food`,`confirmed`,`signup_date`) VALUES (NULL, "John", "Casserole","Y", '2012-04-11');
+
+SELECT * FROM potluck;

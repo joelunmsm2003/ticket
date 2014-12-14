@@ -1,0 +1,173 @@
+
+
+{% include "layout.html" %}
+  <title>Real Time</title>
+<script type='text/javascript' src='http://code.jquery.com/jquery-1.8.2.js'></script>
+
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body>
+
+{% include "header.html" %}
+<div id='count'>{{count}}</div>
+
+<table>
+<tbody>
+ <tr>
+Tickets Real Time
+  </tr>
+   <tr>
+    <td width='10%'>Usuario</td>
+    <td width='10%'>Asunto</td>
+    <td width='10%'>Tipo</td> 
+    <td width='10%'>Fecha de Inicio</td>
+
+
+
+  {% if estado_name == 'Atendidos' %}
+      <td width='10%'>Soporte</td>
+  {% endif %}
+
+   
+    <td width='10%'>Estado</td>
+    <td width='10%'>Detalle</td>
+    
+    <td width='10%'>Accion</td>
+
+  </tr>
+
+
+
+</tbody> 
+</table>
+
+
+
+<table> 
+
+    <div id='orillamada' class="warning"></div>
+    
+
+</table>
+
+{% if ticket %}
+
+<table>
+  <tr>Historico de Tickets</tr>
+{% for ticket in ticket%}
+  
+
+  <tr>
+  
+  <td width='10%'><a href='/ver_usuario/{{ticket.cliente_id}}/'>{{ticket.cliente}}</a></td>
+  <td width='10%'>{{ticket.asunto}}</td>
+  <td width='10%'>{{ticket.tipo}}</td>
+  <td width='10%'>{{ticket.fecha_inicio}}</td>
+  <td width='10%'>{{ticket.estado}}</td>
+  <td width='10%'><a href='/detalle_ticket/{{ticket.id}}'>Mas detalle</a></td>
+  {% if grupo == 'Soporte' %}
+            {% if estado_name == 'Nuevos' %}
+            <td width='10%'><a href='/atender/{{ticket.id}}'>Atender</a></td>
+            {% endif %}
+     
+
+  {% else %}
+          {% if estado_name == 'Nuevos' %}
+            <td width='10%'><a href=''>-</a></td>
+            {% endif %}
+    
+  {% endif %}
+  </tr>
+{% endfor %}
+
+
+</table>
+
+
+{% else %}
+<a>No hay tickets</a>
+{% endif %}
+
+
+<script type="text/javascript">
+
+i=0  
+setInterval('moverItem()',2000);
+
+
+function moverItem() {
+count = $('#count').text()
+                       
+    
+       $.ajax({
+                        url : "/realtime_post_monitor", 
+                        type : "POST",   
+                        dataType:"json",                
+                        data : {
+                            count: count,
+                            csrfmiddlewaretoken: '{{ csrf_token }}'
+                            },
+                            success : function(json) {
+
+								i=i+1
+								var trs=$("#orillamada tr").length;
+								
+								if(trs==20){
+								$("#orillamada tr:last").remove();
+
+								}
+
+						  
+
+           
+
+                console.log(json.n)
+              if (typeof(json.n)!='undefined'){
+
+              
+
+                x = $.parseJSON(json.n).counter_act;
+                c = $.parseJSON(json.data)
+                  $('#orillamada').prepend('<table><tr><td width=10%><a href="/ver_usuario/'+c[0].fields.cliente+'">'+c[0].fields.cliente+'</a></td><td width=10%>'+c[0].fields.asunto+'</td><td width=10%>'+c[0].fields.tipo+'</td><td width=10%>'+c[0].fields.fecha_inicio+'</td><td width=10%>'+c[0].fields.estado+'</td><td width=10%><a href="/detalle_ticket/'+c[0].pk+'">Mas detalle</a></td><td width=10%><a href="/atender/'+c[0].pk+'">Atender</a></td><tr></table>') 
+
+
+                $('#audio').append('<audio src="http://k10.offliberty.com/wmLmjawU62o.mp3" autoplay></audio>')
+
+                console.log(c[0].fields.asunto)
+
+                 $('#notificacion').append('<a href="/salir">Nuevo ticket :'+c[0].fields.asunto+'</a>')  
+
+
+              }
+              else{
+
+                x=json.counter_act
+              }
+
+
+             
+               $("#count").text(x)
+              
+              
+						
+
+
+       
+                            },
+                    });
+                    return false;
+}
+
+</script>
+
+
+
+
+</body>
+</html>
+
+

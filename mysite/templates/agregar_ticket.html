@@ -1,0 +1,69 @@
+
+
+{% include "layout.html" %}
+
+<body>
+
+{% include "header.html" %}
+
+
+
+
+{{msj}}
+<div id='contenedor'>
+<div id='form'>
+Generar un Ticket
+<form action="/ticket_add/" method="post" class='ticket' enctype="multipart/form-data">
+    
+    {% csrf_token %}
+    
+
+    <label class='etiqueta'>Asunto :</label><div id='field'><input id="field" type="text" name="asunto" maxlength="100"></div>
+    <label class='etiqueta'>Tipo :</label><br>
+    <select name="tipo" id="tipo">
+    {% for tipos in tipos%}
+     <option value="{{tipos.id}}">{{tipos.name}}</option>
+	{% endfor %}
+    </select>
+
+    <br>
+    <label class='etiqueta'>Descripcion :</label><br>
+    <textarea id="field" name="descripcion" rows="10" cols="30">
+
+	</textarea>
+
+    <p>{{ form_document.non_field_errors }}</p>
+    <p>{{ form_document.docfile.label_tag }} {{ form_document.docfile.help_text }}</p>
+
+    <p>
+        {{ form_document.docfile.errors }}
+        {{ form_document.docfile }}
+        {{ form_document.docfile1 }}
+        {{ form_document.docfile2 }}
+        {{ form_document.docfile3 }}
+        {{ form_document.docfile4 }}
+    </p>
+
+    <br>
+    
+    <label class='etiqueta'></label><div id='field'><input  id="field1" type="submit" value="Enviar Ticket" /></div>
+
+
+   
+
+
+</form>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

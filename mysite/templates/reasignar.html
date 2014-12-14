@@ -1,0 +1,52 @@
+
+
+{% include "layout.html" %}
+
+<body>
+
+{% include "header.html" %}
+
+
+
+
+{{msj}}
+
+
+<form action="/reasignar_add/" method="post" class='ticket'>
+    
+    {% csrf_token %}
+    
+    <label class='etiqueta'></label><div id='field'><input value="{{id_ticket}}" id="field" type="hidden" name="id_ticket" maxlength="100"></div>
+    <label class='etiqueta'></label><div id='field'><input readonly value="{{soporte.id}}" id="field" type="hidden" name="id" maxlength="100"></div>
+    <label class='etiqueta'>Ticket :</label><div id='field'><input  readonly value="{{soporte.ticket}}" id="field" type="text" name="ticket" maxlength="100"></div>
+    <label class='etiqueta'>Fecha Inicio :</label><div id='field'><input readonly value="{{soporte.fecha_inicio}}" id="field" type="text" name="fecha_inicio" maxlength="100"></div>
+
+
+
+
+    <label class='etiqueta'>Soporte :</label><br>
+
+    <select name="soporte" id="tipo">
+    {% for user_soporte in user_soporte%}
+     <option value="{{user_soporte.id}}">{{user_soporte.username}}</option>
+	{% endfor %}
+    </select>
+
+     <br>
+  
+
+    <label class='etiqueta'></label><div id='field'><br><input  id="field1" type="submit" value="Reasignar Ticket" /></div>
+
+</form>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

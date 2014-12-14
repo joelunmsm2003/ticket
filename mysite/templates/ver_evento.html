@@ -1,0 +1,50 @@
+
+{% include "layout.html" %}
+
+<body>
+
+{% include "header.html" %}
+
+<div id='contenedor'>
+
+
+{% if evento %}
+<table>
+
+ <tr>
+Soporte del ticket <a href='/detalle_ticket/{{ticket.id}}/'>{{ticket.asunto}}</a>
+
+  </tr>
+  <tr></tr>
+   <tr>
+    
+		<td>Evento generado por</td> 
+		<td>Soporte Asignado</td>
+		<td>Fecha</td>
+		<td>Documentos</td> 
+		<td>Evento</td> 
+   
+
+    
+  </tr>
+
+
+	{% for evento in evento%}
+	<tr>
+	<td width='10%'>{{evento.user}}</td>
+	<td width='10%'>{{soporte.soporte}}</td>
+	<td width='10%'>{{evento.fecha_inicio}}</td>
+	<td width='10%'><a href='/documentos/{{ticket.id}}'>Documentos</a></td>
+	<td width='60%'>{{evento.name}}</td>
+	{% endfor %}
+</table>
+{% else %}
+<a>No existen eventos</a>
+{% endif %}
+
+
+
+
+</div>
+
+</body>

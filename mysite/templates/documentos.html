@@ -1,0 +1,72 @@
+{% include "layout.html" %}
+
+<body>
+
+{% include "header.html" %}
+
+Archivos del Ticket {{ticket.asunto}} {{ticket.id}}
+
+
+{% if documentos %}
+	<ul>
+	{% for document in documentos %}
+		<li><a href="http://localhost/{{document.docfile.name}}">{{ document.docfile.name }}</a></li>
+	{% endfor %}
+	</ul>
+{% else %}
+	<p>No documents.</p>
+{% endif %}
+
+<br><br>
+	<form action="{% url "list1" %}" method="post" enctype="multipart/form-data">
+
+
+	{% csrf_token %}
+
+
+
+				<div class='file_upload'><a> Adjuntar Archivo</a></div>
+
+				<input type='hidden' name='ticket' value='{{ticket.id}}' id='ticket'></input>
+				<input type='hidden' name='cont' value='0' id='cont'></input>
+				
+				<div id='files'></div>
+				<br>
+			</p>
+			<p><input type="submit" value="Upload"  id="field1" /></p>
+		</form>
+
+
+
+
+
+<script type="text/javascript">
+	
+
+	i=0
+
+$( ".file_upload" ).click(function() {
+
+	i=i+1
+	x=i
+	console.log(i)
+
+	$("#files").append('<input type="file" id="file" name="docfile'+i+'"><br>')
+	
+	$("input#cont").val(i)
+
+});
+
+function Eliminar(i)
+{
+    
+    x = $("#cont").text()
+    console.log(x)
+    var d=document.getElementById('#file'.i)
+    console.log(d)
+}
+
+
+
+
+</script>

@@ -1,0 +1,40 @@
+{% include "layout.html" %}
+
+<body>
+
+{% include "header.html" %}
+
+
+<a href= '/detalle_ticket/{{ticket.id}}'>Eventos del ticket {{ticket.asunto}}</a>
+<table>
+
+   <tr>
+
+
+
+  <td >Evento</td>
+  <td >User</td>
+  
+  <td >Fecha Inicio</td>
+<td >Name</td>
+
+  </tr>
+
+
+
+
+  {% for evento in evento%}
+  <tr>
+  <td >{{evento.evento_id}}</td>
+  <td >{{evento.user}}</td>
+  
+  <td >{{evento.fecha_inicio}}</td>
+ <td >{{evento.name}}</td>
+
+
+  </tr>
+
+  {% endfor %}
+
+
+</table>

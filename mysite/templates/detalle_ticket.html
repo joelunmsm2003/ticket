@@ -1,0 +1,138 @@
+
+
+{% include "layout.html" %}
+
+<body>
+
+{% include "header.html" %}
+
+{{msj}}
+
+<table>
+    <tr>
+      Ticket {{ticket.asunto}}
+    </tr>
+
+    <tr>
+      <td width='10%'>Usuario</td>
+      <td width='10%'>Tipo</td> 
+      <td width='15%'>Fecha de Inicio</td>
+      <td width='15%'>Fecha de Fin</td>
+      <td width='10%' >Estado</td>
+      <td width='10%' >Accion</td>
+      <td width='10%' >Documentos</td>
+      <td width='50%'>Descripcion</td>
+    </tr>
+
+    <tr>
+      <td width='10%'><a href='/ver_usuario/{{ticket.cliente_id}}/'>{{ticket.cliente}}</a></td>
+      <td width='10%'>{{ticket.tipo}}</td>
+      <td width='10%'>{{ticket.fecha_inicio}}</td>
+      <td width='10%'>{{ticket.fecha_fin}}</td>
+      <td width='10%'>{{ticket.estado}}</td>
+
+      {% if grupo == 'Soporte' %}
+      
+        {% if estado == 'Nuevo' %}
+          <td width='10%'><a href='/atender/{{ticket.id}}'>Atender</a></td>
+        {% else %}
+          <td width='10%'><a href='-'>-</a></td>
+        {% endif %}
+      
+      {% else %}
+
+        {% if estado == 'Prueba' %}
+          <td width='10%'><a href='/validar/{{ticket.id}}'>Validar</a></td>
+        {% else %}
+          <td width='10%'><a href=''>-</a></td>
+        {% endif %}
+
+      
+      
+      {% endif %}
+
+      <td width='10%'><a href='/documentos/{{ticket.id}}'>Documentos</a></td>
+      <td width='50%'>{{ticket.descripcion}}</td>
+    </tr>
+
+</table>
+
+
+
+
+<br><br>
+
+{% if soportes %}
+<table>
+  
+  <tr>
+  Soportes  del ticket 
+  </tr>
+  
+  <tr>
+
+    <td>Soporte Asignado</td>
+    <td>Fecha de Inicio</td>
+    <td>Fecha de Fin</td>
+
+    {% if grupo == 'Soporte' %}
+      <td>Reasignar</td>
+    {% endif %}
+
+    <td>Accion</td>
+    <td>Detalle</td>
+  
+  </tr>
+
+
+  {% for soportes in soportes%}
+  <tr>
+
+    <td width='15%'><a href='/ver_usuario/{{soportes.soporte_id}}/'>{{soportes.soporte}}</a></td>
+    <td width='20%'>{{soportes.fecha_inicio}}</td>
+    <td width='20%'>{{soportes.fecha_fin}}</td>
+
+    {% if soportes.fecha_fin == None %}
+      
+      {% if grupo == 'Soporte' %}
+      <td width='12%'><a href='/reasignar/{{soportes.id}}/{{ticket.id}}'>Reasignar</a></td>
+      {% endif %}
+    
+      <td width='20%'><a href='/evento/{{soportes.id}}/{{ticket.id}}'>Agregar un evento</a></td>
+    
+    {% else %}
+
+      {% if grupo == 'Soporte' %}
+        <td width='12%'><a href=''>-</a></td>
+      {% endif %}
+        <td width='12%'><a href=''>-</a></td>
+    
+    {% endif %}
+
+    <td width='12%'><a href='/ver_evento/{{soportes.id}}/{{ticket.id}}'>Mas detalles</a></td>
+
+
+  </tr>
+
+  {% endfor %}
+
+
+</table>
+
+{% else %}
+
+<p>Este ticket no ha sido asignado</p>
+
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

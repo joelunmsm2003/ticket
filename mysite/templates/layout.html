@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	  <meta charset="utf-8">
+
+   <link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
+<link rel="icon" href="http://www.iconsdb.com/icons/download/dark-gray/x-mark-4-512.png" type="image/gif" sizes="16x16">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+</head>
+
+
+
+<style>
+
+*{
+
+  padding: 0px;
+  margin: 0px;
+  border: 0px;
+
+}
+a{
+  color:rgb(91, 91, 157);
+}
+
+#notificaciones li a{
+
+  background: #111;
+}
+
+#audio{
+  margin-top: 5em;
+}
+
+nav li a,#numero_notis{
+
+  vertical-align: middle;
+  display: inline-block;
+}
+
+ul.ticket_tipo{
+  width: 200px;
+}
+
+#contenedor{
+
+  text-align: center;
+  width: center;
+
+}
+/*body*/
+
+body{
+
+font-family: 'Lato', sans-serif;
+color:black;
+}
+
+/*logo*/
+
+
+
+header{
+
+  width: 100%;
+  background: black;
+  text-align: center;
+  position: fixed;
+ margin-top: -5em;
+
+  opacity:7;
+
+ 
+
+}
+
+header h1 a{
+
+
+  font-size: 20px;
+  text-decoration: none;
+ text-align: middle;
+ 
+
+}
+
+
+
+/*alinear logo y menu de navegacion*/
+
+header h1,nav{
+
+  
+  vertical-align: middle;
+  display: inline-block;
+  color: white;
+  width: 16%;
+
+
+}
+header h1{
+ margin-top: -15px;
+}
+nav{
+
+    width: 80%;
+
+    
+  }
+
+
+
+
+
+
+
+
+/*menu de navegacion*/
+
+#top-menu{
+
+
+  margin: auto;
+
+text-decoration: none;
+height: 55px;
+font-size: 15px;
+
+
+}
+
+ul,ol{
+
+  list-style: none;
+  opacity:7;
+  
+
+}
+
+.nav li a{
+
+  width:170px;
+  text-shadow: 0px 0px 1.5px #fff;
+
+  height: 2.0em;
+  background-color: #000;
+  color: #fff;
+  text-decoration: none;
+  padding:15px 15px;
+  display:block;
+   -ms-transition: all 0.5s ease-in;
+  -moz-transition: all 0.5s ease-in;
+  -o-transition: all 0.5s ease-in;
+  -webkit-transition: all 0.5s ease-in;
+  transition: all 0.5s ease-in;
+opacity:7;
+
+
+}
+
+
+.nav li a:hover{
+width:170px;
+    border-radius: 0em;
+    background-color: #a79999;
+     -ms-transition: all 0.5s ease-out;
+  -moz-transition: all 0.5s ease-out;
+  -o-transition: all 0.5s ease-out;
+  -webkit-transition: all 0.5s ease-out;
+  transition: all 0.5s ease-out;
+  opacity:7;
+
+
+}
+
+.nav > li{
+
+  float: left;
+
+
+
+}
+
+.nav li ul{
+
+  display: none;
+  position: absolute;
+  min-width: 165px;
+  text-align: middle;
+ opacity:7;
+
+}
+
+.nav li:hover>ul{
+
+  display: block;
+width:20em;
+
+}
+
+.nav li ul li{
+
+  width:20em;
+  position: relative;
+}
+
+
+div#top-menu ul li a.selected {
+
+  vertical-align: middle;
+
+
+  opacity:7;
+}
+
+
+
+
+
+/*sombras de imagenes*/
+
+.fade{
+  
+  opacity: 7;
+  filter:alpha(opacity=10);
+
+  -ms-transition: all 0.5s ease-in;
+  -moz-transition: all 0.5s ease-in;
+  -o-transition: all 0.5s ease-in;
+  -webkit-transition: all 0.5s ease-in;
+  transition:all 0.5s ease-in;
+  
+
+}
+
+.fade:hover{
+  
+  opacity: 7;
+  filter:alpha(opacity=7);
+  -ms-transition: all 0.5s ease-out;
+  -moz-transition: all 0.5s ease-out;
+  -o-transition: all 0.5s ease-out;
+  -webkit-transition: all 0.5s ease-out;
+  transition:all 0.5s ease-out;
+  
+
+}
+
+#contenedor{
+  padding-top: 2em;
+}
+
+select#tipo,input#field1{
+  width:100px;
+  width: 337px;
+height: 38px;
+padding: 4px;
+text-align: center;
+font-family: 'Lato', sans-serif;
+background: #0082D8;;
+
+}
+
+form.ticket{
+
+  padding: 1em;
+}
+
+
+#pendientes{
+
+  text-align: center;
+
+  font-size: 14px;
+}
+
+
+#field{
+  width: 50%;
+
+}
+
+input#field{
+    border-style: solid;
+    border-width: 1px;
+    
+    font-family: 'Lato', sans-serif;
+    height: 20px;
+    width: 325px;
+    color: #0082D8;
+    height: 24px;
+    padding: 5px;
+
+}
+textarea#field{
+    border-style: solid;
+    border-width: 1px;
+    
+    font-family: 'Lato', sans-serif;
+
+    width: 325px;
+    color: #0082D8;
+    height: 150px;
+    padding: 5px;
+
+}
+
+input#descripcion{
+
+      border-style: solid;
+    border-width: 1px;
+       width: 325px;
+    
+height: 240px;
+    padding: 5px;
+    color: #0082D8;
+}
+
+
+
+#tickets,#form{
+  vertical-align: top;
+  display: inline-block;
+  
+
+}
+
+#form{
+  width: 30%;
+  text-align:left;
+}
+
+#tickets{
+  width: 60%
+}
+
+
+#salir,#select{
+
+  vertical-align: middle;
+  display: inline-block;
+  width: 48%;
+
+}
+
+#titulo{
+
+  text-align: center;
+}
+
+#salir{
+
+  text-align: right;
+}
+#select{
+
+  text-align: left;
+}
+
+table{
+
+      border-style: solid;
+    border-width: 1px;
+    color: #0082D8;
+ border-collapse: collapse;
+ font-family: 'Open Sans', sans-serif;
+ font-size: 12px;
+ width: 100%;
+   visibility: visible;
+  opacity: 7;
+  transition: opacity 12s linear;
+}
+
+tr{
+ font-family: 'Open Sans', sans-serif;
+ color: #000;
+ width: 100%;
+
+}
+
+td{
+ 
+    border-bottom: 1px solid #5C84C2;
+  border-top: 1px solid #5C84C2;
+
+
+  }
+
+#orillamadas{
+font-size: 11px;
+  width: 100%
+}
+
+#audio,#count,#soportex,#evento{
+
+  color: #fff;
+}
+
+
+
+@media (min-width: 0px) and (max-width: 1000px) {
+ 
+
+header{
+
+  width: 100%;
+  background: black;
+  text-align: center;
+
+
+ 
+
+}
+
+header h1 a{
+
+
+  font-size: 13px;
+  text-decoration: none;
+ text-align: middle;
+ 
+
+}
+
+
+
+/*alinear logo y menu de navegacion*/
+
+header h1,nav{
+
+  
+
+  color: white;
+  width:100%;
+
+
+}
+
+header h1{
+  padding: 0.5em;
+  height: 2.0em;
+}
+
+nav{
+
+width: 100%;
+
+    
+  }
+
+nav li{
+
+  width: 100%;
+
+
+}
+
+
+
+
+
+
+
+
+
+/*menu de navegacion*/
+
+#top-menu{
+
+
+  margin: auto;
+
+text-decoration: none;
+height: 55px;
+width: 100%;
+
+
+}
+
+ul,ol{
+
+  list-style: none;
+  
+  
+
+}
+
+.nav li a{
+
+  width:100%;
+  text-shadow: 0px 0px 1.5px #fff;
+
+  height: 3.5em;
+  background-color: #000;
+  color: #fff;
+  text-decoration: none;
+  padding:1em;
+  display:block;
+   -ms-transition: all 0.5s ease-in;
+  -moz-transition: all 0.5s ease-in;
+  -o-transition: all 0.5s ease-in;
+  -webkit-transition: all 0.5s ease-in;
+  transition: all 0.5s ease-in;
+
+
+
+}
+
+.nav li a:hover{
+
+    border-radius: 0em;
+    background-color: #a79999;
+     -ms-transition: all 0.5s ease-out;
+  -moz-transition: all 0.5s ease-out;
+  -o-transition: all 0.5s ease-out;
+  -webkit-transition: all 0.5s ease-out;
+  transition: all 0.5s ease-out;
+
+}
+
+.nav > li{
+
+  float: left;
+
+
+
+}
+
+.nav li ul{
+
+  display: none;
+  position: absolute;
+  min-width: 165px;
+  text-align: middle;
+
+
+}
+
+.nav li:hover>ul{
+
+  display: block;
+
+
+}
+
+.nav li ul li{
+
+
+  position: relative;
+}
+
+
+div#top-menu ul li a.selected {
+
+  vertical-align: middle;
+}
+
+
+input#username,input#password,input#button{
+
+  width: 100%;
+  height: 3em;
+    font-family: 'Lato', sans-serif;
+  font-size: 20px;
+  text-align: center;
+
+
+  
+}
+
+#contenedor{
+
+  padding: 2em;
+  font-family: 'Lato', sans-serif;
+  font-size: 30px;
+  border: 1px;
+    border-style: solid;
+    margin: 1em;
+    border-color: #a79999;
+
+}
+
+form.ticket{
+  width:100%;
+  padding:0em;
+}
+#form{
+  width:77%;
+}
+
+
+
+      }
+
+
+
+
+
+
+
+</style>
