@@ -14,22 +14,22 @@
     </tr>
 
     <tr>
-      <td width='10%'>Usuario</td>
-      <td width='10%'>Tipo</td> 
-      <td width='15%'>Fecha de Inicio</td>
-      <td width='15%'>Fecha de Fin</td>
-      <td width='10%' >Estado</td>
+      <td width='6%'>Usuario</td>
+      <td width='6%'>Tipo</td> 
+      <td width='12%'>Fecha de Inicio</td>
+      <td width='10%'>Fecha de Fin</td>
+      <td width='6%' >Estado</td>
       <td width='10%' >Accion</td>
       <td width='10%' >Documentos</td>
       <td width='50%'>Descripcion</td>
     </tr>
 
     <tr>
-      <td width='10%'><a href='/ver_usuario/{{ticket.cliente_id}}/'>{{ticket.cliente}}</a></td>
-      <td width='10%'>{{ticket.tipo}}</td>
-      <td width='10%'>{{ticket.fecha_inicio}}</td>
+      <td width='6%'><a href='/ver_usuario/{{ticket.cliente_id}}/'>{{ticket.cliente}}</a></td>
+      <td width='6%'>{{ticket.tipo}}</td>
+      <td width='12%'>{{ticket.fecha_inicio}}</td>
       <td width='10%'>{{ticket.fecha_fin}}</td>
-      <td width='10%'>{{ticket.estado}}</td>
+      <td width='6%'>{{ticket.estado}}</td>
 
       {% if grupo == 'Soporte' %}
       

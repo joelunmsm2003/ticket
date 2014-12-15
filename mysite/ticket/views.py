@@ -19,7 +19,11 @@ from django.core.urlresolvers import reverse
 def ver_usuario(request,id):
 
 	usuario = User.objects.get(id=id)
-	return render(request,'ver_usuario.html', {'usuario':usuario})
+	x=User.objects.get(pk=id)
+	grupo =x.groups.get()
+	grupo=str(grupo)
+
+	return render(request,'ver_usuario.html', {'usuario':usuario,'grupo':grupo})
 
 
 
@@ -475,21 +479,7 @@ def notificaciones(request):
 	return render(request, 'notificaciones.html', {'noti':noti,'grupo':grupo,'username':username})
 
 
-def ver_evento_all(request,id_ticket):
-
-	ticket = Ticket.objects.get(id=id_ticket)
-	username = request.user.username
-	soporte = ticket.soporte_set.get(fecha_fin=None)
-
-	eventox = soporte.evento_set.all().order_by('-id')
-	noti = Notificaciones.objects.all().order_by('-id')[:8]
-	x=User.objects.get(username=username)
-	grupo =x.groups.get()
-	grupo= str(grupo)
-
-	return render(request, 'ver_evento_all.html', {'grupo':grupo,'noti':noti,'username':username,'soporte':soporte,'ticket':ticket,'evento':eventox})
-
-def list(request):
+def agregar_ticket(request):
     # Handle file upload
 
 	id = request.user.id
@@ -545,7 +535,7 @@ def list(request):
 
     # Render list page with the documents and the form
 	return render_to_response(
-        'myapp/list.html',
+        'agregar_ticket.html',
         {'noti':noti,'tipos':tipos,'documents': documents, 'form': form,'username':username,'grupo':grupo},
         context_instance=RequestContext(request)
     )
@@ -573,7 +563,7 @@ def list1(request):
 
 	if request.method == 'POST':
 
-	
+		id = request.user.id
 		form = DocumentForm(request.POST, request.FILES)
 		ticket = request.POST['ticket']
 		print ticket
@@ -593,7 +583,7 @@ def list1(request):
 
 		for i in range (1, int(ix)+1):
 		
-			newdoc = Document(docfile = request.FILES['docfile'+str(i)],ticket_id=c.id)
+			newdoc = Document(docfile = request.FILES['docfile'+str(i)],ticket_id=c.id,user_id=id)
 			newdoc.save()
 
 		

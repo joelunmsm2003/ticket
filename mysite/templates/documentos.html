@@ -6,16 +6,28 @@
 
 Archivos del Ticket {{ticket.asunto}} {{ticket.id}}
 
+<table>
+
+<tr>
+	<td>Usuario que subio el archivo</td>
+	<td>Ruta</td>
+	
+</tr>
 
 {% if documentos %}
-	<ul>
+	
 	{% for document in documentos %}
-		<li><a href="http://localhost/{{document.docfile.name}}">{{ document.docfile.name }}</a></li>
+		<tr>
+		<td><a href="/ver_usuario/{{ticket.cliente_id}}/">{{document.user}}</a></td>
+		<td><a href="http://localhost/{{document.docfile.name}}">{{ document.docfile.name }}</a></td>
+		</tr>
 	{% endfor %}
-	</ul>
+	
 {% else %}
 	<p>No documents.</p>
 {% endif %}
+
+</table>
 
 <br><br>
 	<form action="{% url "list1" %}" method="post" enctype="multipart/form-data">
