@@ -1,4 +1,4 @@
-pip install Django==1.6.7
+pip install Django==1.7
 python manage.py syncdb 
 python manage.py inspectdb > MonitorApp/models.py
 
@@ -29,3 +29,9 @@ python manage.py makemigrations MonitorApp
 
 python manage.py makemigrations
 python manage.py syncdb
+
+python -c "import django; print(django.get_version())"
+
+eliminar django
+ruta 
+python -c "import sys; sys.path = sys.path[1:]; import django; print(django.__path__)"

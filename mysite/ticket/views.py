@@ -518,7 +518,7 @@ def list(request):
 		#tipo 1=Incidencia 2=Requerimento
 
 
-		c=User.objects.get(pk=id).ticket_set.create(cliente=username,asunto=asunto,tipo_id=1,descripcion=descripcion,fecha_inicio=fecha_inicio,validado=0,estado_id=1)
+		c=User.objects.get(pk=id).ticket_set.create(cliente=username,asunto=asunto,tipo_id=1,descripcion=descripcion,fecha_inicio=fecha_inicio,estado_id=1)
 		
 		c.save()
 
@@ -530,7 +530,7 @@ def list(request):
 
 		for i in range (1, int(ix)+1):
 		
-			newdoc = Document(docfile = request.FILES['docfile'+str(i)],ticket_id=c.id)
+			newdoc = Document(docfile = request.FILES['docfile'+str(i)],ticket_id=c.id,user_id=id)
 			newdoc.save()
 
 		
