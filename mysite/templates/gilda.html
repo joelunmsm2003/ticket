@@ -1,0 +1,95 @@
+
+
+{% include "layout.html" %}
+
+
+
+{{msj}}
+
+<a>Tickets Nuevos <a>
+<table>
+
+<tr>
+    <td>Asunto</td>
+    <td>fecha Inicio</td>
+    <td>Accion</td>
+</tr>
+
+{% for ticket_nuevo in ticket_nuevo %}
+
+    <tr>
+
+
+    <td width='6%'><a href=''>{{ticket_nuevo.ticket}}</a></td>
+    <td width='10%'>{{ticket_nuevo.fecha_inicio}}</td>
+    <td width='10%'><a href="/asignar_gilda/{{ticket_nuevo.id}}" >Asignar</a></td>
+
+    </tr>
+
+{% endfor %}
+
+</table>
+
+
+<a>Tickets Preatendidos <a>
+<table>
+
+<tr>
+    <td>Id</td>
+    <td>Asunto</td>
+    <td>Fecha Inicio Ticket</td>
+    <td>Fecha Inicio</td>
+    <td>Accion</td>
+</tr>
+
+{% for ticket_preatendido in ticket_preatendido %}
+
+    <tr>
+
+    <td width='6%'><a href='/ver_usuario/{{ticket.cliente_id}}/'>{{ticket_preatendido.ticket_id}}</a></td>
+
+
+    <td width='6%'>{{ticket_preatendido.ticket__asunto}}</td>
+    <td width='6%'>{{ticket_preatendido.ticket__fecha_inicio}}</td>
+    <td width='10%'>{{ticket_preatendido.dcount}}</td>
+
+
+    <td width='10%'><a href="/asignar_gilda/{{ticket_preatendido.id}}" >Reasignar</a></td>
+
+    </tr>
+
+{% endfor %}
+
+</table>
+
+</table>
+
+
+<a>Tickets Atendidos <a>
+<table>
+
+<tr>
+    <td>Asunto</td>
+    <td>fecha Inicio</td>
+    <td>Accion</td>
+</tr>
+{% for ticket_atendido in ticket_atendido %}
+
+    <tr>
+
+
+    <td width='6%'><a href='/ver_usuario/{{ticket.cliente_id}}/'>{{ticket_atendido.ticket}}</a></td>
+    <td width='10%'>{{ticket_atendido.fecha_inicio}}</td>
+    <td width='10%'><a href="-" >-</a></td>
+
+    </tr>
+
+{% endfor %}
+
+</table>
+
+
+
+
+</body>
+</html>

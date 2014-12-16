@@ -14,6 +14,7 @@ import json
 from ticket.models import Document
 from ticket.forms import DocumentForm
 from django.core.urlresolvers import reverse
+from django.db.models import Max,Count
 
 
 def ver_usuario(request,id):
@@ -299,6 +300,81 @@ def reasignar(request,id,id_ticket):
 
 	return render(request,'reasignar.html', {'id_ticket':id_ticket ,'user_soporte':user_soporte,'soporte':soporte,'username':username,'grupo':grupo,'tipo':tipo})
 
+def asignar_gilda(request,id_ticket):
+
+	ticket_nuevo= Ticket.objects.all()
+
+	ticket = Ticket.objects.get(id=id_ticket)
+	user_soporte = User.objects.filter(groups__name='Soporte')
+
+	username = request.user.username
+	tipo=Tipo.objects.all()
+	x=User.objects.get(username=username)
+	
+	grupo =x.groups.get()
+	grupo= str(grupo)
+
+	return render(request,'asignar_gilda.html', {'ticket_nuevo':ticket_nuevo,'ticket':ticket,'user_soporte':user_soporte,'username':username,'grupo':grupo,'tipo':tipo})
+
+
+def gilda(request):
+
+	ticket_nuevo= Soporte.objects.filter(ticket__estado=1).annotate(dcount=Max('fecha_inicio'))
+	ticket_atendido= Soporte.objects.filter(ticket__estado=5).values('ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio'))
+	ticket_preatendido= Soporte.objects.filter(ticket__estado=5).values('ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio'))
+
+
+	print ticket_preatendido.count()
+
+	user_soporte = User.objects.filter(groups__name='Soporte')
+
+	username = request.user.username
+	tipo=Tipo.objects.all()
+	x=User.objects.get(username=username)
+	
+	grupo =x.groups.get()
+	grupo= str(grupo)
+
+	return render(request,'gilda.html', {'ticket_preatendido':ticket_preatendido,'ticket_atendido':ticket_atendido,'ticket_nuevo':ticket_nuevo,'user_soporte':user_soporte,'username':username,'grupo':grupo,'tipo':tipo})
+
+def asignar_post_gilda(request):
+
+	if request.method == 'POST':
+
+		soporte = request.POST['soporte']
+		ticket = request.POST['ticket']
+		user_soporte = User.objects.get(id=soporte)
+		print user_soporte
+
+		fecha_inicio = datetime.datetime.today()
+		ticket = Ticket.objects.get(id=ticket)
+		ticket.estado_id = 5
+		ticket.soporte_actual = str(user_soporte.username)
+		ticket.save()
+
+		ticket.soporte_set.create(fecha_inicio=fecha_inicio,soporte_id=soporte)
+		ticket_nuevo= Ticket.objects.filter(estado_id=1)
+		ticket_atendido= Ticket.objects.filter(estado_id=2)
+		ticket_preatendido= Ticket.objects.filter(estado_id=5)
+
+		user_soporte = User.objects.filter(groups__name='Soporte')
+		username = request.user.username
+		tipo=Tipo.objects.all()
+
+		x=User.objects.get(username=username)
+
+		grupo =x.groups.get()
+		grupo= str(grupo)
+
+		noti=ticket.notificaciones_set.create(name='Ticket by cellphone',fecha_inicio=fecha_inicio)
+		noti.save()
+
+
+		return render(request,'gilda.html', {'ticket_preatendido':ticket_preatendido,'ticket_atendido':ticket_atendido,'ticket_nuevo':ticket_nuevo,'user_soporte':user_soporte,'username':username,'grupo':grupo,'tipo':tipo})
+
+	return HttpResponseRedirect("/gilda")
+
+
 def reasignar_add(request):
 
 	if request.method == 'POST':
@@ -309,6 +385,7 @@ def reasignar_add(request):
 		
 		id_ticket = request.POST['id_ticket']
 		ticket = Ticket.objects.get(id=id_ticket)
+
 		id = request.POST['id']
 		fecha_inicio = datetime.datetime.today()
 		soporte = Soporte.objects.get(id=id)
@@ -326,6 +403,7 @@ def reasignar_add(request):
 		noti.save()
 
 		return HttpResponseRedirect("/detalle_ticket/"+id_ticket+"/")
+
 
 
 def ver_ticket(request,id):
@@ -571,7 +649,7 @@ def list1(request):
 		c= Ticket.objects.get(id=ticket)
 
 		fecha_inicio = datetime.datetime.today()
-		#estado 1=Nuevo	2=Atendido 3=Prueba 4=Cerrado
+		#estado 1=Nuevo	2=Atendido 3=Prueba 4=Cerrado 5 =Preatendido
 		#tipo 1=Incidencia 2=Requerimento
 
 

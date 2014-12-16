@@ -33,6 +33,9 @@ urlpatterns = patterns('',
 	url(r'^agregar_ticket/$', 'ticket.views.agregar_ticket', name='agregar_ticket'),
 	url(r'^list1/$', 'ticket.views.list1', name='list1'),
 	url(r'^documentos/(\d+)/$', 'ticket.views.documentos'),
+	url(r'^asignar_gilda/(\d+)/$','ticket.views.asignar_gilda'),
+	url(r'^gilda/$','ticket.views.gilda'),
+	url(r'^asignar_post_gilda/', 'ticket.views.asignar_post_gilda'),
 )
 
 

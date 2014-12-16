@@ -1,0 +1,27 @@
+{% include "layout.html" %}
+
+<form action="/asignar_post_gilda/" method="post" class='ticket'>
+    
+    {% csrf_token %}
+    
+    Ticket {{ticket.asunto}}
+    
+ 
+
+    <br>
+
+    <input value="{{ticket.id}}" id="field" type="hidden" name="ticket" maxlength="100">
+    <label class='etiqueta'>Soporte :</label><br>
+
+    <select name="soporte" id="tipo">
+    {% for user_soporte in user_soporte%}
+     <option value="{{user_soporte.id}}">{{user_soporte.username}}</option>
+	{% endfor %}
+    </select>
+
+     <br>
+  
+
+    <label class='etiqueta'></label><div id='field'><br><input  id="field1" type="submit" value="Asignar Ticket" /></div>
+
+</form>

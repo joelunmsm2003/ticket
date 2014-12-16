@@ -35,3 +35,13 @@ python -c "import django; print(django.get_version())"
 eliminar django
 ruta 
 python -c "import sys; sys.path = sys.path[1:]; import django; print(django.__path__)"
+
+from django.db.models import Max
+
+x.soporte_set.all().aggregate(Max('id'))
+
+group by
+
+Soporte.objects.values('ticket_id').annotate(dcount=Count('ticket_id'))
+
+Soporte.objects.values('ticket_id').annotate(dcount=Max('fecha_inicio'))

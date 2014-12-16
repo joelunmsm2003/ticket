@@ -1,0 +1,16 @@
+#Iniciar web2py  
+python web2py.py  runserver
+
+#Iniciar tarea scheduler
+python web2py.py -K name_app -D 0
+
+#Iniciar shell
+python web2py.py -S name_app -M
+
+#tablas en base de datos
+db.tables
+db.table_name.fields
+
+#Consulta a base de datos
+db(db.tables_name.id==1).select()
+db(db.tables_name.id>0).count()

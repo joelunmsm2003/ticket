@@ -31,6 +31,7 @@ class Ticket(models.Model):
 	cliente = models.ForeignKey(User)
 	asunto = models.CharField(max_length=100,blank=True)
 	tipo = models.ForeignKey(Tipo)
+	soporte_actual = models.CharField(max_length=100,blank=True)
 	descripcion = models.CharField(max_length=100,blank=True)
 	fecha_inicio = models.DateTimeField()
 	fecha_fin = models.DateTimeField(null=True,blank=True)
@@ -60,7 +61,7 @@ class Evento(models.Model):
 	id = models.AutoField(max_length=100,primary_key=True)
 	evento = models.ForeignKey(Soporte)
 	user = models.ForeignKey(User,)
-	name = models.CharField(max_length=100,blank=True)
+	name = models.CharField(max_length=1000,blank=True)
 	fecha_inicio = models.DateTimeField(null=True,blank=True)
 	comentario = models.CharField(max_length=100,blank=True)
 

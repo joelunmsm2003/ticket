@@ -52,7 +52,7 @@ Tickets {{estado_name}}
 	
 	<tr>
 	
-	<td width='10%'><a href='/ver_usuario/{{ticket.cliente_id}}/'>{{ticket.cliente}}</a></td>
+	<td width='6%'><a href='/ver_usuario/{{ticket.cliente_id}}/'>{{ticket.cliente}}</a></td>
 	<td width='10%'>{{ticket.asunto}}</td>
 	<td width='10%'>{{ticket.tipo}}</td>
 	<td width='15%'>{{ticket.fecha_inicio}}</td>
@@ -73,7 +73,7 @@ Tickets {{estado_name}}
 		{% endfor %}
 
 
-	<td width='10%'>{{ticket.estado}}</td>
+	<td width='6%'>{{ticket.estado}}</td>
 	<td width='10%'><a href='/detalle_ticket/{{ticket.id}}'>Mas detalle</a></td>
 	<td width='10%'><a href='/documentos/{{ticket.id}}'>Documentos</a></td>
 
@@ -83,12 +83,9 @@ Tickets {{estado_name}}
 		{% endif %}
 		{% if estado_name == 'Atendidos' %}
 		<td width='12%'><a href='/cerrar/{{ticket.id}}'>Enviar a validar</a></td>
-		
-		
-
 		{% endif %}
 		{% if estado_name == 'En Prueba' %}
-		<td width='20%'><a href=''>En Prueba</a></td>
+		<td width='20%'><a href=''>-</td>
 		{% endif %}
 		{% if estado_name == 'Cerrados' %}
 		<td width='20%'><a href=''>-</a></td>
