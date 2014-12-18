@@ -347,7 +347,7 @@ def reasignar_gilda(request,id_ticket):
 def gilda(request):
 
 	ticket_nuevo= Ticket.objects.filter(estado=1)
-	ticket_atendido= Soporte.objects.filter(ticket__estado=5).values('soporte','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio'))
+	ticket_atendido= Soporte.objects.filter(ticket__estado=2).values('soporte','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio'))
 	ticket_preatendido= Soporte.objects.filter(ticket__estado=5).values('soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
 
 	
@@ -384,18 +384,24 @@ def asignar_post_gilda(request):
 
 		soporte = request.POST['soporte']
 		
-		soporte_act = request.POST['soporte_act']
+		
 
 		ticket = request.POST['ticket']
 		user_soporte = User.objects.get(id=soporte)
+
 		
 
 		fecha_inicio = datetime.datetime.today()
+		
+
 
 		ticket = Ticket.objects.get(id=ticket)
-		ticket.estado_id = 2
+		ticket.estado_id = 5
 		ticket.soporte_actual = str(user_soporte.username)
 		ticket.save()
+
+		ticket.soporte_set.create(fecha_inicio=fecha_inicio,soporte_id=soporte)
+		
 
 
 		noti=ticket.notificaciones_set.create(name='Ticket by cellphone',fecha_inicio=fecha_inicio)
@@ -413,9 +419,14 @@ def reasignar_post_gilda(request):
 
 		soporte = request.POST['soporte']
 
-		
+		soporte_act = str(request.POST['soporte_act'])
 
-		sa = Soporte.objects.get(id=request.POST['soporte_act'])
+		print soporte
+
+		print soporte_act
+
+
+		sa = Soporte.objects.get(id=soporte_act)
 
 		sa.fecha_fin = datetime.datetime.today()
 
