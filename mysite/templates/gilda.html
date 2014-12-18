@@ -2,7 +2,7 @@
 
 {% include "layout.html" %}
 
-
+{% include "header.html" %}
 
 {{msj}}
 
@@ -11,7 +11,7 @@
 
 <tr>
     <td>Asunto</td>
-    <td>fecha Inicio</td>
+    <td>Fecha Inicio</td>
     <td>Accion</td>
 </tr>
 
@@ -20,7 +20,7 @@
     <tr>
 
 
-    <td width='6%'><a href=''>{{ticket_nuevo.ticket}}</a></td>
+    <td width='6%'>{{ticket_nuevo.asunto}}</td>
     <td width='10%'>{{ticket_nuevo.fecha_inicio}}</td>
     <td width='10%'><a href="/asignar_gilda/{{ticket_nuevo.id}}" >Asignar</a></td>
 
@@ -37,8 +37,10 @@
 <tr>
     <td>Id</td>
     <td>Asunto</td>
+    <td>Soporte Asignado</td>
     <td>Fecha Inicio Ticket</td>
     <td>Fecha Inicio</td>
+    <td>Tiempo de Espera</td>
     <td>Accion</td>
 </tr>
 
@@ -50,11 +52,12 @@
 
 
     <td width='6%'>{{ticket_preatendido.ticket__asunto}}</td>
+    <td width='6%'>{{ticket_preatendido.soporte__username}}</td>
     <td width='6%'>{{ticket_preatendido.ticket__fecha_inicio}}</td>
     <td width='10%'>{{ticket_preatendido.dcount}}</td>
+    <td width='10%'>{{ticket_preatendido.dif_fecha}}</td>
 
-
-    <td width='10%'><a href="/asignar_gilda/{{ticket_preatendido.id}}" >Reasignar</a></td>
+    <td width='10%'><a href="/reasignar_gilda/{{ticket_preatendido.ticket_id}}" >Reasignar</a></td>
 
     </tr>
 

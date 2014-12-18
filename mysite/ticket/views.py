@@ -172,6 +172,8 @@ def ticket(request,estado):
 		estado_name= 'En Prueba'
 	if str(estado)=='4': 
 		estado_name= 'Cerrados'
+	if str(estado)=='5': 
+		estado_name= 'Preatendido'
 
 	event = Evento.objects.count()
 
@@ -270,7 +272,13 @@ def atender(request,id):
 		
 		return HttpResponseRedirect("/ticket/2")
 
+	if ticket.estado_id ==5 :
 
+		ticket.estado_id = 2
+		ticket.save()
+
+		noti=ticket.notificaciones_set.create(name='Ticket atendido -',fecha_inicio=fecha_inicio)
+		noti.save()
 
 
 	return HttpResponseRedirect("/ticket/2")
@@ -302,7 +310,7 @@ def reasignar(request,id,id_ticket):
 
 def asignar_gilda(request,id_ticket):
 
-	ticket_nuevo= Ticket.objects.all()
+	
 
 	ticket = Ticket.objects.get(id=id_ticket)
 	user_soporte = User.objects.filter(groups__name='Soporte')
@@ -314,18 +322,51 @@ def asignar_gilda(request,id_ticket):
 	grupo =x.groups.get()
 	grupo= str(grupo)
 
-	return render(request,'asignar_gilda.html', {'ticket_nuevo':ticket_nuevo,'ticket':ticket,'user_soporte':user_soporte,'username':username,'grupo':grupo,'tipo':tipo})
+	return render(request,'asignar_gilda.html', {'ticket':ticket,'user_soporte':user_soporte,'username':username,'grupo':grupo,'tipo':tipo})
+
+
+def reasignar_gilda(request,id_ticket):
+
+	
+
+	ticket = Ticket.objects.get(id=id_ticket)
+	soporte = ticket.soporte_set.all().values('soporte__id').annotate(dcount=Max('fecha_inicio'))
+	soporte = soporte[0]['soporte__id']
+	user_soporte = User.objects.filter(groups__name='Soporte')
+
+	username = request.user.username
+	tipo=Tipo.objects.all()
+	x=User.objects.get(username=username)
+	
+	grupo =x.groups.get()
+	grupo= str(grupo)
+
+	return render(request,'reasignar_gilda.html', {'soporte':soporte,'ticket':ticket,'user_soporte':user_soporte,'username':username,'grupo':grupo,'tipo':tipo})
 
 
 def gilda(request):
 
-	ticket_nuevo= Soporte.objects.filter(ticket__estado=1).annotate(dcount=Max('fecha_inicio'))
-	ticket_atendido= Soporte.objects.filter(ticket__estado=5).values('ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio'))
-	ticket_preatendido= Soporte.objects.filter(ticket__estado=5).values('ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio'))
+	ticket_nuevo= Ticket.objects.filter(estado=1)
+	ticket_atendido= Soporte.objects.filter(ticket__estado=5).values('soporte','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio'))
+	ticket_preatendido= Soporte.objects.filter(ticket__estado=5).values('soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
 
+	
 
-	print ticket_preatendido.count()
+	for i in range(len(ticket_preatendido)):
 
+		fit = ticket_preatendido[i]['ticket__fecha_inicio']
+		fiat = ticket_preatendido[i]['dcount'].strftime('%H:%M:%S')
+		today = datetime.datetime.today().strftime('%H:%M:%S')
+
+		fiat =datetime.datetime.strptime(fiat,'%H:%M:%S')
+		today =datetime.datetime.strptime(today,'%H:%M:%S')		
+ 		
+		ticket_preatendido[i]['dif_fecha']=str(today-fiat)
+		
+		print str(today-fiat)
+
+		
+	
 	user_soporte = User.objects.filter(groups__name='Soporte')
 
 	username = request.user.username
@@ -342,35 +383,61 @@ def asignar_post_gilda(request):
 	if request.method == 'POST':
 
 		soporte = request.POST['soporte']
+		
+		soporte_act = request.POST['soporte_act']
+
 		ticket = request.POST['ticket']
 		user_soporte = User.objects.get(id=soporte)
-		print user_soporte
+		
 
 		fecha_inicio = datetime.datetime.today()
+
 		ticket = Ticket.objects.get(id=ticket)
-		ticket.estado_id = 5
+		ticket.estado_id = 2
 		ticket.soporte_actual = str(user_soporte.username)
 		ticket.save()
 
-		ticket.soporte_set.create(fecha_inicio=fecha_inicio,soporte_id=soporte)
-		ticket_nuevo= Ticket.objects.filter(estado_id=1)
-		ticket_atendido= Ticket.objects.filter(estado_id=2)
-		ticket_preatendido= Ticket.objects.filter(estado_id=5)
-
-		user_soporte = User.objects.filter(groups__name='Soporte')
-		username = request.user.username
-		tipo=Tipo.objects.all()
-
-		x=User.objects.get(username=username)
-
-		grupo =x.groups.get()
-		grupo= str(grupo)
 
 		noti=ticket.notificaciones_set.create(name='Ticket by cellphone',fecha_inicio=fecha_inicio)
 		noti.save()
 
 
-		return render(request,'gilda.html', {'ticket_preatendido':ticket_preatendido,'ticket_atendido':ticket_atendido,'ticket_nuevo':ticket_nuevo,'user_soporte':user_soporte,'username':username,'grupo':grupo,'tipo':tipo})
+		return HttpResponseRedirect("/gilda")
+
+	return HttpResponseRedirect("/gilda")
+
+
+def reasignar_post_gilda(request):
+
+	if request.method == 'POST':
+
+		soporte = request.POST['soporte']
+
+		
+
+		sa = Soporte.objects.get(id=request.POST['soporte_act'])
+
+		sa.fecha_fin = datetime.datetime.today()
+
+		sa.save()
+
+		ticket = request.POST['ticket']
+		user_soporte = User.objects.get(id=soporte)
+		
+
+		fecha_inicio = datetime.datetime.today()
+
+		ticket = Ticket.objects.get(id=ticket)
+		ticket.estado_id = 2
+		ticket.soporte_actual = str(user_soporte.username)
+		ticket.save()
+
+
+		noti=ticket.notificaciones_set.create(name='Ticket by cellphone',fecha_inicio=fecha_inicio)
+		noti.save()
+
+
+		return HttpResponseRedirect("/gilda")
 
 	return HttpResponseRedirect("/gilda")
 

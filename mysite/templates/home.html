@@ -25,7 +25,7 @@ Tickets {{estado_name}}
     <td>Tipo</td> 
 
     <td>Fecha de Inicio</td>
-
+<!--
 	{% if estado_name == 'Cerrados' %}
 		 <td>Fecha de Fin</td>
 	{% endif %}
@@ -36,7 +36,7 @@ Tickets {{estado_name}}
 
 	{% if estado_name == 'En Prueba' %}
 		  <td>Soporte Asignado</td>
-	{% endif %}
+	{% endif %}-->
 
    
     <td>Estado</td>
@@ -57,12 +57,11 @@ Tickets {{estado_name}}
 	<td width='10%'>{{ticket.tipo}}</td>
 	<td width='15%'>{{ticket.fecha_inicio}}</td>
 	{% if estado_name == 'Cerrados' %}
-		<td width='18%'>{{ticket.fecha_fin}}</td>
-
+	<td width='18%'>{{ticket.fecha_fin}}</td>
 	{% endif %}
 
 
-
+<!--
 		{% for soporte in soporte %}
 
 			{% if soporte.ticket_id == ticket.id %}
@@ -70,7 +69,7 @@ Tickets {{estado_name}}
 
 			{% endif %}
 			
-		{% endfor %}
+		{% endfor %}-->
 
 
 	<td width='6%'>{{ticket.estado}}</td>
@@ -90,7 +89,13 @@ Tickets {{estado_name}}
 		{% if estado_name == 'Cerrados' %}
 		<td width='20%'><a href=''>-</a></td>
 		{% endif %}
+
+		{% if estado_name == 'Preatendido' %}
+		<td width='20%'><a href='/atender/{{ticket.id}}'>Atender</a></td>
+		{% endif %}
 	{% else %}
+
+
 	{% if estado_name == 'Nuevos' %}
 		<td width='10%'><a href=''>-</a></td>
 		{% endif %}
@@ -101,6 +106,10 @@ Tickets {{estado_name}}
 		<td width='20%'><a href='/validar/{{ticket.id}}'>Validar</a></td>
 		{% endif %}
 		{% if estado_name == 'Cerrados' %}
+		<td width='20%'><a href=''>-</a></td>
+		{% endif %}
+
+		{% if estado_name == 'Preatendido' %}
 		<td width='20%'><a href=''>-</a></td>
 		{% endif %}
 	{% endif %}

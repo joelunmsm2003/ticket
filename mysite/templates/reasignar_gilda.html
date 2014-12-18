@@ -1,6 +1,6 @@
 {% include "layout.html" %}
 
-<form action="/asignar_post_gilda/" method="post" class='ticket'>
+<form action="/reasignar_post_gilda/" method="post" class='ticket'>
     
     {% csrf_token %}
     
@@ -10,8 +10,8 @@
 
 
     <br>
-    
-    <input value="{{ticket.id}}" id="field" type="hidden" name="ticket" maxlength="100">
+    <input value="{{soporte}}" id="field" type="text" name="soporte_act" maxlength="100">
+    <input value="{{ticket.id}}" id="field" type="hidden" name="ticket" maxlength="100"><br>
     <label class='etiqueta'>Soporte :</label><br>
 
     <select name="soporte" id="tipo">
