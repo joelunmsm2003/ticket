@@ -1,5 +1,8 @@
 {% include "layout.html" %}
 
+<div id='contenedor'>
+<div id='form'>
+
 <form action="/reasignar_post_gilda/" method="post" class='ticket'>
     
     {% csrf_token %}
@@ -23,3 +26,6 @@
     <label class='etiqueta'></label><div id='field'><br><input  id="field1" type="submit" value="Asignar Ticket" /></div>
 
 </form>
+
+</div>
+</div>
