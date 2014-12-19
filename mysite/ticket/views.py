@@ -401,7 +401,7 @@ def gilda(request):
  		
 		ticket_preatendido[i]['dif_fecha']=str(today-fiat)
 		
-		print str(today-fiat)
+		
 
 		
 	
@@ -483,6 +483,39 @@ def reasignar_post_gilda(request):
 		return HttpResponseRedirect("/gilda")
 
 	return HttpResponseRedirect("/gilda")
+
+
+def reasignar_post_gilda_new(request,soporte_act,ticket,soporte):
+
+
+
+	sa = Soporte.objects.get(id=soporte_act)
+	print sa
+	
+	sa.fecha_fin = datetime.datetime.today()
+	sa.soporte_id = soporte
+
+	sa.save()
+
+	user_soporte = User.objects.get(id=soporte)
+	
+
+	fecha_inicio = datetime.datetime.today()
+
+	ticket = Ticket.objects.get(id=ticket)
+	ticket.estado_id = 5
+	ticket.soporte_actual = str(user_soporte.username)
+	ticket.save()
+
+
+	noti=ticket.notificaciones_set.create(name='Ticket by cellphone',fecha_inicio=fecha_inicio)
+	noti.save()
+	
+
+	return HttpResponseRedirect("/gilda")
+
+
+
 
 
 def reasignar_add(request):

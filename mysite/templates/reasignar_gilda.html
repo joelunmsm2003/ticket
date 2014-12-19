@@ -1,5 +1,23 @@
 {% include "layout.html" %}
 
+<script type='text/javascript' src='http://code.jquery.com/jquery-1.8.2.js'></script>
+
+<div id='soporte_act'>{{soporte}}</div>
+<div id='ticket_id'>{{ticket.id}}</div>
+
+
+<table>
+    
+ {% for user_soporte in user_soporte%}
+    <tr class='aaa'>
+     <td >{{user_soporte.id}}</td>
+     <td >{{user_soporte.username}}</td>
+     </tr>
+{% endfor %}
+
+</table>
+
+
 <div id='contenedor'>
 <div id='form'>
 
@@ -10,8 +28,8 @@
     Ticket {{ticket.asunto}}
 
     <br>
-    <input value="{{soporte}}" id="field" type="hidden" name="soporte_act" maxlength="100">
-    <input value="{{ticket.id}}" id="field" type="hidden" name="ticket" maxlength="100"><br>
+    soporte_act<input value="{{soporte}}" id="field" type="text" name="soporte_act" maxlength="100">
+    ticket<input value="{{ticket.id}}" id="field" type="text" name="ticket" maxlength="100"><br>
     <label class='etiqueta'>Soporte :</label><br>
 
     <select name="soporte" id="tipo">
@@ -26,6 +44,40 @@
     <label class='etiqueta'></label><div id='field'><br><input  id="field1" type="submit" value="Asignar Ticket" /></div>
 
 </form>
+
+<script type="text/javascript">
+
+ $( ".aaa" ).mouseover(function() {
+
+  soporte = $("#soporte_act").text()
+  ticket = $("#ticket_id").text()
+
+  console.log(soporte)
+  console.log(ticket)
+  
+
+
+
+    $( ".aaa" ).click(function() {
+
+    soporte_act = $(this).children().html()
+    
+    window.location.href = "/reasignar_post_gilda_new/"+soporte+"/"+ticket+"/"+soporte_act
+
+});
+
+});
+
+  $( ".aaa" ).mouseout(function() {
+  $(this).css("background","white")
+  $(this).css("color","black") 
+  
+  
+});
+
+</script>
+
+
 
 </div>
 </div>
