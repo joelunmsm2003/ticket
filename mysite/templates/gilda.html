@@ -52,12 +52,12 @@
     <tr class='sss'>
 
     <td width='6%'>{{ticket_preatendido.ticket_id}}</td>
-    <td width='25%'>{{ticket_preatendido.ticket__asunto}}</td>
-    <td width='25%'>{{ticket_preatendido.soporte__username}}</td>
+    <td width='30%'>{{ticket_preatendido.ticket__asunto}}</td>
+    <td width='20%'>{{ticket_preatendido.soporte__username}}</td>
     <!--
     <td width='6%'>{{ticket_preatendido.ticket__fecha_inicio}}</td>
     <td width='10%'>{{ticket_preatendido.dcount}}</td>-->
-    <td width='25%'>{{ticket_preatendido.dif_fecha}}</td>
+    <td width='20%'>{{ticket_preatendido.dif_fecha}}</td>
 
     <!--
     <td width='10%' class='d'><a href="/reasignar_gilda/{{ticket_preatendido.ticket_id}}" >Reasignar</a></td>-->
@@ -127,9 +127,7 @@
 <script type="text/javascript">
     
     $( ".sss" ).mouseover(function() {
-  $(this).css("background","black") 
-  $(this).css("cursor","pointer")
-  $(this).css("color","white")
+
 
   console.log($(this).children().html())
 
@@ -141,18 +139,11 @@
 
 });
 
-      $( ".sss" ).mouseout(function() {
-  $(this).css("background","white")
-  $(this).css("color","black") 
-  
-  
-});
+
 
 
   $( ".aaa" ).mouseover(function() {
-  $(this).css("background","black") 
-  $(this).css("cursor","pointer")
-  $(this).css("color","white")
+
 
   console.log($(this).children().html())
 
