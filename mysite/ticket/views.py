@@ -426,9 +426,10 @@ def reasignar_post_gilda(request):
 		print soporte_act
 
 
-		sa = Soporte.objects.get(id=soporte_act)
+		sa = Soporte.objects.get(soporte_id=soporte_act)
 
 		sa.fecha_fin = datetime.datetime.today()
+		sa.soporte = soporte
 
 		sa.save()
 
@@ -439,7 +440,7 @@ def reasignar_post_gilda(request):
 		fecha_inicio = datetime.datetime.today()
 
 		ticket = Ticket.objects.get(id=ticket)
-		ticket.estado_id = 2
+		ticket.estado_id = 5
 		ticket.soporte_actual = str(user_soporte.username)
 		ticket.save()
 
