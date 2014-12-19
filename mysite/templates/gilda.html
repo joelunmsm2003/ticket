@@ -10,10 +10,10 @@
 <table>
 
 <tr>
-    <td>Id</td>
-    <td>Asunto</td>
-    <td>Soporte</td>
-    <td>Fecha Inicio</td>
+    <td width='6%'>Id</td>
+    <td width='25%'>Asunto</td>
+    <td width='25%'>Soporte</td>
+    <td width='25%'>Fecha Inicio</td>
    
 </tr>
 
@@ -23,7 +23,7 @@
 
     <td width='6%'>{{ticket_nuevo.id}}</td>
     <td width='25%'>{{ticket_nuevo.asunto}}</td>
-    <td width='25%'>{{ticket_nuevo.soporte}}</td>
+    <td width='25%'>-</td>
     <td width='25%'>{{ticket_nuevo.fecha_inicio}}</td>
    
 
@@ -44,12 +44,12 @@
     <tr class='sss'>
 
     <td width='6%'>{{ticket_preatendido.ticket_id}}</td>
-    <td width='30%'>{{ticket_preatendido.ticket__asunto}}</td>
-    <td width='20%'>{{ticket_preatendido.soporte__username}}</td>
+    <td width='25%'>{{ticket_preatendido.ticket__asunto}}</td>
+    <td width='25%'>{{ticket_preatendido.soporte__username}}</td>
     <!--
     <td width='6%'>{{ticket_preatendido.ticket__fecha_inicio}}</td>
     <td width='10%'>{{ticket_preatendido.dcount}}</td>-->
-    <td width='20%'>{{ticket_preatendido.dif_fecha}}</td>
+    <td width='25%'>{{ticket_preatendido.dif_fecha}}</td>
 
     <!--
     <td width='10%' class='d'><a href="/reasignar_gilda/{{ticket_preatendido.ticket_id}}" >Reasignar</a></td>-->
@@ -73,9 +73,9 @@
 
 
     <td width='6%'>{{ticket_atendido.ticket__asunto}}</td>
-    <td width='10%'>{{ticket_atendido.soporte__username}}</td>
-    <td width='10%'>{{ticket_atendido.ticket__fecha_inicio}}</td>
-    <td width='10%'><a href="-" >-</a></td>
+    <td width='25%'>{{ticket_atendido.soporte__username}}</td>
+    <td width='25%'>{{ticket_atendido.ticket__fecha_inicio}}</td>
+    <td width='25%'><a href="-" >-</a></td>
 
     </tr>
 
@@ -94,8 +94,9 @@
 
 
     <td width='6%'>{{ticket_cerrados.ticket__asunto}}</td>
-    <td width='10%'>{{ticket_cerrados.soporte__username}}</td>
-    <td width='10%'>{{ticket_cerrados.ticket__fecha_inicio}}</td>
+    <td width='25%'>{{ticket_cerrados.soporte__username}}</td>
+    <td width='25%'>{{ticket_cerrados.ticket__fecha_inicio}}</td>
+    <td width='25%'><a href="-" >-</a></td>
   
 
     </tr>
