@@ -307,7 +307,7 @@ def atender(request,id):
 		noti=ticket.notificaciones_set.create(name='Ticket atendido -',fecha_inicio=fecha_inicio)
 		noti.save()
 		
-		return HttpResponseRedirect("/ticket/2")
+		return HttpResponseRedirect("/tickets_asignados")
 
 	if ticket.estado_id ==5 :
 
@@ -318,7 +318,7 @@ def atender(request,id):
 		noti.save()
 
 
-	return HttpResponseRedirect("/ticket/2")
+	return HttpResponseRedirect("/tickets_asignados")
 
 def cerrar(request,id):
 
@@ -384,9 +384,10 @@ def reasignar_gilda(request,id_ticket):
 def gilda(request):
 
 	ticket_nuevo= Ticket.objects.filter(estado=1)
-	ticket_atendido= Soporte.objects.filter(ticket__estado=2).values('soporte','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio'))
+	ticket_atendido= Soporte.objects.filter(ticket__estado=2).values('soporte','soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
 	ticket_preatendido= Soporte.objects.filter(ticket__estado=5).values('soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
-
+	ticket_cerrados= Soporte.objects.filter(ticket__estado=3).values('soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
+	
 	
 
 	for i in range(len(ticket_preatendido)):
@@ -413,7 +414,7 @@ def gilda(request):
 	grupo =x.groups.get()
 	grupo= str(grupo)
 
-	return render(request,'gilda.html', {'ticket_preatendido':ticket_preatendido,'ticket_atendido':ticket_atendido,'ticket_nuevo':ticket_nuevo,'user_soporte':user_soporte,'username':username,'grupo':grupo,'tipo':tipo})
+	return render(request,'gilda.html', {'ticket_cerrados':ticket_cerrados,'ticket_preatendido':ticket_preatendido,'ticket_atendido':ticket_atendido,'ticket_nuevo':ticket_nuevo,'user_soporte':user_soporte,'username':username,'grupo':grupo,'tipo':tipo})
 
 
 
