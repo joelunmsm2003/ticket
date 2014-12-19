@@ -392,14 +392,14 @@ def gilda(request):
 
 	for i in range(len(ticket_preatendido)):
 
-		fit = ticket_preatendido[i]['ticket__fecha_inicio']
+		fit = ticket_preatendido[i]['ticket__fecha_inicio'].strftime('%H:%M:%S')
 		fiat = ticket_preatendido[i]['dcount'].strftime('%H:%M:%S')
 		today = datetime.datetime.today().strftime('%H:%M:%S')
 
 		fiat =datetime.datetime.strptime(fiat,'%H:%M:%S')
 		today =datetime.datetime.strptime(today,'%H:%M:%S')		
  		
-		ticket_preatendido[i]['dif_fecha']=str(today-fiat)
+		ticket_preatendido[i]['dif_fecha']=str(today-fit)
 		
 		
 
