@@ -16,6 +16,44 @@ from ticket.forms import DocumentForm
 from django.core.urlresolvers import reverse
 from django.db.models import Max,Count
 
+def tickets_asignados(request):
+
+	id = request.user.id
+	ticket_nuevo= Ticket.objects.filter(estado=1)
+	ticket_preatendido= Soporte.objects.filter(ticket__estado=5,soporte_id=id).values('soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
+	ticket_atendido= Soporte.objects.filter(ticket__estado=2,soporte_id=id).values('soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
+	ticket_cerrados= Soporte.objects.filter(ticket__estado=3,soporte_id=id).values('soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
+	
+	x=User.objects.get(pk=id)
+	grupo =x.groups.get()
+	grupo= str(grupo)
+
+	username = request.user.username
+
+	for i in range(len(ticket_preatendido)):
+
+		fit = ticket_preatendido[i]['ticket__fecha_inicio']
+		fiat = ticket_preatendido[i]['dcount'].strftime('%H:%M:%S')
+		today = datetime.datetime.today().strftime('%H:%M:%S')
+
+		fiat =datetime.datetime.strptime(fiat,'%H:%M:%S')
+		today =datetime.datetime.strptime(today,'%H:%M:%S')		
+ 		
+		ticket_preatendido[i]['dif_fecha']=str(today-fiat)
+		
+		print str(today-fiat)
+
+	if grupo == 'Soporte':
+
+		noti = Notificaciones.objects.all().order_by('-id')[:8]
+
+	if grupo == 'Clientes':
+
+		noti = Notificaciones.objects.filter(ticket__cliente=request.user.id).order_by('-id')[:8]
+		
+
+
+	return render(request,'tickets_asignados.html', {'noti':noti,'grupo':grupo,'username':username,'ticket_cerrados':ticket_cerrados,'ticket_atendido':ticket_atendido,'ticket_nuevo':ticket_nuevo,'ticket_preatendido':ticket_preatendido})
 
 def ver_usuario(request,id):
 
@@ -158,8 +196,7 @@ def ticket(request,estado):
 		c.save()
 
 		
-		#return render(request, 'home.html', {'username':username,'form': form,'asunto':asunto,'ticket_pendiente':ticket_pendiente,'ticket_cerrado':ticket_cerrado,'grupo':grupo,'msj':msj})
-
+	
 		return HttpResponseRedirect("/ticket")
 	else:
 		form = FormTicket()
@@ -330,8 +367,8 @@ def reasignar_gilda(request,id_ticket):
 	
 
 	ticket = Ticket.objects.get(id=id_ticket)
-	soporte = ticket.soporte_set.all().values('soporte__id').annotate(dcount=Max('fecha_inicio'))
-	soporte = soporte[0]['soporte__id']
+	soporte = ticket.soporte_set.all().values('id').annotate(dcount=Max('fecha_inicio'))
+	soporte = soporte[0]['id']
 	user_soporte = User.objects.filter(groups__name='Soporte')
 
 	username = request.user.username
@@ -378,23 +415,16 @@ def gilda(request):
 
 	return render(request,'gilda.html', {'ticket_preatendido':ticket_preatendido,'ticket_atendido':ticket_atendido,'ticket_nuevo':ticket_nuevo,'user_soporte':user_soporte,'username':username,'grupo':grupo,'tipo':tipo})
 
+
+
 def asignar_post_gilda(request):
 
 	if request.method == 'POST':
 
 		soporte = request.POST['soporte']
-		
-		
-
 		ticket = request.POST['ticket']
 		user_soporte = User.objects.get(id=soporte)
-
-		
-
 		fecha_inicio = datetime.datetime.today()
-		
-
-
 		ticket = Ticket.objects.get(id=ticket)
 		ticket.estado_id = 5
 		ticket.soporte_actual = str(user_soporte.username)
@@ -426,10 +456,10 @@ def reasignar_post_gilda(request):
 		print soporte_act
 
 
-		sa = Soporte.objects.get(soporte_id=soporte_act)
+		sa = Soporte.objects.get(id=soporte_act)
 
 		sa.fecha_fin = datetime.datetime.today()
-		sa.soporte = soporte
+		sa.soporte_id = soporte
 
 		sa.save()
 
