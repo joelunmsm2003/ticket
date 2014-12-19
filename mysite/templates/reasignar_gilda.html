@@ -10,13 +10,14 @@
 <table>
     
  {% for user_soporte in user_soporte%}
-    <tr class='aaa'>
+    <tr class='reasignar'>
      <td >{{user_soporte.id}}</td>
      <td >{{user_soporte.username}}</td>
      </tr>
 {% endfor %}
 
 </table>
+
 
 
 <div id='contenedor'>
@@ -48,7 +49,7 @@
 
 <script type="text/javascript">
 
- $( ".aaa" ).mouseover(function() {
+ $( ".reasignar" ).mouseover(function() {
 
   soporte = $("#soporte_act").text()
   ticket = $("#ticket_id").text()
@@ -59,7 +60,7 @@
 
 
 
-    $( ".aaa" ).click(function() {
+    $( ".reasignar" ).click(function() {
 
     soporte_act = $(this).children().html()
     
@@ -69,7 +70,7 @@
 
 });
 
-  $( ".aaa" ).mouseout(function() {
+  $( ".reasignar" ).mouseout(function() {
   $(this).css("background","white")
   $(this).css("color","black") 
   
