@@ -6,8 +6,8 @@
 
 {{msj}}
 
-<a>Tickets Nuevos <a>
-<table>
+<p class= 'rg'>Tickets Nuevos <p>
+<table class ='nuevos'>
 
 <tr>
     <td width='6%'>Id</td>
@@ -31,11 +31,11 @@
 
 {% endfor %}
 
-</table>
+</table >
 
 
-<a>Tickets Preatendidos <a>
-<table>
+<p class= 'rg'>Tickets Preatendidos <p>
+<table class ='preatendidos'>
 
 
 
@@ -63,8 +63,8 @@
 </table>
 
 
-<a>Tickets Atendidos <a>
-<table>
+<p class= 'rg'>Tickets Atendidos <p>
+<table class ='atendidos'>
 
 
 {% for ticket_atendido in ticket_atendido %}
@@ -84,8 +84,8 @@
 </table>
 
 
-<a>Tickets Por Validar <a>
-<table>
+<p class= 'rg'>Tickets por Validar <p>
+<table class ='porvalidar'>
 
 
 {% for ticket_cerrados in ticket_cerrados %}
