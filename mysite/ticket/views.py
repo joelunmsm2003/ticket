@@ -443,6 +443,23 @@ def asignar_post_gilda(request):
 
 	return HttpResponseRedirect("/gilda")
 
+def asignar_post_gilda_new(request,soporte,ticket):
+
+
+	
+	user_soporte = User.objects.get(id=soporte)
+	fecha_inicio = datetime.datetime.today()
+	ticket = Ticket.objects.get(id=ticket)
+	ticket.estado_id = 5
+	ticket.soporte_actual = str(user_soporte.username)
+	ticket.save()
+
+	ticket.soporte_set.create(fecha_inicio=fecha_inicio,soporte_id=soporte)
+	noti=ticket.notificaciones_set.create(name='Ticket by cellphone',fecha_inicio=fecha_inicio)
+	noti.save()
+
+	return HttpResponseRedirect("/gilda")
+
 
 def reasignar_post_gilda(request):
 

@@ -3,6 +3,7 @@
 <script type='text/javascript' src='http://code.jquery.com/jquery-1.8.2.js'></script>
 
 <p class='rg'>Escoja un soporte</p> 
+<div id='movil'>
 <div id='soporte_act'>{{soporte}}</div>
 <div id='ticket_id'>{{ticket.id}}</div>
 
@@ -17,10 +18,11 @@
 {% endfor %}
 
 </table>
-
+</div>
 
 
 <div id='contenedor'>
+{% include "header.html" %}
 <div id='form'>
 
 <form action="/reasignar_post_gilda/" method="post" class='ticket'>
@@ -30,8 +32,8 @@
     Ticket {{ticket.asunto}}
 
     <br>
-    soporte_act<input value="{{soporte}}" id="field" type="text" name="soporte_act" maxlength="100">
-    ticket<input value="{{ticket.id}}" id="field" type="text" name="ticket" maxlength="100"><br>
+    <input value="{{soporte}}" id="field" type="hidden" name="soporte_act" maxlength="100">
+    <input value="{{ticket.id}}" id="field" type="hidden" name="ticket" maxlength="100"><br>
     <label class='etiqueta'>Soporte :</label><br>
 
     <select name="soporte" id="tipo">
@@ -49,6 +51,24 @@
 
 <script type="text/javascript">
 
+$("#soporte_act").hide()
+$("#ticket_id").hide()
+
+console.log($("#form").width())
+
+if ($("#form").width() < 700) {
+
+  $("#contenedor").hide()
+  $("#movil").show()
+}
+
+if ($("#form").width() > 700) {
+
+  $("#contenedor").show()
+  $("#movil").hide()
+}
+
+
  $( ".reasignar" ).mouseover(function() {
 
   soporte = $("#soporte_act").text()
@@ -63,19 +83,13 @@
     $( ".reasignar" ).click(function() {
 
     soporte_act = $(this).children().html()
-    
+    $(this).css("background","black");
     window.location.href = "/reasignar_post_gilda_new/"+soporte+"/"+ticket+"/"+soporte_act
 
 });
 
 });
 
-  $( ".reasignar" ).mouseout(function() {
-  $(this).css("background","white")
-  $(this).css("color","black") 
-  
-  
-});
 
 </script>
 

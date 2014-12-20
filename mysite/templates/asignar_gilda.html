@@ -1,5 +1,30 @@
 {% include "layout.html" %}
 
+
+
+<script type='text/javascript' src='http://code.jquery.com/jquery-1.8.2.js'></script>
+ 
+<div id='movil'>
+<p class='rg'>Escoja un soporte</p>
+<div id='ticket_id'>{{ticket.id}}</div>
+
+
+<table>
+    
+ {% for user_soporte in user_soporte%}
+    <tr class='reasignar'>
+     <td >{{user_soporte.id}}</td>
+     <td >{{user_soporte.username}}</td>
+     </tr>
+{% endfor %}
+
+</table>
+</div>
+
+
+<div id='contenedor'>
+{% include "header.html" %}
+<div id='form'>
 <form action="/asignar_post_gilda/" method="post" class='ticket'>
     
     {% csrf_token %}
@@ -26,3 +51,43 @@
     <label class='etiqueta'></label><div id='field'><br><input  id="field1" type="submit" value="Asignar Ticket" /></div>
 
 </form>
+
+</div>
+</div>
+
+<script>
+
+ticket = $("#ticket_id").text()
+$("#ticket_id").hide()
+
+if ($("#form").width() < 700) {
+
+  $("#contenedor").hide()
+  $("#movil").show()
+  
+
+}
+
+if ($("#form").width() > 700) {
+
+  $("#contenedor").show()
+  $("#movil").hide()
+}
+
+ $( ".reasignar" ).mouseover(function() {
+
+
+
+    $( ".reasignar" ).click(function() {
+
+    soporte = $(this).children().html()
+
+    $(this).css("background","black");
+    window.location.href = "/asignar_post_gilda_new/"+soporte+"/"+ticket
+
+});
+
+});
+
+
+</script>

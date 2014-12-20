@@ -13,7 +13,7 @@
     <td width='6%' class ='titulo'>Id</td>
     <td width='25%' class ='titulo'>Asunto</td>
     <td width='25%' class ='titulo'>Soporte</td>
-    <td width='25%' class ='titulo'>Fecha Inicio</td>
+    <td width='25%' class ='titulo'>Tiempo de Espera</td>
    
 </tr>
 
@@ -117,7 +117,7 @@
   console.log($(this).children().html())
 
     $( ".sss" ).click(function() {
-    
+    $(this).css("background","black");
     window.location.href = "/reasignar_gilda/"+$(this).children().html()
 
 });
@@ -134,7 +134,9 @@
 
     $( ".aaa" ).click(function() {
     
+    $(this).css("background","black");
     window.location.href = "/asignar_gilda/"+$(this).children().html()
+
 
 });
 
