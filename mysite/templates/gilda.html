@@ -10,7 +10,7 @@
 
 <table class ='titulo' >
 <tr >
-    <td width='6%' class ='titulo'>Id</td>
+    <td width='8%' class ='titulo'>Id</td>
     <td width='25%' class ='titulo'>Asunto</td>
     <td width='25%' class ='titulo'>Soporte</td>
     <td width='25%' class ='titulo'>Tiempo de Espera</td>
@@ -27,10 +27,10 @@
 
     <tr class='aaa'>
 
-    <td width='6%'>{{ticket_nuevo.id}}</td>
+    <td width='8%'>{{ticket_nuevo.id}}</td>
     <td width='25%'>{{ticket_nuevo.asunto}}</td>
     <td width='25%'>-</td>
-    <td width='25%'>{{ticket_nuevo.fecha_inicio}}</td>
+    <td width='25%'>{{ticket_nuevo.dif_fecha}}</td>
    
 
     </tr>
@@ -48,7 +48,7 @@
 
     <tr class='sss'>
 
-    <td width='6%'>{{ticket_preatendido.ticket_id}}</td>
+    <td width='8%'>{{ticket_preatendido.ticket_id}}</td>
     <td width='25%'>{{ticket_preatendido.ticket__asunto}}</td>
     <td width='25%'>{{ticket_preatendido.soporte__username}}</td>
     <!--
@@ -75,11 +75,11 @@
 
     <tr>
 
-
+    <td width='8%'>{{ticket_atendido.ticket_id}}</td>
     <td width='6%'>{{ticket_atendido.ticket__asunto}}</td>
     <td width='25%'>{{ticket_atendido.soporte__username}}</td>
-    <td width='25%'>{{ticket_atendido.ticket__fecha_inicio}}</td>
-    <td width='25%'><a href="-" >-</a></td>
+    <td width='25%'>{{ticket_atendido.dif_fecha}}</td>
+    
 
     </tr>
 
@@ -95,11 +95,11 @@
 
     <tr>
 
-
-    <td width='6%'>{{ticket_cerrados.ticket__asunto}}</td>
+    <td width='8%'>{{ticket_cerrados.ticket_id}}</td>
+    <td width='8%'>{{ticket_cerrados.ticket__asunto}}</td>
     <td width='25%'>{{ticket_cerrados.soporte__username}}</td>
-    <td width='25%'>{{ticket_cerrados.ticket__fecha_inicio}}</td>
-    <td width='25%'><a href="-" >-</a></td>
+    <td width='25%'>{{ticket_cerrados.dif_fecha}}</td>
+    
   
 
     </tr>

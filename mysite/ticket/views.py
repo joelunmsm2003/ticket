@@ -383,23 +383,49 @@ def reasignar_gilda(request,id_ticket):
 
 def gilda(request):
 
-	ticket_nuevo= Ticket.objects.filter(estado=1)
+	ticket_nuevo= Ticket.objects.filter(estado=1).values('id','asunto','fecha_inicio')
 	ticket_atendido= Soporte.objects.filter(ticket__estado=2).values('soporte','soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
 	ticket_preatendido= Soporte.objects.filter(ticket__estado=5).values('soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
 	ticket_cerrados= Soporte.objects.filter(ticket__estado=3).values('soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
 	
 	
 
+	for i in range(len(ticket_nuevo)):
+
+		fit = ticket_nuevo[i]['fecha_inicio']
+		today = datetime.datetime.today()
+
+		
+		
+		ticket_nuevo[i]['dif_fecha']=str(today-fit)
+		
 	for i in range(len(ticket_preatendido)):
 
 		fit = ticket_preatendido[i]['ticket__fecha_inicio']
-		fiat = ticket_preatendido[i]['dcount'].strftime('%H:%M:%S')
-		today = datetime.datetime.today().strftime('%H:%M:%S')
+		today = datetime.datetime.today()
 
-		fiat =datetime.datetime.strptime(fiat,'%H:%M:%S')
-		today =datetime.datetime.strptime(today,'%H:%M:%S')		
+		print today-fit
+	
+		ticket_preatendido[i]['dif_fecha']=str(today-fit)
+		
+
+	for i in range(len(ticket_atendido)):
+
+		fit = ticket_atendido[i]['ticket__fecha_inicio']
+	
+		today = datetime.datetime.today()
+
+		ticket_atendido[i]['dif_fecha']=str(today-fit)
+
+	for i in range(len(ticket_cerrados)):
+
+		fit = ticket_cerrados[i]['ticket__fecha_inicio']
+	
+		today = datetime.datetime.today()
+
+	
  		
-		ticket_preatendido[i]['dif_fecha']=str(today-fiat)
+		ticket_cerrados[i]['dif_fecha']=str(today-fit)
 		
 		
 
@@ -418,35 +444,9 @@ def gilda(request):
 
 
 
-def asignar_post_gilda(request):
-
-	if request.method == 'POST':
-
-		soporte = request.POST['soporte']
-		ticket = request.POST['ticket']
-		user_soporte = User.objects.get(id=soporte)
-		fecha_inicio = datetime.datetime.today()
-		ticket = Ticket.objects.get(id=ticket)
-		ticket.estado_id = 5
-		ticket.soporte_actual = str(user_soporte.username)
-		ticket.save()
-
-		ticket.soporte_set.create(fecha_inicio=fecha_inicio,soporte_id=soporte)
-		
-
-
-		noti=ticket.notificaciones_set.create(name='Ticket by cellphone',fecha_inicio=fecha_inicio)
-		noti.save()
-
-
-		return HttpResponseRedirect("/gilda")
-
-	return HttpResponseRedirect("/gilda")
 
 def asignar_post_gilda_new(request,soporte,ticket):
 
-
-	
 	user_soporte = User.objects.get(id=soporte)
 	fecha_inicio = datetime.datetime.today()
 	ticket = Ticket.objects.get(id=ticket)
@@ -461,45 +461,6 @@ def asignar_post_gilda_new(request,soporte,ticket):
 	return HttpResponseRedirect("/gilda")
 
 
-def reasignar_post_gilda(request):
-
-	if request.method == 'POST':
-
-		soporte = request.POST['soporte']
-
-		soporte_act = str(request.POST['soporte_act'])
-
-		print soporte
-
-		print soporte_act
-
-
-		sa = Soporte.objects.get(id=soporte_act)
-
-		sa.fecha_fin = datetime.datetime.today()
-		sa.soporte_id = soporte
-
-		sa.save()
-
-		ticket = request.POST['ticket']
-		user_soporte = User.objects.get(id=soporte)
-		
-
-		fecha_inicio = datetime.datetime.today()
-
-		ticket = Ticket.objects.get(id=ticket)
-		ticket.estado_id = 5
-		ticket.soporte_actual = str(user_soporte.username)
-		ticket.save()
-
-
-		noti=ticket.notificaciones_set.create(name='Ticket by cellphone',fecha_inicio=fecha_inicio)
-		noti.save()
-
-
-		return HttpResponseRedirect("/gilda")
-
-	return HttpResponseRedirect("/gilda")
 
 
 def reasignar_post_gilda_new(request,soporte_act,ticket,soporte):
@@ -742,6 +703,8 @@ def agregar_ticket(request):
 		descripcion=request.POST['descripcion']
 
 		fecha_inicio = datetime.datetime.today()
+
+		print fecha_inicio
 		#estado 1=Nuevo	2=Atendido 3=Prueba 4=Cerrado
 		#tipo 1=Incidencia 2=Requerimento
 
