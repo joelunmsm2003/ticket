@@ -16,6 +16,12 @@ from ticket.forms import DocumentForm
 from django.core.urlresolvers import reverse
 from django.db.models import Max,Count
 
+
+def webx(request):
+
+	return render(request, 'web/index.html')
+
+
 def tickets_asignados(request):
 
 	id = request.user.id
@@ -327,6 +333,7 @@ def cerrar(request,id):
 	ticket.save()
 
 	return HttpResponseRedirect("/ticket/3")
+
 
 
 def reasignar(request,id,id_ticket):

@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-
+print BASE_DIR
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
@@ -32,7 +32,8 @@ TEMPLATE_DIRS = (os.path.join(PROJECT_PATH, '../templates'),)
 
 MEDIA_ROOT = os.path.join(PROJECT_PATH, '/var/www/html/')
 
-STATIC_ROOT = os.path.join(PROJECT_PATH, 'static')
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),)
 
 MEDIA_URL = '/var/www/html/'
 
