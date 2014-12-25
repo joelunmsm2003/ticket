@@ -401,19 +401,21 @@ def gilda(request):
 
 		fit = ticket_nuevo[i]['fecha_inicio']
 		today = datetime.datetime.today()
-
+		x=str(today-fit)
+		y=x.split('.')[0]
 		
 		
-		ticket_nuevo[i]['dif_fecha']=str(today-fit)
+		
+		ticket_nuevo[i]['dif_fecha']=y
 		
 	for i in range(len(ticket_preatendido)):
 
 		fit = ticket_preatendido[i]['ticket__fecha_inicio']
 		today = datetime.datetime.today()
-
-		print today-fit
+		x=str(today-fit)
+		y=x.split('.')[0]
 	
-		ticket_preatendido[i]['dif_fecha']=str(today-fit)
+		ticket_preatendido[i]['dif_fecha']=y
 		
 
 	for i in range(len(ticket_atendido)):
@@ -421,18 +423,22 @@ def gilda(request):
 		fit = ticket_atendido[i]['ticket__fecha_inicio']
 	
 		today = datetime.datetime.today()
+		x=str(today-fit)
+		y=x.split('.')[0]
 
-		ticket_atendido[i]['dif_fecha']=str(today-fit)
+		ticket_atendido[i]['dif_fecha']=y
 
 	for i in range(len(ticket_cerrados)):
 
 		fit = ticket_cerrados[i]['ticket__fecha_inicio']
 	
 		today = datetime.datetime.today()
+		x=str(today-fit)
+		y=x.split('.')[0]
 
 	
  		
-		ticket_cerrados[i]['dif_fecha']=str(today-fit)
+		ticket_cerrados[i]['dif_fecha']=y
 		
 		
 
