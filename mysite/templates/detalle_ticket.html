@@ -62,10 +62,10 @@
 
     {% if grupo == 'Soporte' %}
       <td>Reasignar</td>
-      <td>Cerrar</td>
+      <td>Validar</td>
     {% endif %}
 
-    <td>Accion</td>
+    <td>Evento</td>
     <td>Detalle</td>
   
   </tr>
@@ -82,7 +82,7 @@
       
       {% if grupo == 'Soporte' %}
       <td width='12%'><a href='/reasignar/{{soportes.id}}/{{ticket.id}}'>Reasignar</a></td>
-      <td width='12%'><a href='/validar/{{ticket.id}}'>Cerrar</a></td>
+      <td width='12%'><a href='/validar/{{ticket.id}}'>Validar</a></td>
       
       {% endif %}
     
