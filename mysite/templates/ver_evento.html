@@ -16,7 +16,7 @@ Soporte del ticket <a href='/detalle_ticket/{{ticket.id}}/'>{{ticket.asunto}}</a
   <tr></tr>
    <tr>
     
-		<td>Evento generado por</td> 
+		<td>Usuario</td> 
 		<td>Soporte Asignado</td>
 		<td>Fecha</td>
 		<td>Documentos</td> 
@@ -29,11 +29,11 @@ Soporte del ticket <a href='/detalle_ticket/{{ticket.id}}/'>{{ticket.asunto}}</a
 
 	{% for evento in evento%}
 	<tr>
-	<td width='10%'>{{evento.user}}</td>
+	<td width='5%'>{{evento.user}}</td>
 	<td width='10%'>{{soporte.soporte}}</td>
 	<td width='10%'>{{evento.fecha_inicio}}</td>
 	<td width='10%'><a href='/documentos/{{ticket.id}}'>Documentos</a></td>
-	<td width='60%'>{{evento.name}}</td>
+	<td width='50%'>{{evento.name}}</td>
 	{% endfor %}
 </table>
 {% else %}

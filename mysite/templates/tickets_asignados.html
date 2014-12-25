@@ -10,7 +10,7 @@ Tickets Asignados
 <table>
 
 <tr>
-    <td>Id</td>
+  
     <td>Cliente</td>
     <td>Asunto</td>
     <td>Soporte Asignado</td>
@@ -24,10 +24,9 @@ Tickets Asignados
 
     <tr>
 
-    <td width='6%'><a href='/ver_usuario/{{ticket.cliente_id}}/'>{{ticket_preatendido.ticket_id}}</a></td>
 
    
-    <td width='6%'>{{ticket_preatendido.ticket__cliente}}</td>
+    <td width='6%'><a href='/ver_usuario/{{ticket_preatendido.ticket__cliente}}'>{{ticket_preatendido.ticket__cliente}}</a></td>
     <td width='20%'>{{ticket_preatendido.ticket__asunto}}</td>
     <td width='10%'>{{ticket_preatendido.soporte__username}}</td>
     <td width='20%'>{{ticket_preatendido.ticket__fecha_inicio}}</td>
@@ -47,7 +46,7 @@ Tickets Asignados
 <table>
 
 <tr>
-    <td>Id</td>
+    
     <td>Cliente</td>
     <td>Asunto</td>
     <td>Fecha Inicio</td>
@@ -59,8 +58,8 @@ Tickets Asignados
 
     <tr>
 
-    <td width='10%'>{{ticket_reasignado.ticket_id}}</td>
-    <td width='6%'>{{ticket_reasignado.ticket__cliente}}</td>
+  
+     <td width='6%'><a href='/ver_usuario/{{ticket_reasignado.ticket__cliente}}'>{{ticket_reasignado.ticket__cliente}}</a></td>
     <td width='6%'>{{ticket_reasignado.ticket__asunto}}</td>
     <td width='10%'>{{ticket_reasignado.ticket__fecha_inicio}}</td>
     <td width='10%'><a href="/detalle_ticket/{{ticket_reasignado.ticket_id}}" >Detalle del Ticket</a></td>
@@ -100,6 +99,7 @@ Tickets Asignados
 <table>
 
 <tr>
+    <td>Cliente</td>
     <td>Asunto</td>
     <td>Fecha Inicio</td>
     <td>Ver Detalles</td>
@@ -109,7 +109,7 @@ Tickets Asignados
 
     <tr>
 
-
+     <td width='6%'><a href='/ver_usuario/{{ticket_atendido.ticket__cliente}}'>{{ticket_atendido.ticket__cliente}}</a></td>
     <td width='6%'>{{ticket_atendido.ticket__asunto}}</td>
     <td width='10%'>{{ticket_atendido.ticket__fecha_inicio}}</td>
     <td width='10%'><a href="/detalle_ticket/{{ticket_atendido.ticket_id}}" >Detalle del Ticket</a></td>
@@ -127,6 +127,7 @@ Tickets Asignados
 <table>
 
 <tr>
+    <td>Cliente</td>
     <td>Asunto</td>
     <td>Fecha Inicio</td>
     
@@ -135,7 +136,7 @@ Tickets Asignados
 
     <tr>
 
-
+    <td width='6%'><a href='/ver_usuario/{{ticket_cerrados.ticket__cliente}}'>{{ticket_cerrados.ticket__cliente}}</a></td>
     <td width='6%'>{{ticket_cerrados.ticket__asunto}}</td>
     <td width='10%'>{{ticket_cerrados.ticket__fecha_inicio}}</td>
   
