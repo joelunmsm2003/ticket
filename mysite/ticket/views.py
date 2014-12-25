@@ -26,10 +26,14 @@ def tickets_asignados(request):
 
 	id = request.user.id
 	ticket_nuevo= Ticket.objects.filter(estado=1)
-	ticket_preatendido= Soporte.objects.filter(ticket__estado=5,soporte_id=id).values('soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
-	ticket_atendido= Soporte.objects.filter(ticket__estado=2,soporte_id=id).values('soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
-	ticket_cerrados= Soporte.objects.filter(ticket__estado=3,soporte_id=id).values('soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
-	
+	ticket_preatendido= Soporte.objects.filter(ticket__estado=5,soporte_id=id).values('ticket__cliente','soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
+	ticket_atendido= Soporte.objects.filter(ticket__estado=2,soporte_id=id).values('ticket__cliente','soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
+	ticket_cerrados= Soporte.objects.filter(ticket__estado=3,soporte_id=id).values('ticket__cliente','soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
+	ticket_reasignado= Soporte.objects.filter(ticket__estado=6,soporte_id=id,fecha_fin=None).values('ticket__cliente','soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
+		
+	print request.user.username
+
+
 	x=User.objects.get(pk=id)
 	grupo =x.groups.get()
 	grupo= str(grupo)
@@ -47,7 +51,7 @@ def tickets_asignados(request):
  		
 		ticket_preatendido[i]['dif_fecha']=str(today-fiat)
 		
-		print str(today-fiat)
+		
 
 	if grupo == 'Soporte':
 
@@ -59,7 +63,7 @@ def tickets_asignados(request):
 		
 
 
-	return render(request,'tickets_asignados.html', {'noti':noti,'grupo':grupo,'username':username,'ticket_cerrados':ticket_cerrados,'ticket_atendido':ticket_atendido,'ticket_nuevo':ticket_nuevo,'ticket_preatendido':ticket_preatendido})
+	return render(request,'tickets_asignados.html', {'ticket_reasignado':ticket_reasignado,'noti':noti,'grupo':grupo,'username':username,'ticket_cerrados':ticket_cerrados,'ticket_atendido':ticket_atendido,'ticket_nuevo':ticket_nuevo,'ticket_preatendido':ticket_preatendido})
 
 def ver_usuario(request,id):
 
@@ -217,6 +221,8 @@ def ticket(request,estado):
 		estado_name= 'Cerrados'
 	if str(estado)=='5': 
 		estado_name= 'Preatendido'
+	if str(estado)=='6': 
+		estado_name= 'Reasignado'
 
 	event = Evento.objects.count()
 
@@ -323,6 +329,14 @@ def atender(request,id):
 		noti=ticket.notificaciones_set.create(name='Ticket atendido -',fecha_inicio=fecha_inicio)
 		noti.save()
 
+	if ticket.estado_id ==6 :
+
+		ticket.estado_id = 2
+		ticket.save()
+
+		noti=ticket.notificaciones_set.create(name='Ticket reasignado atendido -',fecha_inicio=fecha_inicio)
+		noti.save()
+
 
 	return HttpResponseRedirect("/tickets_asignados")
 
@@ -332,13 +346,17 @@ def cerrar(request,id):
 	ticket.estado_id = 3
 	ticket.save()
 
-	return HttpResponseRedirect("/ticket/3")
+	return HttpResponseRedirect("/tickets_asignados")
 
 
 
 def reasignar(request,id,id_ticket):
 
 	id_ticket= str(id_ticket)
+	ticket = Ticket.objects.get(id=id_ticket)
+	ticket.estado_id=6
+	ticket.save()
+
 	soporte= Soporte.objects.get(id=id)
 	user_soporte = User.objects.filter(groups__name='Soporte')
 
@@ -374,6 +392,9 @@ def reasignar_gilda(request,id_ticket):
 	
 
 	ticket = Ticket.objects.get(id=id_ticket)
+	ticket.estado=6
+	ticket.save()
+
 	soporte = ticket.soporte_set.all().values('id').annotate(dcount=Max('fecha_inicio'))
 	soporte = soporte[0]['id']
 	user_soporte = User.objects.filter(groups__name='Soporte')
@@ -562,7 +583,7 @@ def validar(request,id):
 	
 	ticket.save()
 
-	return HttpResponseRedirect("/ticket/1")
+	return HttpResponseRedirect("/tickets_asignados")
 
 def detalle_ticket(request,id):
 

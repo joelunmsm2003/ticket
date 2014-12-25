@@ -62,6 +62,7 @@
 
     {% if grupo == 'Soporte' %}
       <td>Reasignar</td>
+      <td>Cerrar</td>
     {% endif %}
 
     <td>Accion</td>
@@ -73,14 +74,16 @@
   {% for soportes in soportes%}
   <tr>
 
-    <td width='15%'><a href='/ver_usuario/{{soportes.soporte_id}}/'>{{soportes.soporte}}</a></td>
-    <td width='20%'>{{soportes.fecha_inicio}}</td>
-    <td width='20%'>{{soportes.fecha_fin}}</td>
+    <td width='10%'><a href='/ver_usuario/{{soportes.soporte_id}}/'>{{soportes.soporte}}</a></td>
+    <td width='15%'>{{soportes.fecha_inicio}}</td>
+    <td width='15%'>{{soportes.fecha_fin}}</td>
 
     {% if soportes.fecha_fin == None %}
       
       {% if grupo == 'Soporte' %}
       <td width='12%'><a href='/reasignar/{{soportes.id}}/{{ticket.id}}'>Reasignar</a></td>
+      <td width='12%'><a href='/validar/{{ticket.id}}'>Cerrar</a></td>
+      
       {% endif %}
     
       <td width='20%'><a href='/evento/{{soportes.id}}/{{ticket.id}}'>Agregar un evento</a></td>
@@ -88,6 +91,7 @@
     {% else %}
 
       {% if grupo == 'Soporte' %}
+        <td width='12%'><a href=''>-</a></td>
         <td width='12%'><a href=''>-</a></td>
       {% endif %}
         <td width='12%'><a href=''>-</a></td>

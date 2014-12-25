@@ -24,11 +24,11 @@ Tickets {{estado_name}}
     <td>Tipo</td> 
 
     <td>Fecha de Inicio</td>
-<!--
+
 	{% if estado_name == 'Cerrados' %}
 		 <td>Fecha de Fin</td>
 	{% endif %}
-
+<!--
 	{% if estado_name == 'Atendidos' %}
 		  <td>Soporte Asignado</td>
 	{% endif %}
@@ -86,6 +86,9 @@ Tickets {{estado_name}}
 		<td width='20%'><a href=''>-</td>
 		{% endif %}
 		{% if estado_name == 'Cerrados' %}
+		<td width='20%'><a href=''>-</a></td>
+		{% endif %}
+		{% if estado_name == 'Reasignado' %}
 		<td width='20%'><a href=''>-</a></td>
 		{% endif %}
 

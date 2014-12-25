@@ -1,4 +1,4 @@
-
+{% if grupo == 'Soporte' %}
 
 {% include "header.html" %}
 
@@ -11,10 +11,11 @@ Tickets Asignados
 
 <tr>
     <td>Id</td>
+    <td>Cliente</td>
     <td>Asunto</td>
     <td>Soporte Asignado</td>
     <td>Fecha Inicio Ticket</td>
-    <td>Fecha Inicio</td>
+    <td>Fecha Inicio de Asignacion</td>
     <td>Tiempo de Espera</td>
     <td>Accion</td>
 </tr>
@@ -25,7 +26,8 @@ Tickets Asignados
 
     <td width='6%'><a href='/ver_usuario/{{ticket.cliente_id}}/'>{{ticket_preatendido.ticket_id}}</a></td>
 
-
+   
+    <td width='6%'>{{ticket_preatendido.ticket__cliente}}</td>
     <td width='20%'>{{ticket_preatendido.ticket__asunto}}</td>
     <td width='10%'>{{ticket_preatendido.soporte__username}}</td>
     <td width='20%'>{{ticket_preatendido.ticket__fecha_inicio}}</td>
@@ -40,8 +42,35 @@ Tickets Asignados
 
 </table>
 
-</table>
 
+<a>Tickets Reasignados <a>
+<table>
+
+<tr>
+    <td>Id</td>
+    <td>Cliente</td>
+    <td>Asunto</td>
+    <td>Fecha Inicio</td>
+    <td>Detalle</td>
+    <td>Accion</td>
+</tr>
+
+{% for ticket_reasignado in ticket_reasignado %}
+
+    <tr>
+
+    <td width='10%'>{{ticket_reasignado.ticket_id}}</td>
+    <td width='6%'>{{ticket_reasignado.ticket__cliente}}</td>
+    <td width='6%'>{{ticket_reasignado.ticket__asunto}}</td>
+    <td width='10%'>{{ticket_reasignado.ticket__fecha_inicio}}</td>
+    <td width='10%'><a href="/detalle_ticket/{{ticket_reasignado.ticket_id}}" >Detalle del Ticket</a></td>
+    <td width='10%'><a href="/atender/{{ticket_reasignado.ticket_id}}" >Atender</a></td>
+    </tr>
+
+{% endfor %}
+
+</table>
+<!--
 <a>Tickets Nuevos <a>
 <table>
 
@@ -64,7 +93,7 @@ Tickets Asignados
 
 {% endfor %}
 
-</table>
+</table>-->
 
 
 <a>Tickets Atendidos <a>
@@ -73,6 +102,7 @@ Tickets Asignados
 <tr>
     <td>Asunto</td>
     <td>Fecha Inicio</td>
+    <td>Ver Detalles</td>
     <td>Accion</td>
 </tr>
 {% for ticket_atendido in ticket_atendido %}
@@ -82,7 +112,9 @@ Tickets Asignados
 
     <td width='6%'>{{ticket_atendido.ticket__asunto}}</td>
     <td width='10%'>{{ticket_atendido.ticket__fecha_inicio}}</td>
+    <td width='10%'><a href="/detalle_ticket/{{ticket_atendido.ticket_id}}" >Detalle del Ticket</a></td>
     <td width='10%'><a href="/cerrar/{{ticket_atendido.ticket_id}}" >Enviar a Validar</a></td>
+
 
     </tr>
 
@@ -114,7 +146,12 @@ Tickets Asignados
 
 </table>
 
+{% else %}
 
+<meta http-equiv="Refresh" content="0;url=/ticket/1">
+
+{% endif %}
 
 </body>
+
 </html>
