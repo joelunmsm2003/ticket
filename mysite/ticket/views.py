@@ -25,7 +25,7 @@ def webx(request):
 def tickets_asignados(request):
 
 	id = request.user.id
-	ticket_nuevo= Ticket.objects.filter(estado=1)
+	ticket_nuevo= Ticket.objects.filter(estado=1).order_by('-id')
 	ticket_preatendido= Soporte.objects.filter(ticket__estado=5,soporte_id=id).values('ticket__cliente','soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
 	ticket_atendido= Soporte.objects.filter(ticket__estado=2,soporte_id=id).values('ticket__cliente','soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
 	ticket_cerrados= Soporte.objects.filter(ticket__estado=3,soporte_id=id).values('ticket__cliente','soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
@@ -334,7 +334,7 @@ def atender(request,id):
 		ticket.estado_id = 2
 		ticket.save()
 
-		noti=ticket.notificaciones_set.create(name='Ticket reasignado atendido -',fecha_inicio=fecha_inicio)
+		noti=ticket.notificaciones_set.create(name='Ticket reatendido -',fecha_inicio=fecha_inicio)
 		noti.save()
 
 
@@ -392,7 +392,7 @@ def reasignar_gilda(request,id_ticket):
 	
 
 	ticket = Ticket.objects.get(id=id_ticket)
-	ticket.estado=6
+	ticket.estado_id=6
 	ticket.save()
 
 	soporte = ticket.soporte_set.all().values('id').annotate(dcount=Max('fecha_inicio'))
@@ -411,7 +411,7 @@ def reasignar_gilda(request,id_ticket):
 
 def gilda(request):
 
-	ticket_nuevo= Ticket.objects.filter(estado=1).values('id','asunto','fecha_inicio')
+	ticket_nuevo= Ticket.objects.filter(estado=1).values('id','asunto','fecha_inicio').order_by('-id')
 	ticket_atendido= Soporte.objects.filter(ticket__estado=2).values('soporte','soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
 	ticket_preatendido= Soporte.objects.filter(ticket__estado=5).values('soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
 	ticket_cerrados= Soporte.objects.filter(ticket__estado=3).values('soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
@@ -554,7 +554,7 @@ def reasignar_add(request):
 		ticket.soporte_set.create(fecha_inicio=fecha_fin,soporte_id=soporte_user)
 
 
-		noti=ticket.notificaciones_set.create(name='Ticket reasignado -',fecha_inicio=fecha_inicio)
+		noti=ticket.notificaciones_set.create(name='Ticket reasignado ',fecha_inicio=fecha_inicio)
 		noti.save()
 
 		return HttpResponseRedirect("/detalle_ticket/"+id_ticket+"/")
@@ -642,7 +642,7 @@ def evento_add(request):
 		soporte = Soporte.objects.get(id=soporte_id)
 		soporte.evento_set.create(fecha_inicio=fecha_inicio,name=name,user_id=user)
 
-		noti=soporte.ticket.notificaciones_set.create(name='Ticket evento-',fecha_inicio=fecha_inicio)
+		noti=soporte.ticket.notificaciones_set.create(name='Ticket evento ',fecha_inicio=fecha_inicio)
 		noti.save()
 
 		return HttpResponseRedirect("/ver_evento/"+soporte_id+"/"+evento_id)
@@ -748,7 +748,7 @@ def agregar_ticket(request):
 		c.save()
 
 
-		noti=c.notificaciones_set.create(name='Ticket nuevo -',fecha_inicio=fecha_inicio)
+		noti=c.notificaciones_set.create(name='Ticket nuevo ',fecha_inicio=fecha_inicio)
 		noti.save()
 
 		ix = request.POST['cont']		
@@ -810,7 +810,7 @@ def list1(request):
 		#tipo 1=Incidencia 2=Requerimento
 
 
-		noti=c.notificaciones_set.create(name='Archivo nuevo -',fecha_inicio=fecha_inicio)
+		noti=c.notificaciones_set.create(name='Archivo nuevo ',fecha_inicio=fecha_inicio)
 		noti.save()
 
 		ix = request.POST['cont']

@@ -130,6 +130,8 @@ Tickets Asignados
     <td>Cliente</td>
     <td>Asunto</td>
     <td>Fecha Inicio</td>
+    <td>Detalle</td>
+    <td>Accion</td>
     
 </tr>
 {% for ticket_cerrados in ticket_cerrados %}
@@ -138,8 +140,9 @@ Tickets Asignados
 
     <td width='6%'><a href='/ver_usuario/{{ticket_cerrados.ticket__cliente}}'>{{ticket_cerrados.ticket__cliente}}</a></td>
     <td width='6%'>{{ticket_cerrados.ticket__asunto}}</td>
-    <td width='10%'>{{ticket_cerrados.ticket__fecha_inicio}}</td>
-  
+    <td width='6%'>{{ticket_cerrados.ticket__fecha_inicio}}</td>
+    <td width='10%'><a href='/detalle_ticket/{{ticket_cerrados.ticket__cliente}}'>Detalle</a></td>
+    <td width='10%'><a href='/validar/{{ticket_cerrados.ticket__cliente}}'>Validar</a></td>
 
     </tr>
 
@@ -149,7 +152,8 @@ Tickets Asignados
 
 {% else %}
 
-<meta http-equiv="Refresh" content="0;url=/ticket/1">
+
+<meta http-equiv="Refresh" content="0;url=/ticket/3">
 
 {% endif %}
 
