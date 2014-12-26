@@ -10,6 +10,39 @@ a{
   color:rgb(91, 91, 157);
 }
 
+.nuevos{
+
+  background: #990099;
+  
+}
+.preatendidos{
+
+  background: #ff0000;
+}
+.atendidos{
+
+  background: #33cc33;
+}
+.porvalidar{
+
+  background: #6600ff;
+}
+
+.cerrados{
+
+  background: #990099;
+}
+.reasignar{
+
+  background: #3300FF;
+}
+
+.titulo{
+
+
+  color: #123;
+}
+
 #notificaciones li a{
 
   background: #111;
@@ -636,38 +669,7 @@ form.ticket{
 }
 
 
-.nuevos{
 
-  background: #990099;
-  
-}
-.preatendidos{
-
-  background: #ff0000;
-}
-.atendidos{
-
-  background: #33cc33;
-}
-.porvalidar{
-
-  background: #6600ff;
-}
-
-.cerrados{
-
-  background: #990099;
-}
-.reasignar{
-
-  background: #3300FF;
-}
-
-.titulo{
-
-
-  color: #123;
-}
 
 
 /*Loading*/
