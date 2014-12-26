@@ -99,13 +99,13 @@ Tickets {{estado_name}}
 
 
 	{% if estado_name == 'Nuevos' %}
-		<td width='10%'><a href='/validar/{{ticket.id}}'>Validar</a></td>
+		<td width='10%'><a href='/validar/{{ticket.id}}'>Cerrar</a></td>
 		{% endif %}
 		{% if estado_name == 'Atendidos' %}
 		<td width='10%'><a href=''>-</a></td>
 		{% endif %}
 		{% if estado_name == 'En Prueba' %}
-		<td width='20%'><a href='/validar/{{ticket.id}}'>Validar</a></td>
+		<td width='20%'><a href='/validar/{{ticket.id}}'>Cerrar</a></td>
 		{% endif %}
 		{% if estado_name == 'Cerrados' %}
 		<td width='20%'><a href=''>-</a></td>
