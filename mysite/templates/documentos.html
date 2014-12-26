@@ -18,7 +18,7 @@ Archivos del Ticket {{ticket.asunto}} {{ticket.id}}
 	{% for document in documentos %}
 		<tr>
 		<td><a href="/ver_usuario/{{ticket.cliente_id}}/">{{document.user}}</a></td>
-		<td><a href="http://localhost/{{document.docfile.name}}">{{ document.docfile.name }}</a></td>
+		<td><a href="http://www.xiencias.org/html/{{document.docfile.name}}">{{ document.docfile.name }}</a></td>
 		</tr>
 	{% endfor %}
 	
