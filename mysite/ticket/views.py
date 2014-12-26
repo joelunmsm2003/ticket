@@ -43,15 +43,30 @@ def tickets_asignados(request):
 	for i in range(len(ticket_preatendido)):
 
 		fit = ticket_preatendido[i]['ticket__fecha_inicio']
-		fiat = ticket_preatendido[i]['dcount'].strftime('%H:%M:%S')
-		today = datetime.datetime.today().strftime('%H:%M:%S')
+		today = datetime.datetime.today()
+		x=str(today-fit)
+		y=x.split('.')[0]
+		ticket_preatendido[i]['dif_fecha']=y
 
-		fiat =datetime.datetime.strptime(fiat,'%H:%M:%S')
-		today =datetime.datetime.strptime(today,'%H:%M:%S')		
- 		
-		ticket_preatendido[i]['dif_fecha']=str(today-fiat)
-		
-		
+	for i in range(len(ticket_atendido)):
+
+		fit = ticket_atendido[i]['ticket__fecha_inicio']
+		today = datetime.datetime.today()
+		x=str(today-fit)
+		y=x.split('.')[0]
+		ticket_atendido[i]['dif_fecha']=y
+
+	for i in range(len(ticket_cerrados)):
+
+		fit = ticket_cerrados[i]['ticket__fecha_inicio']
+		today = datetime.datetime.today()
+		x=str(today-fit)
+		y=x.split('.')[0]
+		ticket_preatendido[i]['dif_fecha']=y
+
+
+
+
 
 	if grupo == 'Soporte':
 
@@ -415,8 +430,6 @@ def gilda(request):
 	ticket_atendido= Soporte.objects.filter(ticket__estado=2).values('soporte','soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
 	ticket_preatendido= Soporte.objects.filter(ticket__estado=5).values('soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
 	ticket_cerrados= Soporte.objects.filter(ticket__estado=3).values('soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
-	
-	
 
 	for i in range(len(ticket_nuevo)):
 
@@ -656,7 +669,14 @@ def ver_evento(request,id,id_ticket):
 	noti = Notificaciones.objects.all().order_by('-id')[:8]
 	soporte_abierto = Soporte.objects.filter(fecha_fin=None)
 
-	return render(request, 'ver_evento.html', {'soporte_abierto':soporte_abierto,'noti':noti,'event':event,'evento':evento,'soporte':soporte,'ticket':ticket})
+	username = request.user.username
+	tipos=Tipo.objects.all()
+	x=User.objects.get(username=username)
+	grupo =x.groups.get()
+	grupo= str(grupo)
+	estado= str(ticket.estado)
+
+	return render(request, 'ver_evento.html', {'estado':estado,'grupo':grupo,'username':username,'soporte_abierto':soporte_abierto,'noti':noti,'event':event,'evento':evento,'soporte':soporte,'ticket':ticket})
 
 
 def realtime_post_monitor(request):

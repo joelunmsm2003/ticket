@@ -33,3 +33,7 @@ git remote add origin git+ssh://user@server/home/user/git/repository.git
 git push origin master
 
 
+df -h
+
+
+

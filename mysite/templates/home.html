@@ -99,7 +99,7 @@ Tickets {{estado_name}}
 
 
 	{% if estado_name == 'Nuevos' %}
-		<td width='10%'><a href=''>-</a></td>
+		<td width='10%'><a href='/validar/{{ticket.id}}'>Validar</a></td>
 		{% endif %}
 		{% if estado_name == 'Atendidos' %}
 		<td width='10%'><a href=''>-</a></td>

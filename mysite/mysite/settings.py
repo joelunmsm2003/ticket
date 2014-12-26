@@ -72,9 +72,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', 
         'NAME': 'monitor',
-        'USER': 'byte',
-        'PASSWORD': 'byte',
-        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+        'USER': 'root',
+        'PASSWORD': 's3rv3r',
+        'HOST': '192.241.177.135',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
     }
 }

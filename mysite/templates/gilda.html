@@ -91,6 +91,25 @@
 
 </table>
 
+<table class ='atendidos'>
+
+
+{% for ticket_reasignado in ticket_reasignado %}
+
+    <tr>
+
+    <td width='8%'>{{ticket_reasignado.ticket_id}}</td>
+    <td width='6%'>{{ticket_reasignado.ticket__asunto}}</td>
+    <td width='25%'>{{ticket_reasignado.soporte__username}}</td>
+    <td width='25%'>{{ticket_reasignado.dif_fecha}}</td>
+    
+
+    </tr>
+
+{% endfor %}
+
+</table>
+
 
 <table class ='porvalidar'>
 

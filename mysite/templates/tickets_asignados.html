@@ -51,6 +51,7 @@ Tickets Asignados
     <td>Asunto</td>
     <td>Fecha Inicio</td>
     <td>Detalle</td>
+    <td>Tiempo de Espera</td>
     <td>Accion</td>
 </tr>
 
@@ -62,7 +63,8 @@ Tickets Asignados
      <td width='6%'><a href='/ver_usuario/{{ticket_reasignado.ticket__cliente}}'>{{ticket_reasignado.ticket__cliente}}</a></td>
     <td width='6%'>{{ticket_reasignado.ticket__asunto}}</td>
     <td width='10%'>{{ticket_reasignado.ticket__fecha_inicio}}</td>
-    <td width='10%'><a href="/detalle_ticket/{{ticket_reasignado.ticket_id}}" >Detalle del Ticket</a></td>
+    <td width='10%'><a href="/detalle_ticket/{{ticket_reasignado.ticket_id}}" >Detalle</a></td>
+    <td width='20%'>{{ticket_reasignado.dif_fecha}}</td>
     <td width='10%'><a href="/atender/{{ticket_reasignado.ticket_id}}" >Atender</a></td>
     </tr>
 
@@ -104,6 +106,7 @@ Tickets Asignados
     <td>Fecha Inicio</td>
     <td>Ver Detalles</td>
     <td>Accion</td>
+    <td>Tiempo de Espera</td>
     <td>Validar</td>
 </tr>
 {% for ticket_atendido in ticket_atendido %}
@@ -111,11 +114,12 @@ Tickets Asignados
     <tr>
 
      <td width='6%'><a href='/ver_usuario/{{ticket_atendido.ticket__cliente}}'>{{ticket_atendido.ticket__cliente}}</a></td>
-    <td width='6%'>{{ticket_atendido.ticket__asunto}}</td>
+    <td width='20%'>{{ticket_atendido.ticket__asunto}}</td>
     <td width='10%'>{{ticket_atendido.ticket__fecha_inicio}}</td>
-    <td width='10%'><a href="/detalle_ticket/{{ticket_atendido.ticket_id}}" >Detalle del Ticket</a></td>
+    <td width='10%'><a href="/detalle_ticket/{{ticket_atendido.ticket_id}}" >Detalle</a></td>
     <td width='10%'><a href="/cerrar/{{ticket_atendido.ticket_id}}" >Enviar a Validar</a></td>
-    <td width='10%'><a href='/validar/{{ticket_atendido.ticket_id}}'>Validar</a></td>
+    <td width='20%'>{{ticket_atendido.dif_fecha}}</td>
+    <td width='10%'><a href='/validar/{{ticket_atendido.ticket_id}}'>Cerrar</a></td>
 
 
     </tr>
@@ -133,6 +137,7 @@ Tickets Asignados
     <td>Asunto</td>
     <td>Fecha Inicio</td>
     <td>Detalle</td>
+    <td>Tiempo de Espera</td>
     <td>Accion</td>
     
 </tr>
@@ -141,10 +146,11 @@ Tickets Asignados
     <tr>
 
     <td width='6%'><a href='/ver_usuario/{{ticket_cerrados.ticket__cliente}}'>{{ticket_cerrados.ticket__cliente}}</a></td>
-    <td width='6%'>{{ticket_cerrados.ticket__asunto}}</td>
-    <td width='6%'>{{ticket_cerrados.ticket__fecha_inicio}}</td>
+    <td width='20%'>{{ticket_cerrados.ticket__asunto}}</td>
+    <td width='10%'>{{ticket_cerrados.ticket__fecha_inicio}}</td>
     <td width='10%'><a href='/detalle_ticket/{{ticket_cerrados.ticket__cliente}}'>Detalle</a></td>
-    <td width='10%'><a href='/validar/{{ticket_cerrados.ticket_id}}'>Validar</a></td>
+    <td width='20%'>{{ticket_cerrados.dif_fecha}}</td>
+    <td width='10%'><a href='/validar/{{ticket_cerrados.ticket_id}}'>Cerrar</a></td>
 
     </tr>
 
