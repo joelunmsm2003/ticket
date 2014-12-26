@@ -62,7 +62,7 @@ def tickets_asignados(request):
 		today = datetime.datetime.today()
 		x=str(today-fit)
 		y=x.split('.')[0]
-		ticket_preatendido[i]['dif_fecha']=y
+		ticket_cerrados[i]['dif_fecha']=y
 
 
 
@@ -430,7 +430,8 @@ def gilda(request):
 	ticket_atendido= Soporte.objects.filter(ticket__estado=2).values('soporte','soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
 	ticket_preatendido= Soporte.objects.filter(ticket__estado=5).values('soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
 	ticket_cerrados= Soporte.objects.filter(ticket__estado=3).values('soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
-
+	ticket_reasignado= Soporte.objects.filter(ticket__estado=6,fecha_fin=None).values('ticket__cliente','soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
+	
 	for i in range(len(ticket_nuevo)):
 
 		fit = ticket_nuevo[i]['fecha_inicio']
@@ -462,6 +463,16 @@ def gilda(request):
 
 		ticket_atendido[i]['dif_fecha']=y
 
+	for i in range(len(ticket_reasignado)):
+
+		fit = ticket_reasignado[i]['ticket__fecha_inicio']
+	
+		today = datetime.datetime.today()
+		x=str(today-fit)
+		y=x.split('.')[0]
+
+		ticket_reasignado[i]['dif_fecha']=y
+
 	for i in range(len(ticket_cerrados)):
 
 		fit = ticket_cerrados[i]['ticket__fecha_inicio']
@@ -487,7 +498,7 @@ def gilda(request):
 	grupo =x.groups.get()
 	grupo= str(grupo)
 
-	return render(request,'gilda.html', {'ticket_cerrados':ticket_cerrados,'ticket_preatendido':ticket_preatendido,'ticket_atendido':ticket_atendido,'ticket_nuevo':ticket_nuevo,'user_soporte':user_soporte,'username':username,'grupo':grupo,'tipo':tipo})
+	return render(request,'gilda.html', {'ticket_reasignado':ticket_reasignado,'ticket_cerrados':ticket_cerrados,'ticket_preatendido':ticket_preatendido,'ticket_atendido':ticket_atendido,'ticket_nuevo':ticket_nuevo,'user_soporte':user_soporte,'username':username,'grupo':grupo,'tipo':tipo})
 
 
 
