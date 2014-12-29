@@ -511,7 +511,17 @@ def gilda(request):
 	grupo =x.groups.get()
 	grupo= str(grupo)
 
-	return render(request,'gilda.html', {'ticket_reasignado':ticket_reasignado,'ticket_cerrados':ticket_cerrados,'ticket_preatendido':ticket_preatendido,'ticket_atendido':ticket_atendido,'ticket_nuevo':ticket_nuevo,'user_soporte':user_soporte,'username':username,'grupo':grupo,'tipo':tipo})
+	if grupo == 'Soporte':
+
+		noti = Notificaciones.objects.all().order_by('-id')[:8]
+
+	if grupo == 'Clientes':
+
+		noti = Notificaciones.objects.filter(ticket__cliente=request.user.id).order_by('-id')[:8]
+		
+
+	print noti 
+	return render(request,'gilda.html', {'noti':noti,'ticket_reasignado':ticket_reasignado,'ticket_cerrados':ticket_cerrados,'ticket_preatendido':ticket_preatendido,'ticket_atendido':ticket_atendido,'ticket_nuevo':ticket_nuevo,'user_soporte':user_soporte,'username':username,'grupo':grupo,'tipo':tipo})
 
 
 
