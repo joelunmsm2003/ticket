@@ -44,7 +44,7 @@ urlpatterns = patterns('',
 	url(r'^reasignar_post_gilda_new/(\d+)/(\d+)/(\d+)/$', 'ticket.views.reasignar_post_gilda_new'),
 	url(r'^asignar_post_gilda_new/(\d+)/(\d+)/$', 'ticket.views.asignar_post_gilda_new'),
 	url(r'^tickets_asignados/', 'ticket.views.tickets_asignados'),
-
+	url(r'^ver_ticket_gilda/(\d+)/$', 'ticket.views.ver_ticket_gilda'),
 	url(r'^webx/','ticket.views.webx'),
 
 )

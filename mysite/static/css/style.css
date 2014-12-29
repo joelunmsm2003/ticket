@@ -673,10 +673,19 @@ form.ticket{
 
 #detalle{
 
-  background: #a79999;
-  color: #000;
-}
+    background: #1084C9;
+    color: #000;
+    text-align: center;
+    padding: 1em;
 
+}
+table,td,tr{
+    border-style: solid;
+    margin: 1em;
+    border-color: #FFF;
+
+
+}
 
 
 /*Loading*/

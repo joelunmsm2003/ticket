@@ -281,7 +281,11 @@ def salir(request):
 
 	return render_to_response('logeate.html', context_instance=RequestContext(request))
 
+def ver_ticket_gilda(request,ticket):
 
+	ticket =Ticket.objects.get(id=ticket)
+
+	return render(request, 'ver_ticket_gilda.html', {'ticket':ticket})
 
 def editar_ticket(request,id):
 	

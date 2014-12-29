@@ -1,58 +1,11 @@
 
 
-
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Varela' rel='stylesheet' type='text/css'>
 <script type='text/javascript' src='http://code.jquery.com/jquery-1.8.2.js'></script>
- 
-<div id='movil'>
-<p class='rg'>Escoja un soporte</p>
-<div id='ticket_id'>{{ticket.id}}</div>
+{% load static %} 
 
-
-<table>
-    
- {% for user_soporte in user_soporte%}
-    <tr class='reasignar'>
-     <td >{{user_soporte.id}}</td>
-     <td >{{user_soporte.username}}</td>
-     </tr>
-{% endfor %}
-
-</table>
-</div>
-
-
-<div id='contenedor'>
-{% include "header.html" %}
-<div id='form'>
-<form action="/asignar_post_gilda/" method="post" class='ticket'>
-    
-    {% csrf_token %}
-    
-    Ticket {{ticket.asunto}}
-    
- 
-
-
-    <br>
-    
-    <input value="{{ticket.id}}" id="field" type="hidden" name="ticket" maxlength="100">
-    <label class='etiqueta'>Soporte :</label><br>
-
-    <select name="soporte" id="tipo">
-    {% for user_soporte in user_soporte%}
-     <option value="{{user_soporte.id}}">{{user_soporte.username}}</option>
-	{% endfor %}
-    </select>
-
-     <br>
-  
-
-    <label class='etiqueta'></label><div id='field'><br><input  id="field1" type="submit" value="Asignar Ticket" /></div>
-
-</form>
-
-</div>
-</div>
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" type='text/css'>
 
 <div id = "detalle">
 
@@ -60,7 +13,7 @@
 
 
 <table>
-<tr><td>Detalle ticket</td><td></td></tr>
+<tr><td>Detalle ticket</td></tr>
 <tr><td>Asunto</td> <td>{{ticket.asunto}}</td></tr>
 <tr>
 

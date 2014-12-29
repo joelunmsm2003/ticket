@@ -101,14 +101,12 @@ if ($("#form").width() > 700) {
 </div>
 </div>
 <div id = "detalle">
-<p>Detalle del TIcket</p>
-
-{{ticket.asunto}}
 
 <table>
-
-
+<tr><td>Detalle ticket</td><td></td></tr>
+<tr><td>Asunto</td> <td>{{ticket.asunto}}</td></tr>
 <tr>
+
 <td>Id</td> <td>{{ticket.id}}</td></tr>
 <tr><td>Cliente</td> <td>{{ticket.cliente}}</td></tr>
 <tr><td>Asunto</td> <td>{{ticket.asunto}}</td></tr>

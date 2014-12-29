@@ -77,7 +77,7 @@
 
 {% for ticket_atendido in ticket_atendido %}
 
-    <tr>
+    <tr class='atendido'>
 
     <td width='8%'>{{ticket_atendido.ticket_id}}</td>
     <td width='25%'>{{ticket_atendido.ticket__asunto}}</td>
@@ -94,7 +94,7 @@
 
 {% for ticket_reasignado in ticket_reasignado %}
 
-    <tr>
+    <tr class='atendido'>
 
     <td width='8%'>{{ticket_reasignado.ticket_id}}</td>
     <td width='25%'>{{ticket_reasignado.ticket__asunto}}</td>
@@ -114,7 +114,7 @@
 
 {% for ticket_cerrados in ticket_cerrados %}
 
-    <tr>
+    <tr class='porvalidars'>
 
     <td width='8%'>{{ticket_cerrados.ticket_id}}</td>
     <td width='25%'>{{ticket_cerrados.ticket__asunto}}</td>
@@ -163,6 +163,36 @@
 
 });
 
+    $( ".atendido" ).mouseover(function() {
+
+
+  console.log($(this).children().html())
+
+    $( ".atendido" ).click(function() {
+    
+    $(this).css("background","black");
+    window.location.href = "/ver_ticket_gilda/"+$(this).children().html()
+
+
+});
+
+});
+
+
+    $( ".porvalidars" ).mouseover(function() {
+
+
+  console.log($(this).children().html())
+
+    $( ".porvalidars" ).click(function() {
+    
+    $(this).css("background","black");
+    window.location.href = "/ver_ticket_gilda/"+$(this).children().html()
+
+
+});
+
+});
 
 
 
