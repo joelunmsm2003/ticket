@@ -94,8 +94,9 @@ def ver_usuario(request,id):
 	x=User.objects.get(pk=id)
 	grupo =x.groups.get()
 	grupo=str(grupo)
+	username = request.user.username
 
-	return render(request,'ver_usuario.html', {'usuario':usuario,'grupo':grupo})
+	return render(request,'ver_usuario.html', {'username':username,'usuario':usuario,'grupo':grupo})
 
 
 

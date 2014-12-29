@@ -16,6 +16,7 @@ Tickets Asignados
     <td>Soporte Asignado</td>
     <td>Fecha Inicio Ticket</td>
     <td>Fecha Inicio de Asignacion</td>
+    <td>Detalle</td>
     <td>Tiempo de Espera</td>
     <td>Accion</td>
 </tr>
@@ -31,6 +32,7 @@ Tickets Asignados
     <td width='10%'>{{ticket_preatendido.soporte__username}}</td>
     <td width='20%'>{{ticket_preatendido.ticket__fecha_inicio}}</td>
     <td width='20%'>{{ticket_preatendido.dcount}}</td>
+    <td width='10%'><a href="/detalle_ticket/{{ticket_preatendido.ticket_id}}" >Detalle</a></td>
     <td width='20%'>{{ticket_preatendido.dif_fecha}}</td>
 
     <td width='20%'><a href="/atender/{{ticket_preatendido.ticket_id}}" >Atender</a></td>
@@ -112,7 +114,7 @@ Tickets Asignados
     <td>Ver Detalles</td>
     <td>Accion</td>
     <td>Tiempo de Espera</td>
-    <td>Validar</td>
+    <td>Accion</td>
 </tr>
 {% for ticket_atendido in ticket_atendido %}
 
