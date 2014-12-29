@@ -100,3 +100,26 @@ if ($("#form").width() > 700) {
 
 </div>
 </div>
+<div id = "detalle">
+<p>Detalle del TIcket</p>
+
+{{ticket.asunto}}
+
+<table>
+
+
+<tr>
+<td>Id</td> <td>{{ticket.id}}</td></tr>
+<tr><td>Cliente</td> <td>{{ticket.cliente}}</td></tr>
+<tr><td>Asunto</td> <td>{{ticket.asunto}}</td></tr>
+<tr><td>Tipo</td> <td>{{ticket.tipo}}</td></tr>
+<tr><td>Soporte Actual</td> <td>{{ticket.soporte_actual}}</td></tr>
+<tr><td>Descripcion</td> <td>{{ticket.descripcion}}</td></tr>
+<tr><td>Fecha Inicio</td> <td>{{ticket.fecha_inicio}}</td></tr>
+<tr><td>Fecha Fin</td> <td>{{ticket.fecha_fin}}</td></tr>
+<tr><td>Estado</td> <td>{{ticket.estado}}</td></tr>
+
+
+
+</table>
+</div>

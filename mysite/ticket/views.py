@@ -387,10 +387,10 @@ def reasignar(request,id,id_ticket):
 
 def asignar_gilda(request,id_ticket):
 
-	
-
 	ticket = Ticket.objects.get(id=id_ticket)
 	user_soporte = User.objects.filter(groups__name='Soporte')
+	
+	
 
 	username = request.user.username
 	tipo=Tipo.objects.all()
@@ -837,7 +837,7 @@ def list1(request):
 		c= Ticket.objects.get(id=ticket)
 
 		fecha_inicio = datetime.datetime.today()
-		#estado 1=Nuevo	2=Atendido 3=Prueba 4=Cerrado 5 =Preatendido
+		#estado 1=Nuevo	2=Atendido 3=Prueba 4=Cerrado 5 =Preatendido 
 		#tipo 1=Incidencia 2=Requerimento
 
 

@@ -43,6 +43,8 @@ a{
   color: #123;
 }
 
+
+
 #notificaciones li a{
 
   background: #111;
@@ -669,6 +671,11 @@ form.ticket{
 }
 
 
+#detalle{
+
+  background: #a79999;
+  color: #000;
+}
 
 
 
