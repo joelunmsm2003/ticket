@@ -61,11 +61,11 @@ Tickets Asignados
 
   
      <td width='6%'><a href='/ver_usuario/{{ticket_reasignado.ticket__cliente}}'>{{ticket_reasignado.ticket__cliente}}</a></td>
-    <td width='6%'>{{ticket_reasignado.ticket__asunto}}</td>
-    <td width='10%'>{{ticket_reasignado.ticket__fecha_inicio}}</td>
-    <td width='10%'><a href="/detalle_ticket/{{ticket_reasignado.ticket_id}}" >Detalle</a></td>
+    <td width='20%'>{{ticket_reasignado.ticket__asunto}}</td>
+    <td width='20%'>{{ticket_reasignado.ticket__fecha_inicio}}</td>
+    <td width='20%'><a href="/detalle_ticket/{{ticket_reasignado.ticket_id}}" >Detalle</a></td>
     <td width='20%'>{{ticket_reasignado.dif_fecha}}</td>
-    <td width='10%'><a href="/atender/{{ticket_reasignado.ticket_id}}" >Atender</a></td>
+    <td width='20%'><a href="/atender/{{ticket_reasignado.ticket_id}}" >Atender</a></td>
     </tr>
 
 {% endfor %}

@@ -64,6 +64,14 @@ def tickets_asignados(request):
 		y=x.split('.')[0]
 		ticket_cerrados[i]['dif_fecha']=y
 
+	for i in range(len(ticket_reasignado)):
+
+		fit = ticket_reasignado[i]['ticket__fecha_inicio']
+		today = datetime.datetime.today()
+		x=str(today-fit)
+		y=x.split('.')[0]
+		ticket_reasignado[i]['dif_fecha']=y
+
 
 
 

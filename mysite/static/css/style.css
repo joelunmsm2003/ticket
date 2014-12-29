@@ -76,13 +76,20 @@ ul.ticket_tipo{
 body{
 
 font-family: 'Varela', sans-serif;
-color:black;
+height: 570px;
+background: linear-gradient(45deg, blue, white, blue);
+text-align: center;
 }
 
 /*logo*/
 
+a{
+  color:black;
+}
 
-
+.logos{
+  color:white;
+}
 header{
 
   width: 100%;
