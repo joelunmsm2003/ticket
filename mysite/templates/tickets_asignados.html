@@ -5,11 +5,11 @@
 {{msj}}
 
 
-
+{% if ticket_preatendido %}
 Tickets Asignados
 <table>
 
-<tr>
+<tr class='titulo'>
   
     <td>Cliente</td>
     <td>Asunto</td>
@@ -40,12 +40,14 @@ Tickets Asignados
 {% endfor %}
 
 </table>
+{% endif %}
 
+{% if ticket_reasignado %}
 
 <a>Tickets Reasignados <a>
 <table>
 
-<tr>
+<tr class='titulo'>
     
     <td>Cliente</td>
     <td>Asunto</td>
@@ -71,6 +73,9 @@ Tickets Asignados
 {% endfor %}
 
 </table>
+
+
+{% endif %}
 <!--
 <a>Tickets Nuevos <a>
 <table>
@@ -96,11 +101,11 @@ Tickets Asignados
 
 </table>-->
 
-
+{% if ticket_atendido %}
 <a>Tickets Atendidos <a>
 <table>
 
-<tr>
+<tr class='titulo'>
     <td>Cliente</td>
     <td>Asunto</td>
     <td>Fecha Inicio</td>
@@ -127,12 +132,12 @@ Tickets Asignados
 {% endfor %}
 
 </table>
-
-
+{% endif %}
+{% if ticket_cerrados %}
 <a>Tickets Por Validar <a>
 <table>
 
-<tr>
+<tr class='titulo'>
     <td>Cliente</td>
     <td>Asunto</td>
     <td>Fecha Inicio</td>
@@ -157,6 +162,7 @@ Tickets Asignados
 {% endfor %}
 
 </table>
+{% endif %}
 
 {% else %}
 

@@ -391,7 +391,10 @@ height: 240px;
   text-decoration: underline;
   cursor:pointer;
 }
-
+.titulo{
+  background: blue;
+  color: white;
+}
 
 table{
 
@@ -406,6 +409,7 @@ table{
     opacity: 7;
     transition: opacity 12s linear;
     margin: 1em;
+    font-size: 14px;
 }
 
 tr{
@@ -419,7 +423,7 @@ td{
  
     border-bottom: 1px solid #5C84C2;
   border-top: 1px solid #5C84C2;
-
+  height:30px; 
 
   }
 
