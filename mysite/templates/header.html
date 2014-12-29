@@ -145,16 +145,18 @@ function moverItem() {
       nevento = $('#evento').text()
        
        $.ajax({
-                        url : "/realtime_post", 
-                        type : "POST",   
-                        dataType:"json",                
-                        data : {
-                            count: count,
-                            soportez: nsoporte,
-                            eventox:nevento,
-                            csrfmiddlewaretoken: '{{ csrf_token }}'
-                            },
-                            success : function(json) {
+
+                url : "/realtime_post", 
+                type : "POST",   
+                dataType:"json",                
+                data : {
+                    count: count,
+                    soportez: nsoporte,
+                    eventox:nevento,
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                    },
+                    success : function(json) {
+
 
 
                 var trs=$("#orillamada tr").length;
@@ -167,8 +169,7 @@ function moverItem() {
            
               if (typeof(json.n)!='undefined'){
 
-                
-             
+              
                 
                 x = $.parseJSON(json.n).counter_act;
                 c = $.parseJSON(json.data)
@@ -178,7 +179,7 @@ function moverItem() {
                 sev = $.parseJSON(json.sevento)
                
          
-                $('#audio').append('<audio src="/static/img/audio.mp3" autoplay></audio>')
+                
 
 
               
@@ -193,6 +194,7 @@ function moverItem() {
                   '">Se atendio el ticket '+c[0].fields.asunto+'</a></li>')
 
                    $('#notificacion').css( "color", "red" );
+                   $('#audio').append('<audio src="/static/img/audio.mp3" autoplay></audio>')
                 }
                 else{
                     if(json.id==c[0].fields.cliente){
@@ -200,6 +202,8 @@ function moverItem() {
                       i=i+1
                        $('#notificacion').prepend('<li><a href="/detalle_ticket/'+sop[0].fields.ticket+
                   '">Se atendio el ticket '+c[0].fields.asunto+'</a></li>')
+
+                   $('#audio').append('<audio src="/static/img/audio.mp3" autoplay></audio>')
 
                     }
 
@@ -218,12 +222,14 @@ function moverItem() {
                   f=1
                   i=i+1
                   $('#notificacion').prepend('<li><a href="/detalle_ticket/'+c[0].pk+'">Nuevo ticket '+c[0].fields.asunto+'</a></li>')
+                  $('#audio').append('<audio src="/static/img/audio.mp3" autoplay></audio>')
                 }
                 else{
                     if(json.id==c[0].fields.cliente){
                       f=1
                       i=i+1
                       $('#notificacion').prepend('<li><a href="/detalle_ticket/'+c[0].pk+'">Nuevo ticket '+c[0].fields.asunto+'</a></li>')
+                      $('#audio').append('<audio src="/static/img/audio.mp3" autoplay></audio>')
 
                     }
 
@@ -242,12 +248,15 @@ function moverItem() {
                   i=i+1
 
                  $('#notificacion').prepend('<li><a href="/ver_evento_all/'+c[0].pk+'">Nuevo evento '+c[0].fields.asunto+'</a></li>')
+                 $('#audio').append('<audio src="/static/img/audio.mp3" autoplay></audio>')
+
                 }
                 else{
                     if(json.id==c[0].fields.cliente){
                       f=1
                       i=i+1
                   $('#notificacion').prepend('<li><a href="/ver_evento/'+c[0].pk+'">Nuevo evento '+c[0].fields.asunto+'</a></li>')
+                  $('#audio').append('<audio src="/static/img/audio.mp3" autoplay></audio>')
 
                     }
 
