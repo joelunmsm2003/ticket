@@ -124,16 +124,17 @@ header h1,nav{
   vertical-align: middle;
   display: inline-block;
   color: white;
-  width: 16%;
+  width: 30%;
 
 
 }
 header h1{
  margin-top: -15px;
+   width: 30%
 }
 nav{
 
-    width: 80%;
+    width: 65%;
 
     
   }
@@ -448,6 +449,7 @@ header{
   width: 100%;
   background: black;
   text-align: center;
+
 
 
  
