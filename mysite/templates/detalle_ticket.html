@@ -13,7 +13,7 @@
       Ticket {{ticket.asunto}}
     </tr>
 
-    <tr>
+    <tr class='titulo'>
       <td width='6%'>Usuario</td>
       <td width='6%'>Tipo</td> 
       <td width='15%'>Fecha de Inicio</td>
@@ -30,7 +30,11 @@
       <td width='15%'>{{ticket.fecha_inicio}}</td>
       <td width='15%'>{{ticket.fecha_fin}}</td>
       <td width='6%'>{{ticket.estado}}</td>
+      {% if grupo == 'Soporte' %}
       <td width='20%'><a href="/atender/{{ticket.id}}" >Atender</a></td>
+      {% else %}
+      <td width='6%'><a href="/validar/{{ticket.id}}" >Cerrar</a> </td>
+      {% endif %}
       <td width='10%'><a href='/documentos/{{ticket.id}}'>Documentos</a></td>
       <td width='50%'>{{ticket.descripcion}}</td>
     </tr>
