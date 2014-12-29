@@ -76,7 +76,7 @@ ul.ticket_tipo{
 body{
 
 font-family: 'Varela', sans-serif;
-height: 590px;
+height: 670px;
 background: linear-gradient(45deg, blue, white, blue);
 text-align: center;
 }
@@ -622,7 +622,7 @@ input#username,input#password,input#button,.file{
   border: 1px;
     border-style: solid;
     margin: 1em;
-    border-color: #a79999;
+    border-color: #fff;
 
 }
 
@@ -632,7 +632,9 @@ form.ticket{
 }
 #form{
   width:77%;
+  height: 100px;
 }
+
 
 
 
