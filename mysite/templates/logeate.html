@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% include "layout.html" %}
+
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -11,6 +11,8 @@
 {% load static %} 
 
 <link href="{% static 'css/style.css' %}" rel="stylesheet" type='text/css'>
+<link href="{% static 'js/javascript.js' %}" rel="stylesheet" type='text/css'>
+
 <h1> <a class ='logos' href='/tickets_asignados'><IMG SRC="/static/img/BOLA8.png" width='20px'>&nbsp<IMG SRC="/static/img/LETRASXIENCIAS.png" width='150px'></a></h1>
 
 
@@ -18,6 +20,8 @@
 
 </head>
 <body>
+
+
 
     <script type="text/javascript">
         $(document).ready(function() {
@@ -73,7 +77,19 @@
 </div>
 
 
+<svg xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+    
+ <rect x="0" y="0" width="30" height="15"
+        style="stroke: #ff0000; fill: none;">
+      <animateMotion
+              path="M10,50 q60,50 100,0 q60,q60,-50 1000,0"
+              begin="0s" dur="3s" repeatCount="indefinite"
+              rotate="auto"
+              />
+  </rect>
 
+</svg>
 
 
 

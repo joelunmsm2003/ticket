@@ -10,6 +10,24 @@ a{
   color:rgb(91, 91, 157);
 }
 
+svg{
+  width: 1000px;
+  height: 1000px;
+}
+
+input#button{
+    border-style: solid;
+    border-width: 1px;
+    
+    font-family: 'Varela', sans-serif;
+    height: 20px;
+    width: 325px;
+    color: #0082D8;
+    height: 24px;
+    padding: 5px;
+
+}
+
 .nuevos{
 
   background: #990099;
