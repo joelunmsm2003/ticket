@@ -2,6 +2,10 @@
 …or create a new repository on the command line
 
 
+192.168.1.248
+ x13nc14s
+
+
 touch README.md
 git init
 git add README.md
