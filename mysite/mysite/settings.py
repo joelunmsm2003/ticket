@@ -97,3 +97,9 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.mailgun.org'
+EMAIL_HOST_USER = 'postmaster@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org'
+EMAIL_HOST_PASSWORD = '5d72732e427556dbec56cbaf89ce5836'
+EMAIL_PORT = 587

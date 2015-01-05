@@ -1,4 +1,24 @@
 
+…or create a new repository on the command line
+
+
+192.168.1.248
+ x13nc14s
+
+
+touch README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin git@github.com:joelunmsm2003/ticket.git
+git push -u origin master
+…or push an existing repository from the command line
+
+
+git remote add origin git@github.com:joelunmsm2003/ticket.git
+git push -u origin master
+
+
 
 192.168.1.248
  x13nc14s
@@ -12,7 +32,3 @@ git push xdev master
 
 
 df -h
-
-
-
-

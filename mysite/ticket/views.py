@@ -15,11 +15,18 @@ from ticket.models import Document
 from ticket.forms import DocumentForm
 from django.core.urlresolvers import reverse
 from django.db.models import Max,Count
-
+from django.core.mail import send_mail
 
 def webx(request):
 
 	return render(request, 'web/index.html')
+
+def email(request):
+
+	
+
+	send_mail('MailGun works great!', 'It really really does.', 'tester@sandboxbb5414fe26d94969aa76e2ece53f668e.com', ['xiencias@gmail.com'], fail_silently=False)
+	return render(request, 'email.html')
 
 
 def tickets_asignados(request):
@@ -119,6 +126,7 @@ def agregar_ticket(request):
 
 	noti = Notificaciones.objects.all().order_by('-id')[:8]
 
+	
 	return render(request,'agregar_ticket.html', {'documents':documents,'form_document':form_document,'noti':noti,'tipos':tipos,'form': form,'username':username,'grupo':grupo})
 
 
@@ -801,8 +809,10 @@ def agregar_ticket(request):
 		
 		c.save()
 
-
+		
+		
 		noti=c.notificaciones_set.create(name='Ticket nuevo ',fecha_inicio=fecha_inicio)
+		
 		noti.save()
 
 		ix = request.POST['cont']		
@@ -812,7 +822,11 @@ def agregar_ticket(request):
 			newdoc = Document(docfile = request.FILES['docfile'+str(i)],ticket_id=c.id,user_id=id)
 			newdoc.save()
 
-		
+
+		cuerpo = 'Archivos adjuntos : ' + str(newdoc) + chr(10)+'Asunto : '+ str(asunto)+ chr(10) + 'Cliente : ' + str(username)+chr(10)+ 'Tipo : ' +str(tipo)+chr(10)+'Descripcion : '+str(descripcion)+chr(10)+'Fecha : '+str(fecha_inicio)
+
+		send_mail('Xiencias Ticket', 'Se agrego un ticket' + cuerpo, 'tester@sandboxbb5414fe26d94969aa76e2ece53f668e.com', ['joelunmsm@gmail.com'], fail_silently=False)
+
             # Redirect to the document list after POST
 		return HttpResponseRedirect("/ticket/1")
 	else:
