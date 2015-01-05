@@ -1,43 +1,18 @@
 
-…or create a new repository on the command line
-
 
 192.168.1.248
  x13nc14s
 
 
-touch README.md
-git init
-git add README.md
-git commit -m "first commit"
-git remote add origin git@github.com:joelunmsm2003/ticket.git
-git push -u origin master
-…or push an existing repository from the command line
-
-
-git remote add origin git@github.com:joelunmsm2003/ticket.git
-git push -u origin master
-
-
-1 En el servidor
-
-cd ~
-mkdir repository.git
-cd repository.git
-git --bare init
-git config core.sharedRepository true
-2 En local:
-
-mkdir repository
-cd repository
 git init
 git add *
 git commit -m "Initial import"
-git remote add origin git+ssh://user@server/home/user/git/repository.git
-git push origin master
+git remote add xdev git+ssh://192.168.1.248/home/repository.git
+git push xdev master
 
 
 df -h
+
 
 
 
