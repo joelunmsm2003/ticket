@@ -825,7 +825,7 @@ def agregar_ticket(request):
 
 		cuerpo =  chr(10)+chr(10)+'Asunto : '+ str(asunto)+ chr(10) + 'Cliente : ' + str(username)+chr(10)+ 'Tipo : ' +str(tipo)+chr(10)+'Descripcion : '+str(descripcion)+chr(10)+'Fecha : '+str(fecha_inicio)+chr(10)+'Archivos adjuntos : ' + 'http://www.xiencias.org/html/' + str(newdoc.docfile) 
 
-		send_mail('Xiencias Ticket', 'Se agrego un ticket' + cuerpo, 'tester@sandboxbb5414fe26d94969aa76e2ece53f668e.com', ['joelunmsm@gmail.com'], fail_silently=False)
+		send_mail('Xiencias Ticket', 'Se agrego un ticket' + cuerpo, 'tester@sandboxbb5414fe26d94969aa76e2ece53f668e.com', ['joelunmsm@gmail.com','xiencias@gmail.com'], fail_silently=False)
 
             # Redirect to the document list after POST
 		return HttpResponseRedirect("/ticket/1")
