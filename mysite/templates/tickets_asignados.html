@@ -23,7 +23,7 @@ Tickets Asignados
 
 {% for ticket_preatendido in ticket_preatendido %}
 
-    <tr>
+    <tr class='ticket'>
 
 
    
@@ -61,7 +61,7 @@ Tickets Asignados
 
 {% for ticket_reasignado in ticket_reasignado %}
 
-    <tr>
+    <tr class='ticket'>
 
   
      <td width='6%'><a href='/ver_usuario/{{ticket_reasignado.ticket__cliente}}'>{{ticket_reasignado.ticket__cliente}}</a></td>
@@ -118,7 +118,7 @@ Tickets Asignados
 </tr>
 {% for ticket_atendido in ticket_atendido %}
 
-    <tr>
+    <tr class='ticket'>
 
      <td width='6%'><a href='/ver_usuario/{{ticket_atendido.ticket__cliente}}'>{{ticket_atendido.ticket__cliente}}</a></td>
     <td width='20%'>{{ticket_atendido.ticket__asunto}}</td>
@@ -150,7 +150,7 @@ Tickets Asignados
 </tr>
 {% for ticket_cerrados in ticket_cerrados %}
 
-    <tr>
+    <tr class='ticket'>
 
     <td width='6%'><a href='/ver_usuario/{{ticket_cerrados.ticket__cliente}}'>{{ticket_cerrados.ticket__cliente}}</a></td>
     <td width='20%'>{{ticket_cerrados.ticket__asunto}}</td>
@@ -172,6 +172,19 @@ Tickets Asignados
 <meta http-equiv="Refresh" content="0;url=/ticket/3">
 
 {% endif %}
+
+
+
+<script>
+$( ".ticket" ).mouseover(function() {
+  $(this).css('background-color', '#6495ED');
+});
+
+$( ".ticket" ).mouseout(function() {
+  $(this).css('background-color', 'white');
+});
+
+</script>
 
 </body>
 

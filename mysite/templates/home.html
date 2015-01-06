@@ -49,7 +49,7 @@ Tickets {{estado_name}}
 {% for ticket in ticket%}
 	
 	
-	<tr>
+	<tr class = 'ticket'>
 	
 	<td width='6%'><a href='/ver_usuario/{{ticket.cliente_id}}/'>{{ticket.cliente}}</a></td>
 	<td width='10%'>{{ticket.asunto}}</td>
@@ -126,9 +126,16 @@ Tickets {{estado_name}}
 <a>No hay tickets</a>
 {% endif %}
 
+<script>
+$( ".ticket" ).mouseover(function() {
+  $(this).css('background-color', '#6495ED');
+});
 
+$( ".ticket" ).mouseout(function() {
+  $(this).css('background-color', 'white');
+});
 
-
+</script>
 
 
 

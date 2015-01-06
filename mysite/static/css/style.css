@@ -95,7 +95,7 @@ body{
 
 font-family: 'Varela', sans-serif;
 height: 670px;
-background: linear-gradient(45deg, blue, white, blue);
+/*background: linear-gradient(45deg,#808080, white,#808080);*/
 text-align: center;
 }
 
@@ -413,8 +413,10 @@ height: 240px;
   cursor:pointer;
 }
 .titulo{
-  background: blue;
+  background: black;
   color: white;
+  opacity: .5;
+  transition: opacity 12s linear;
 }
 
 table{
