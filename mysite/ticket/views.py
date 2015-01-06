@@ -689,9 +689,11 @@ def evento_add(request):
 
 		ix = request.POST['cont']		
 
+		doc= chr(10)
+
 		for i in range (1, int(ix)+1):
 		
-			newdoc = Document(docfile = request.FILES['docfile'+str(i)],ticket_id=evento_id)
+			newdoc = Document(docfile = request.FILES['docfile'+str(i)],ticket_id=evento_id,user_id=user)
 			newdoc.save()
 
 			doc = doc + 'http://www.xiencias.org/html/'+str(newdoc.docfile)+chr(10)
