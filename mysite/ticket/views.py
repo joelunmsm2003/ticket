@@ -604,12 +604,14 @@ def reasignar_add(request):
 
 		soporte.save()
 
-
-
 		ticket.soporte_set.create(fecha_inicio=fecha_fin,soporte_id=soporte_user)
 
+		cuerpo =  chr(10)+chr(10)+'Soporte asignado  : '+ str(soporte__ticket.username)+chr(10)+'Ticket'+chr(10)+'Asunto : '+ str(ticket.asunto)+ chr(10) + 'Cliente : ' + str(username)+chr(10)+ 'Tipo : ' +str(ticket.tipo)+chr(10)+'Descripcion : '+str(ticket.descripcion)+chr(10)+'Fecha : '+str(soporte.fecha_inicio) +chr(10)+'Archivos adjuntos : ' 
+
+		send_mail('Xiencias Ticket', 'El ticket fue reasignado' + cuerpo, 'tester@sandboxbb5414fe26d94969aa76e2ece53f668e.com', ['joelunmsm@gmail.com'], fail_silently=False)
 
 		noti=ticket.notificaciones_set.create(name='Ticket reasignado ',fecha_inicio=fecha_inicio)
+		
 		noti.save()
 
 		return HttpResponseRedirect("/detalle_ticket/"+id_ticket+"/")
@@ -704,7 +706,7 @@ def evento_add(request):
 
 		evento=soporte.evento_set.create(fecha_inicio=fecha_inicio,name=name,user_id=user)
 
-		cuerpo =  chr(10)+chr(10)+'Evento  : '+ str(evento.name)+'Asunto : '+ str(c.asunto)+ chr(10) + 'Cliente : ' + str(username)+chr(10)+ 'Tipo : ' +str(c.tipo)+chr(10)+'Descripcion : '+str(c.descripcion)+chr(10)+'Fecha : '+str(evento.fecha_inicio) +chr(10)+'Archivos adjuntos : ' + doc
+		cuerpo =  chr(10)+chr(10)+'Evento  : '+ str(evento.name)+chr(10)+'Ticket'+chr(10)+'Asunto : '+ str(c.asunto)+ chr(10) + 'Cliente : ' + str(username)+chr(10)+ 'Tipo : ' +str(c.tipo)+chr(10)+'Descripcion : '+str(c.descripcion)+chr(10)+'Fecha : '+str(evento.fecha_inicio) +chr(10)+'Archivos adjuntos : ' + doc
 
 		send_mail('Xiencias Ticket', 'Se agrego un nuevo evento' + cuerpo, 'tester@sandboxbb5414fe26d94969aa76e2ece53f668e.com', ['joelunmsm@gmail.com'], fail_silently=False)
 
