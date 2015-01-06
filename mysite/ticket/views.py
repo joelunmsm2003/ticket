@@ -683,6 +683,7 @@ def evento_add(request):
 		evento_id = request.POST['id_ticket']
 		soporte_id = request.POST['id']
 		user = 	request.user.id	
+		username = 	request.user.username
 		name = request.POST['name']
 		fecha_inicio = datetime.datetime.today()
 		c=Ticket.objects.get(id=evento_id)
