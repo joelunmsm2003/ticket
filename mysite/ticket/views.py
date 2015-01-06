@@ -685,6 +685,7 @@ def evento_add(request):
 		user = 	request.user.id	
 		name = request.POST['name']
 		fecha_inicio = datetime.datetime.today()
+		c=Ticket.objects.get(id=evento_id)
 
 		ix = request.POST['cont']		
 
@@ -693,9 +694,17 @@ def evento_add(request):
 			newdoc = Document(docfile = request.FILES['docfile'+str(i)],ticket_id=evento_id)
 			newdoc.save()
 
-		
+			doc = doc + 'http://www.xiencias.org/html/'+str(newdoc.docfile)+chr(10)
+
+
 		soporte = Soporte.objects.get(id=soporte_id)
-		soporte.evento_set.create(fecha_inicio=fecha_inicio,name=name,user_id=user)
+
+		evento=soporte.evento_set.create(fecha_inicio=fecha_inicio,name=name,user_id=user)
+
+		cuerpo =  chr(10)+chr(10)+'Evento  : '+ str(evento.name)+'Asunto : '+ str(c.asunto)+ chr(10) + 'Cliente : ' + str(username)+chr(10)+ 'Tipo : ' +str(c.tipo)+chr(10)+'Descripcion : '+str(c.descripcion)+chr(10)+'Fecha : '+str(evento.fecha_inicio) +chr(10)+'Archivos adjuntos : ' + doc
+
+		send_mail('Xiencias Ticket', 'Se agrego un nuevo evento' + cuerpo, 'tester@sandboxbb5414fe26d94969aa76e2ece53f668e.com', ['joelunmsm@gmail.com'], fail_silently=False)
+
 
 		noti=soporte.ticket.notificaciones_set.create(name='Ticket evento ',fecha_inicio=fecha_inicio)
 		noti.save()
@@ -858,8 +867,6 @@ def documentos(request,id_ticket):
 
 	documentos = Document.objects.filter(ticket=id_ticket)
 
-	cumentos = Document.objects.all()
-
 	return render(request, 'documentos.html', {'documentos':documentos,'grupo':grupo,'noti':noti,'username':username,'ticket':ticket})
 
 
@@ -895,9 +902,9 @@ def list1(request):
 			doc = doc + 'http://www.xiencias.org/html/'+str(newdoc.docfile)+chr(10)
 
 
-		cuerpo =  chr(10)+chr(10)+'Asunto : '+ str(c.asunto)+ chr(10) + 'Cliente : ' + str(username)+chr(10)+ 'Tipo : ' +str(c.tipo)+chr(10)+'Descripcion : '+str(c.descripcion)+chr(10)+'Fecha : '+str(c.fecha_inicio)+chr(10)+'Archivos adjuntos : ' + doc 
+		cuerpo =  chr(10)+chr(10)+'Archivos adjuntos : ' + doc+chr(10)+'Asunto : '+ str(c.asunto)+ chr(10) + 'Cliente : ' + str(username)+chr(10)+ 'Tipo : ' +str(c.tipo)+chr(10)+'Descripcion : '+str(c.descripcion)+chr(10)+'Fecha : '+str(c.fecha_inicio) 
 
-		send_mail('Xiencias Ticket', 'Se agrego un nuevo documento' + cuerpo, 'tester@sandboxbb5414fe26d94969aa76e2ece53f668e.com', ['joelunmsm@gmail.com'], fail_silently=False)
+		send_mail('Xiencias Ticket', 'Se agrego un nuevo documento adjunto' + cuerpo, 'tester@sandboxbb5414fe26d94969aa76e2ece53f668e.com', ['joelunmsm@gmail.com'], fail_silently=False)
 
 
 		
