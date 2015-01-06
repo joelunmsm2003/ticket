@@ -413,10 +413,10 @@ height: 240px;
   cursor:pointer;
 }
 .titulo{
-  background: black;
-  color: white;
-  opacity: .5;
-  transition: opacity 12s linear;
+
+  color: black;
+  background: #777;
+
 }
 
 table{
