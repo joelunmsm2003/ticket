@@ -860,8 +860,6 @@ def documentos(request,id_ticket):
 
 	cumentos = Document.objects.all()
 
-	
-
 	return render(request, 'documentos.html', {'documentos':documentos,'grupo':grupo,'noti':noti,'username':username,'ticket':ticket})
 
 
@@ -887,10 +885,20 @@ def list1(request):
 		ix = request.POST['cont']
 			
 
+		doc= chr(10)
+
 		for i in range (1, int(ix)+1):
 		
 			newdoc = Document(docfile = request.FILES['docfile'+str(i)],ticket_id=c.id,user_id=id)
 			newdoc.save()
+
+			doc = doc + 'http://www.xiencias.org/html/'+str(newdoc.docfile)+chr(10)
+
+
+		cuerpo =  chr(10)+chr(10)+'Asunto : '+ str(c.asunto)+ chr(10) + 'Cliente : ' + str(username)+chr(10)+ 'Tipo : ' +str(c.tipo)+chr(10)+'Descripcion : '+str(c.descripcion)+chr(10)+'Fecha : '+str(c.fecha_inicio)+chr(10)+'Archivos adjuntos : ' + doc 
+
+		send_mail('Xiencias Ticket', 'Se agrego un nuevo documento' + cuerpo, 'tester@sandboxbb5414fe26d94969aa76e2ece53f668e.com', ['joelunmsm@gmail.com'], fail_silently=False)
+
 
 		
             # Redirect to the document list after POST

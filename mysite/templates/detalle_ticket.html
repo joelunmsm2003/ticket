@@ -53,7 +53,7 @@
   Soportes  del ticket 
   </tr>
   
-  <tr>
+  <tr class='titulo'>
 
     <td>Soporte Asignado</td>
     <td>Fecha de Inicio</td>
@@ -71,7 +71,7 @@
 
 
   {% for soportes in soportes%}
-  <tr>
+  <tr class ='ticket'>
 
     <td width='10%'><a href='/ver_usuario/{{soportes.soporte_id}}/'>{{soportes.soporte}}</a></td>
     <td width='15%'>{{soportes.fecha_inicio}}</td>
