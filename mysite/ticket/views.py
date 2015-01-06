@@ -79,10 +79,6 @@ def tickets_asignados(request):
 		y=x.split('.')[0]
 		ticket_reasignado[i]['dif_fecha']=y
 
-
-
-
-
 	if grupo == 'Soporte':
 
 		noti = Notificaciones.objects.all().order_by('-id')[:8]
@@ -352,6 +348,11 @@ def atender(request,id):
 		ticket.estado_id = 2
 		ticket.save()
 
+		cuerpo =  chr(10)+chr(10)+'Soporte : '+ str(soporte.soporte)+chr(10)+'Asunto : '+ str(ticket.asunto)+ chr(10) + 'Cliente : ' + str(ticket.cliente)+chr(10)+ 'Tipo : ' +str(ticket.tipo)+chr(10)+'Descripcion : '+str(ticket.descripcion)+chr(10)+'Fecha : '+str(soporte.fecha_inicio) +chr(10)
+
+		send_mail('Xiencias Ticket Atendido', 'El ticket fue atendido' + cuerpo, 'tester@sandboxbb5414fe26d94969aa76e2ece53f668e.com', ['joelunmsm@gmail.com'], fail_silently=False)
+
+
 		noti=ticket.notificaciones_set.create(name='Ticket atendido -',fecha_inicio=fecha_inicio)
 		noti.save()
 		
@@ -360,7 +361,13 @@ def atender(request,id):
 	if ticket.estado_id ==5 :
 
 		ticket.estado_id = 2
+
 		ticket.save()
+
+		cuerpo =  chr(10)+chr(10)+'Ticket Atendido  : '+chr(10)+'Asunto : '+ str(ticket.asunto)+ chr(10) + 'Cliente : ' + str(ticket.cliente)+chr(10)+ 'Tipo : ' +str(ticket.tipo)+chr(10)+'Descripcion : '+str(ticket.descripcion)+chr(10)
+
+		send_mail('Xiencias Ticket Atendido', 'El ticket fue atendido' + cuerpo, 'tester@sandboxbb5414fe26d94969aa76e2ece53f668e.com', ['joelunmsm@gmail.com'], fail_silently=False)
+
 
 		noti=ticket.notificaciones_set.create(name='Ticket atendido -',fecha_inicio=fecha_inicio)
 		noti.save()
@@ -370,8 +377,18 @@ def atender(request,id):
 		ticket.estado_id = 2
 		ticket.save()
 
+		cuerpo =  chr(10)+chr(10)+'Ticket Reatendido  : '+chr(10)+'Asunto : '+ str(ticket.asunto)+ chr(10) + 'Cliente : ' + str(ticket.cliente)+chr(10)+ 'Tipo : ' +str(ticket.tipo)+chr(10)+'Descripcion : '+str(ticket.descripcion)+chr(10)
+
+		send_mail('Xiencias Ticket Reatendido', 'El ticket fue reatendido' + cuerpo, 'tester@sandboxbb5414fe26d94969aa76e2ece53f668e.com', ['joelunmsm@gmail.com'], fail_silently=False)
+
+
 		noti=ticket.notificaciones_set.create(name='Ticket reatendido -',fecha_inicio=fecha_inicio)
 		noti.save()
+
+
+
+	
+
 
 
 	return HttpResponseRedirect("/tickets_asignados")
@@ -411,8 +428,6 @@ def asignar_gilda(request,id_ticket):
 	ticket = Ticket.objects.get(id=id_ticket)
 	user_soporte = User.objects.filter(groups__name='Soporte')
 	
-	
-
 	username = request.user.username
 	tipo=Tipo.objects.all()
 	x=User.objects.get(username=username)
@@ -543,9 +558,16 @@ def asignar_post_gilda_new(request,soporte,ticket):
 	ticket.soporte_actual = str(user_soporte.username)
 	ticket.save()
 
-	ticket.soporte_set.create(fecha_inicio=fecha_inicio,soporte_id=soporte)
+	sa = ticket.soporte_set.create(fecha_inicio=fecha_inicio,soporte_id=soporte)
 	noti=ticket.notificaciones_set.create(name='Ticket by cellphone',fecha_inicio=fecha_inicio)
 	noti.save()
+
+	cuerpo =  chr(10)+chr(10)+'Soporte asignado  : '+ str(sa.soporte)+chr(10)+'Ticket'+chr(10)+'Asunto : '+ str(ticket.asunto)+ chr(10) + 'Cliente : ' + str(ticket.cliente)+chr(10)+ 'Tipo : ' +str(ticket.tipo)+chr(10)+'Descripcion : '+str(ticket.descripcion)+chr(10)+'Fecha : '+str(sa.fecha_inicio) +chr(10)
+
+	send_mail('Xiencias Ticket Asignado', 'El ticket fue asignado' + cuerpo, 'tester@sandboxbb5414fe26d94969aa76e2ece53f668e.com', ['joelunmsm@gmail.com'], fail_silently=False)
+
+
+
 
 	return HttpResponseRedirect("/gilda")
 
@@ -574,6 +596,10 @@ def reasignar_post_gilda_new(request,soporte_act,ticket,soporte):
 	ticket.soporte_actual = str(user_soporte.username)
 	ticket.save()
 
+	cuerpo =  chr(10)+chr(10)+'Soporte reasignado  : '+ str(sa.soporte)+chr(10)+'Ticket'+chr(10)+'Asunto : '+ str(ticket.asunto)+ chr(10) + 'Cliente : ' + str(ticket.cliente)+chr(10)+ 'Tipo : ' +str(ticket.tipo)+chr(10)+'Descripcion : '+str(ticket.descripcion)+chr(10)+'Fecha : '+str(sa.fecha_inicio) +chr(10)
+
+	send_mail('Xiencias Ticket Reasignado', 'El ticket fue reasignado' + cuerpo, 'tester@sandboxbb5414fe26d94969aa76e2ece53f668e.com', ['joelunmsm@gmail.com'], fail_silently=False)
+
 
 	noti=ticket.notificaciones_set.create(name='Ticket by cellphone',fecha_inicio=fecha_inicio)
 	noti.save()
@@ -596,6 +622,7 @@ def reasignar_add(request):
 		id_ticket = request.POST['id_ticket']
 		ticket = Ticket.objects.get(id=id_ticket)
 
+
 		id = request.POST['id']
 		fecha_inicio = datetime.datetime.today()
 		soporte = Soporte.objects.get(id=id)
@@ -604,9 +631,14 @@ def reasignar_add(request):
 
 		soporte.save()
 
-		ticket.soporte_set.create(fecha_inicio=fecha_fin,soporte_id=soporte_user)
 
-		cuerpo =  chr(10)+chr(10)+'Soporte asignado  : '+ str(soporte__ticket.username)+chr(10)+'Ticket'+chr(10)+'Asunto : '+ str(ticket.asunto)+ chr(10) + 'Cliente : ' + str(username)+chr(10)+ 'Tipo : ' +str(ticket.tipo)+chr(10)+'Descripcion : '+str(ticket.descripcion)+chr(10)+'Fecha : '+str(soporte.fecha_inicio) +chr(10)+'Archivos adjuntos : ' 
+
+		soporte_r= ticket.soporte_set.create(fecha_inicio=fecha_fin,soporte_id=soporte_user)
+
+		ticket.soporte_actual = str(soporte_r.soporte)
+		ticket.save()
+
+		cuerpo =  chr(10)+chr(10)+'Soporte reasignado  : '+ str(soporte_r.soporte)+chr(10)+'Ticket'+chr(10)+'Asunto : '+ str(ticket.asunto)+ chr(10) + 'Cliente : ' + str(username)+chr(10)+ 'Tipo : ' +str(ticket.tipo)+chr(10)+'Descripcion : '+str(ticket.descripcion)+chr(10)+'Fecha : '+str(soporte.fecha_inicio) +chr(10)
 
 		send_mail('Xiencias Ticket', 'El ticket fue reasignado' + cuerpo, 'tester@sandboxbb5414fe26d94969aa76e2ece53f668e.com', ['joelunmsm@gmail.com'], fail_silently=False)
 
