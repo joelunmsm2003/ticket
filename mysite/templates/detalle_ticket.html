@@ -19,7 +19,7 @@
       <td width='15%'>Fecha de Inicio</td>
       <td width='15%'>Fecha de Fin</td>
       <td width='6%' >Estado</td>
-      <td width='6%' >Accion</td>
+      <td width='6%' >Accion</td>    
       <td width='10%' >Documentos</td>
       <td width='50%'>Descripcion</td>
     </tr>
@@ -31,7 +31,14 @@
       <td width='15%'>{{ticket.fecha_fin}}</td>
       <td width='6%'>{{ticket.estado}}</td>
       {% if grupo == 'Soporte' %}
-      <td width='20%'><a href="/atender/{{ticket.id}}" >Atender</a></td>
+
+        {% if estado == 'Nuevo' %}
+         <td width='20%'><a href="/atender/{{ticket.id}}" >Atender</a></td>
+
+        {% else %}
+        <td width='20%'>-</td>
+        {% endif %}
+
       {% else %}
       <td width='6%'><a href="/validar/{{ticket.id}}" >Cerrar</a> </td>
       {% endif %}

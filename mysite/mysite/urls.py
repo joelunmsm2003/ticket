@@ -47,6 +47,7 @@ urlpatterns = patterns('',
 	url(r'^ver_ticket_gilda/(\d+)/$', 'ticket.views.ver_ticket_gilda'),
 	url(r'^webx/','ticket.views.webx'),
 	url(r'^email/','ticket.views.email'),
+	url(r'^canvas/','ticket.views.canvas'),
 )
 
 

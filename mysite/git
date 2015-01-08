@@ -2,8 +2,8 @@
 …or create a new repository on the command line
 
 
-192.168.1.248
- x13nc14s
+
+lsof -i:22
 
 
 touch README.md
