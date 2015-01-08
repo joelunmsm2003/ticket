@@ -48,6 +48,7 @@ urlpatterns = patterns('',
 	url(r'^webx/','ticket.views.webx'),
 	url(r'^email/','ticket.views.email'),
 	url(r'^canvas/','ticket.views.canvas'),
+	url(r'^agregar_ticket_m/','ticket.views.agregar_ticket_m'),
 )
 
 

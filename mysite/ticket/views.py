@@ -969,4 +969,11 @@ def list1(request):
 		
             # Redirect to the document list after POST
 		return HttpResponseRedirect("/documentos/"+str(ticket))
+
+def agregar_ticket_m(request):
+
+
+	return render(request, 'agregar_ticket_m.html', {})
+
+
 	
