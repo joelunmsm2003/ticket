@@ -761,7 +761,7 @@ def evento_add(request):
 
 		evento=soporte.evento_set.create(fecha_inicio=fecha_inicio,name=name,user_id=user)
 
-		cuerpo =  chr(10)+chr(10)+'Evento  : '+ str(evento.name)+chr(10)+'Ticket'+chr(10)+'Asunto : '+ str(c.asunto)+ chr(10) + 'Cliente : ' + str(username)+chr(10)+ 'Tipo : ' +str(c.tipo)+chr(10)+'Descripcion : '+str(c.descripcion)+chr(10)+'Fecha : '+str(evento.fecha_inicio) +chr(10)+'Archivos adjuntos : ' + doc
+		cuerpo =  chr(10)+chr(10)+'Evento : '+ str(evento.name)+chr(10)+'Ticket'+chr(10)+'Asunto : '+ str(c.asunto)+ chr(10) + 'Cliente : ' + str(username)+chr(10)+ 'Tipo : ' +str(c.tipo)+chr(10)+'Descripcion : '+str(c.descripcion)+chr(10)+'Fecha : '+str(evento.fecha_inicio) +chr(10)+'Archivos adjuntos : ' + doc
 
 		send_mail('Xiencias Ticket Evento', 'Se agrego un nuevo evento' + cuerpo, 'xienwork@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org', [email], fail_silently=False)
 
@@ -904,6 +904,75 @@ def agregar_ticket(request):
 		# Redirect to the document list after POST
 		
 		return HttpResponseRedirect("/ticket/1")
+	else:
+		form = DocumentForm() # A empty, unbound form
+
+    # Load documents for the list page
+	documents = Document.objects.all()
+	noti = Notificaciones.objects.all().order_by('-id')[:8]
+
+    # Render list page with the documents and the form
+	return render_to_response(
+        'agregar_ticket.html',
+        {'noti':noti,'tipos':tipos,'documents': documents, 'form': form,'username':username,'grupo':grupo},
+        context_instance=RequestContext(request)
+    )
+
+
+def agregar_ticket_movil(request):
+    # Handle file upload
+	
+	if request.method == 'POST':
+
+		id = request.user.id
+		form = DocumentForm(request.POST, request.FILES)
+
+		username = request.user.username
+		asunto = request.POST['asunto']
+		tipo = request.POST['tipo']
+
+		tipo = Tipo.objects.get(id=tipo)
+		tipo=str(tipo.name)
+		descripcion=request.POST['descripcion']
+
+		fecha_inicio = datetime.datetime.today()
+
+		print fecha_inicio
+		#estado 1=Nuevo	2=Atendido 3=Prueba 4=Cerrado
+		#tipo 1=Incidencia 2=Requerimento
+
+		c=User.objects.get(pk=id).ticket_set.create(cliente=username,asunto=asunto,tipo_id=1,descripcion=descripcion,fecha_inicio=fecha_inicio,estado_id=1)
+		
+		c.save()	
+		
+		noti=c.notificaciones_set.create(name='Ticket nuevo ',fecha_inicio=fecha_inicio)
+		
+		noti.save()
+
+		ix = request.POST['cont']
+
+		doc=chr(10)		
+
+		for i in range (1, int(ix)+1):
+		
+		
+			newdoc = Document(docfile = request.FILES['docfile'+str(i)],ticket_id=c.id,user_id=id)
+			newdoc.save()
+
+			doc = doc + 'http://www.xiencias.org/html/'+str(newdoc.docfile)+chr(10)
+
+
+		cuerpo =  chr(10)+chr(10)+'Asunto : '+ str(asunto)+ chr(10) + 'Generado por : ' + str(username)+chr(10)+ 'Tipo : ' +str(tipo)+chr(10)+'Descripcion : '+str(descripcion)+chr(10)+'Fecha : '+str(fecha_inicio)+chr(10)+'Archivos adjuntos : ' + doc 
+
+		send_mail('Xiencias Ticket Nuevo', 'Se agrego un ticket' + cuerpo, 'xienwork@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org', ['joelunmsm@gmail.com','xiencias@gmail.com'], fail_silently=False)
+
+		# Redirect to the document list after POST
+		
+		return render_to_response(
+        'movil.html',
+        {},
+        context_instance=RequestContext(request)
+    )
 	else:
 		form = DocumentForm() # A empty, unbound form
 

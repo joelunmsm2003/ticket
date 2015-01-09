@@ -19,7 +19,7 @@
 <h1> <a class ='logos' href='/tickets_asignados'><IMG SRC="/static/img/BOLA8.png" width='70px'>&nbsp<IMG SRC="/static/img/LETRASXIENCIAS1.png" width='450px'></a></h1>
 
 
-    <form action="{% url "agregar_ticket" %}" method="post" enctype="multipart/form-data">
+    <form action="{% url "agregar_ticket_movil" %}" method="post" enctype="multipart/form-data">
 
 
     {% csrf_token %}
@@ -29,10 +29,13 @@
     <input id="asunto" type="text" name="asunto" maxlength="100"><br>
     Tipo :<br>
 
-    <select name="tipo" id="tipo" multiple>
-    {% for tipos in tipos%}
-     <option value="{{tipos.id}}">{{tipos.name}}</option>
-    {% endfor %}
+    <select name="tipo" id="tipo" multiple value="Incidencia">
+   
+
+    <option value="1" selected >Incidencia</option>
+    <option value="2" >Requerimiento</option>
+    <option value="3" >Implementacion</option>
+  
     </select>
 
     <br>
