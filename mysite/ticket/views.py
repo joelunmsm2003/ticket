@@ -404,6 +404,8 @@ def cerrar(request,id):
 
 
 
+
+
 def reasignar(request,id,id_ticket):
 
 	id_ticket= str(id_ticket)
