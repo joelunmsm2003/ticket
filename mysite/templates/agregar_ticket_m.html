@@ -9,21 +9,53 @@
 
 
     {% load static %} 
+       <link href="{% static 'css/stylem.css' %}" rel="stylesheet" type='text/css'>
+    
 
-    <link href="{% static 'css/stylem.css' %}" rel="stylesheet" type='text/css'>
 
 </head>
 <body>
-Asunto:
-<br>
-<input id = 'asunto' type="text"  name="nombre">
 
-<br>
-Descripcion:
-<br>
-<textarea id='descripcion' name="comentarios" rows="10" cols="40"></textarea>
-<br>
-<div id ='enviar'>Enviar Ticket</div>
+<h1> <a class ='logos' href='/tickets_asignados'><IMG SRC="/static/img/BOLA8.png" width='70px'>&nbsp<IMG SRC="/static/img/LETRASXIENCIAS1.png" width='450px'></a></h1>
+
+
+    <form action="{% url "agregar_ticket" %}" method="post" enctype="multipart/form-data">
+
+
+    {% csrf_token %}
+
+
+    Asunto:<br>
+    <input id="asunto" type="text" name="asunto" maxlength="100"><br>
+    Tipo :<br>
+
+    <select name="tipo" id="tipo" multiple>
+    {% for tipos in tipos%}
+     <option value="{{tipos.id}}">{{tipos.name}}</option>
+    {% endfor %}
+    </select>
+
+    <br>
+    Descripcion :<br>
+    <textarea id="descripcion" name="descripcion" rows="10" cols="30" ></textarea><br>
+            <!--<p>{{ form.non_field_errors }}</p>
+            <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
+            <p>
+                {{ form.docfile.errors }}
+                {{ form.docfile }}
+                {{ form.docfile }}
+                <div class='file_upload'><a class='archivo'> Adjuntar Archivo</a></div>
+                <br>-->
+                <input type='hidden' name='cont' value='0' id='cont'>
+                <!--
+                <div id='files'></div>
+                <br>-->
+            </p>
+     <p><input type="submit" value="Agregar Ticket"  id="submit" /></p>
+    </form>
+
+
+
 
 <script>
 	
@@ -43,44 +75,9 @@ $("#enviar").click(function() {
 });
 
 
-
-i=0  
 setInterval('moverItem()',2000);
 
 
-function moverItem() {
-count = $('#count').text()
-                       
-    
-       $.ajax({
-                        url : "/realtime_post_monitor", 
-                        type : "POST",   
-                        dataType:"json",                
-                        data : {
-                            count: count,
-                            csrfmiddlewaretoken: '{{ csrf_token }}'
-                            },
-                            success : function(json) {
-
-								i=i+1
-								
-
-						  
-            
-
-
-             
-               $("#count").text(x)
-              
-              
-						
-
-
-       
-                            },
-                    });
-                    return false;
-}
 
 </script>
 

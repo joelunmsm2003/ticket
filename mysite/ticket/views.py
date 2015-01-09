@@ -726,6 +726,9 @@ def evento_add(request):
 		name = request.POST['name']
 		fecha_inicio = datetime.datetime.today()
 		c=Ticket.objects.get(id=evento_id)
+
+
+	
 		email2 =str(c.cliente.email)
 
 		if (email1 == email2):

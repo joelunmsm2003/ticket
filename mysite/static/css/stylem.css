@@ -25,13 +25,30 @@ input#asunto{
 textarea{
 
   width: 500px;
-  height: 200px;
+  height: 300px;
   font-size: 30px;
   font-family: "Varela";
   padding: 1em;
 
 } 
 
+
+#tipo{
+  width: 560px;
+  height: 150px;
+  font-size: 30px;
+  font-family: "Varela";
+
+
+
+}
+input#submit{
+
+   width: 560px;
+  height: 150px;
+  font-size: 30px;
+  font-family: "Varela";
+}
 
 
 
