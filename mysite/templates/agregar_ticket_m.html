@@ -1,1 +1,76 @@
-hello
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Agregar ticket html</title>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Varela' rel='stylesheet' type='text/css'>
+
+<script type='text/javascript' src='http://code.jquery.com/jquery-1.8.2.js'></script>
+
+
+    {% load static %} 
+
+    <link href="{% static 'css/stylem.css' %}" rel="stylesheet" type='text/css'>
+
+</head>
+<body>
+Asunto:
+<br>
+<input id = 'asunto' type="text"  name="nombre">
+
+<br>
+Descripcion:
+<br>
+<textarea id='descripcion' name="comentarios" rows="10" cols="40"></textarea>
+<br>
+<div id ='enviar'>Enviar Ticket</div>
+
+<script>
+	
+$("#enviar").click(function() {
+
+	asunto=$("#asunto").val()
+	descripcion = $("#descripcion").val()
+	asunto = asunto.replace(" ", "w");
+	window.location.href = "/agregarm/"+String(asunto)+"/"+String(descripcion)
+
+});
+
+ $( ".tipos" ).click(function() {
+
+    tipos = $(this).children().html()
+    console.log(tipos)
+});
+
+
+
+
+
+    
+       $.ajax({
+                        url : "/agregarticket", 
+                        type : "POST",   
+                        dataType:"json",                
+                        data : {
+                            count: count,
+                            csrfmiddlewaretoken: '{{ csrf_token }}'
+                            },
+                            success : function(json) {
+
+								console.log("ggggg")
+								
+
+
+
+       
+                            },
+                    });
+                    return false;
+
+
+</script>
+
+
+
+</body>
+</html>

@@ -23,9 +23,7 @@ def webx(request):
 
 def email(request):
 
-	
-
-	send_mail('MailGun works great!', 'It really really does.', 'tester@sandboxbb5414fe26d94969aa76e2ece53f668e.com', ['xiencias@gmail.com'], fail_silently=False)
+	send_mail('MailGun works great!', 'It really really does.', 'xienwork@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org', ['joelunmsm@gmail.com'], fail_silently=False)
 	return render(request, 'email.html')
 
 
@@ -358,7 +356,7 @@ def atender(request,id):
 
 		cuerpo =  chr(10)+chr(10)+'Soporte : '+ str(soporte.soporte)+chr(10)+'Asunto : '+ str(ticket.asunto)+ chr(10) + 'Cliente : ' + str(ticket.cliente)+chr(10)+ 'Tipo : ' +str(ticket.tipo)+chr(10)+'Descripcion : '+str(ticket.descripcion)+chr(10)+'Fecha : '+str(soporte.fecha_inicio) +chr(10)
 
-		send_mail('Xiencias Ticket Atendido', 'El ticket fue atendido' + cuerpo, 'tester@sandboxbb5414fe26d94969aa76e2ece53f668e.com', [email_cliente,email_root], fail_silently=False)
+		send_mail('Xiencias Ticket Atendido', 'El ticket fue atendido' + cuerpo, 'xienwork@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org', [email_cliente,email_root], fail_silently=False)
 
 
 		noti=ticket.notificaciones_set.create(name='Ticket atendido -',fecha_inicio=fecha_inicio)
@@ -374,7 +372,7 @@ def atender(request,id):
 
 		cuerpo =  chr(10)+chr(10)+'Ticket Atendido  : '+chr(10)+'Asunto : '+ str(ticket.asunto)+ chr(10) + 'Cliente : ' + str(ticket.cliente)+chr(10)+ 'Tipo : ' +str(ticket.tipo)+chr(10)+'Descripcion : '+str(ticket.descripcion)+chr(10)
 
-		send_mail('Xiencias Ticket Atendido', 'El ticket fue atendido' + cuerpo, 'tester@sandboxbb5414fe26d94969aa76e2ece53f668e.com', ['joelunmsm@gmail.com'], fail_silently=False)
+		send_mail('Xiencias Ticket Atendido', 'El ticket fue atendido' + cuerpo, 'xienwork@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org', ['joelunmsm@gmail.com'], fail_silently=False)
 
 
 		noti=ticket.notificaciones_set.create(name='Ticket atendido -',fecha_inicio=fecha_inicio)
@@ -387,7 +385,7 @@ def atender(request,id):
 
 		cuerpo =  chr(10)+chr(10)+'Ticket Reatendido  : '+chr(10)+'Asunto : '+ str(ticket.asunto)+ chr(10) + 'Cliente : ' + str(ticket.cliente)+chr(10)+ 'Tipo : ' +str(ticket.tipo)+chr(10)+'Descripcion : '+str(ticket.descripcion)+chr(10)
 
-		send_mail('Xiencias Ticket Reatendido', 'El ticket fue reatendido' + cuerpo, 'tester@sandboxbb5414fe26d94969aa76e2ece53f668e.com', ['joelunmsm@gmail.com'], fail_silently=False)
+		send_mail('Xiencias Ticket Reatendido', 'El ticket fue reatendido' + cuerpo, 'xienwork@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org', ['joelunmsm@gmail.com'], fail_silently=False)
 
 
 		noti=ticket.notificaciones_set.create(name='Ticket reatendido -',fecha_inicio=fecha_inicio)
@@ -570,7 +568,7 @@ def asignar_post_gilda_new(request,soporte,ticket):
 
 	cuerpo =  chr(10)+chr(10)+'Soporte asignado  : '+ str(sa.soporte)+chr(10)+'Ticket'+chr(10)+'Asunto : '+ str(ticket.asunto)+ chr(10) + 'Cliente : ' + str(ticket.cliente)+chr(10)+ 'Tipo : ' +str(ticket.tipo)+chr(10)+'Descripcion : '+str(ticket.descripcion)+chr(10)+'Fecha : '+str(sa.fecha_inicio) +chr(10)
 
-	send_mail('Xiencias Ticket Asignado', 'El ticket fue asignado' + cuerpo, 'tester@sandboxbb5414fe26d94969aa76e2ece53f668e.com', [email], fail_silently=False)
+	send_mail('Xiencias Ticket Asignado', 'El ticket fue asignado' + cuerpo, 'xienwork@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org', [email], fail_silently=False)
 
 
 
@@ -604,7 +602,7 @@ def reasignar_post_gilda_new(request,soporte_act,ticket,soporte):
 
 	cuerpo =  chr(10)+chr(10)+'Soporte reasignado  : '+ str(sa.soporte)+chr(10)+'Ticket'+chr(10)+'Asunto : '+ str(ticket.asunto)+ chr(10) + 'Cliente : ' + str(ticket.cliente)+chr(10)+ 'Tipo : ' +str(ticket.tipo)+chr(10)+'Descripcion : '+str(ticket.descripcion)+chr(10)+'Fecha : '+str(sa.fecha_inicio) +chr(10)
 
-	send_mail('Xiencias Ticket Reasignado', 'El ticket fue reasignado' + cuerpo, 'tester@sandboxbb5414fe26d94969aa76e2ece53f668e.com', ['joelunmsm@gmail.com'], fail_silently=False)
+	send_mail('Xiencias Ticket Reasignado', 'El ticket fue reasignado' + cuerpo, 'xienwork@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org', ['joelunmsm@gmail.com'], fail_silently=False)
 
 
 	noti=ticket.notificaciones_set.create(name='Ticket by cellphone',fecha_inicio=fecha_inicio)
@@ -646,7 +644,7 @@ def reasignar_add(request):
 
 		cuerpo =  chr(10)+chr(10)+'Soporte reasignado  : '+ str(soporte_r.soporte)+chr(10)+'Ticket'+chr(10)+'Asunto : '+ str(ticket.asunto)+ chr(10) + 'Cliente : ' + str(username)+chr(10)+ 'Tipo : ' +str(ticket.tipo)+chr(10)+'Descripcion : '+str(ticket.descripcion)+chr(10)+'Fecha : '+str(soporte.fecha_inicio) +chr(10)
 
-		send_mail('Xiencias Ticket Reasignado', 'El ticket fue reasignado' + cuerpo, 'tester@sandboxbb5414fe26d94969aa76e2ece53f668e.com', ['joelunmsm@gmail.com'], fail_silently=False)
+		send_mail('Xiencias Ticket Reasignado', 'El ticket fue reasignado' + cuerpo, 'xienwork@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org', ['joelunmsm@gmail.com'], fail_silently=False)
 
 		noti=ticket.notificaciones_set.create(name='Ticket reasignado ',fecha_inicio=fecha_inicio)
 		
@@ -762,7 +760,7 @@ def evento_add(request):
 
 		cuerpo =  chr(10)+chr(10)+'Evento  : '+ str(evento.name)+chr(10)+'Ticket'+chr(10)+'Asunto : '+ str(c.asunto)+ chr(10) + 'Cliente : ' + str(username)+chr(10)+ 'Tipo : ' +str(c.tipo)+chr(10)+'Descripcion : '+str(c.descripcion)+chr(10)+'Fecha : '+str(evento.fecha_inicio) +chr(10)+'Archivos adjuntos : ' + doc
 
-		send_mail('Xiencias Ticket Evento', 'Se agrego un nuevo evento' + cuerpo, 'tester@sandboxbb5414fe26d94969aa76e2ece53f668e.com', [email], fail_silently=False)
+		send_mail('Xiencias Ticket Evento', 'Se agrego un nuevo evento' + cuerpo, 'xienwork@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org', [email], fail_silently=False)
 
 
 		noti=soporte.ticket.notificaciones_set.create(name='Ticket evento ',fecha_inicio=fecha_inicio)
@@ -893,9 +891,9 @@ def agregar_ticket(request):
 			doc = doc + 'http://www.xiencias.org/html/'+str(newdoc.docfile)+chr(10)
 
 
-		cuerpo =  chr(10)+chr(10)+'Asunto : '+ str(asunto)+ chr(10) + 'Cliente : ' + str(username)+chr(10)+ 'Tipo : ' +str(tipo)+chr(10)+'Descripcion : '+str(descripcion)+chr(10)+'Fecha : '+str(fecha_inicio)+chr(10)+'Archivos adjuntos : ' + doc 
+		cuerpo =  chr(10)+chr(10)+'Asunto : '+ str(asunto)+ chr(10) + 'Generado por : ' + str(username)+chr(10)+ 'Tipo : ' +str(tipo)+chr(10)+'Descripcion : '+str(descripcion)+chr(10)+'Fecha : '+str(fecha_inicio)+chr(10)+'Archivos adjuntos : ' + doc 
 
-		send_mail('Xiencias Ticket Nuevo', 'Se agrego un ticket' + cuerpo, 'tester@sandboxbb5414fe26d94969aa76e2ece53f668e.com', ['joelunmsm@gmail.com','xiencias@gmail.com'], fail_silently=False)
+		send_mail('Xiencias Ticket Nuevo', 'Se agrego un ticket' + cuerpo, 'xienwork@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org', ['joelunmsm@gmail.com','xiencias@gmail.com'], fail_silently=False)
 
 		# Redirect to the document list after POST
 		
@@ -963,7 +961,7 @@ def list1(request):
 
 		cuerpo =  chr(10)+chr(10)+'Archivos adjuntos : ' + doc+chr(10)+'Asunto : '+ str(c.asunto)+ chr(10) + 'Cliente : ' + str(username)+chr(10)+ 'Tipo : ' +str(c.tipo)+chr(10)+'Descripcion : '+str(c.descripcion)+chr(10)+'Fecha : '+str(c.fecha_inicio) 
 
-		send_mail('Xiencias Ticket Document', 'Se agrego un nuevo documento adjunto' + cuerpo, 'tester@sandboxbb5414fe26d94969aa76e2ece53f668e.com', ['joelunmsm@gmail.com','xiencias@gmail.com'], fail_silently=False)
+		send_mail('Xiencias Ticket Document', 'Se agrego un nuevo documento adjunto' + cuerpo, 'xienwork@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org', ['joelunmsm@gmail.com','xiencias@gmail.com'], fail_silently=False)
 
 
 		
@@ -972,8 +970,20 @@ def list1(request):
 
 def agregar_ticket_m(request):
 
+	tipos=Tipo.objects.all()
 
-	return render(request, 'agregar_ticket_m.html', {})
+	return render(request, 'agregar_ticket_m.html', {'tipos':tipos})
+
+def agregarm(request,a,b):
+
+	tipos=Tipo.objects.all()
+	
+	return render(request,'am.html', {'tipos':tipos})
 
 
+def arduino(request):
+
+	
+	
+	return render(request,'web/arduino.html', {})
 	

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Agregar ticket html</title>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Varela' rel='stylesheet' type='text/css'>
+
+<script type='text/javascript' src='http://code.jquery.com/jquery-1.8.2.js'></script>
+
+
+    {% load static %} 
+
+    <link href="{% static 'css/stylem.css' %}" rel="stylesheet" type='text/css'>
+
+</head>
+<body>
+
+
+
+<table>
+    
+
+    {% for tipos in tipos%}
+    <tr class='tipos'>
+	<td >{{tipos.name}}</td>
+	{% endfor %}
+
+
+
+</table>
+
+<br>
+<div id ='enviar'>Enviar Ticket</div>
+
+<script>
+	
+
+ $( ".tipos" ).click(function() {
+
+    tipos = $(this).children().html()
+    console.log(tipos)
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+body {
+  font-family: "Varela";
+  width: 90%;
+  font-weight: 200;
+  letter-spacing: 1px;
+  margin: 25px auto 0 auto;
+  background: rgb(234, 235, 235);
+  color: rgb(25, 25, 25);
+  font-size: 30px;
+  text-align: left
+}
+
+input#asunto{
+
+  width: 500px;
+  height: 60px;
+  font-size: 30px;
+  font-family: "Varela";
+  padding: 1em;
+  
+}
+
+
+
+textarea{
+
+  width: 500px;
+  height: 200px;
+  font-size: 30px;
+  font-family: "Varela";
+  padding: 1em;
+
+} 
+
+
+
+

@@ -45,10 +45,16 @@ urlpatterns = patterns('',
 	url(r'^asignar_post_gilda_new/(\d+)/(\d+)/$', 'ticket.views.asignar_post_gilda_new'),
 	url(r'^tickets_asignados/', 'ticket.views.tickets_asignados'),
 	url(r'^ver_ticket_gilda/(\d+)/$', 'ticket.views.ver_ticket_gilda'),
+	url(r'^agregarm/(\w+)/(\w+)/$', 'ticket.views.agregarm'),
 	url(r'^webx/','ticket.views.webx'),
 	url(r'^email/','ticket.views.email'),
 	url(r'^canvas/','ticket.views.canvas'),
 	url(r'^agregar_ticket_m/','ticket.views.agregar_ticket_m'),
+
+
+	
+
+	url(r'^arduino/$','ticket.views.arduino'),
 )
 
 
