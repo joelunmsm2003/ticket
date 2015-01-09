@@ -862,6 +862,9 @@ def agregar_ticket(request):
 		username = request.user.username
 		asunto = request.POST['asunto']
 		tipo = request.POST['tipo']
+
+		tipo = Tipo.objects.get(id=tipo)
+		tipo=str(tipo.name)
 		descripcion=request.POST['descripcion']
 
 		fecha_inicio = datetime.datetime.today()

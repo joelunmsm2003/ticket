@@ -44,11 +44,16 @@ $("#enviar").click(function() {
 
 
 
+i=0  
+setInterval('moverItem()',2000);
 
 
+function moverItem() {
+count = $('#count').text()
+                       
     
        $.ajax({
-                        url : "/agregarticket", 
+                        url : "/realtime_post_monitor", 
                         type : "POST",   
                         dataType:"json",                
                         data : {
@@ -57,16 +62,25 @@ $("#enviar").click(function() {
                             },
                             success : function(json) {
 
-								console.log("ggggg")
+								i=i+1
 								
 
+						  
+            
+
+
+             
+               $("#count").text(x)
+              
+              
+						
 
 
        
                             },
                     });
                     return false;
-
+}
 
 </script>
 
