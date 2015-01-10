@@ -184,8 +184,7 @@ function moverItem() {
 
               
                 if (parseInt(y)>parseInt(nsoporte)){
-                
-                console.log('entro')
+          
 
                 if(json.grupo=='Soporte'){
                   f=1
@@ -211,9 +210,7 @@ function moverItem() {
             
 
                 }
-                console.log(c[0].fields.cliente)
-                console.log(json.id)
-                console.log(json.grupo)
+               
 
                 if (parseInt(x)>parseInt(count)){
                 
@@ -302,15 +299,29 @@ function moverItem() {
 
 </script>
 
+<div id='grupo'>{{grupo}}</div>
+
 <script>
-var ancho = $("header").css("width");
-
-ancho  = parseInt(ancho);
-console.log(ancho)
 
 
+$("#grupo").hide()
 
-if (ancho <= 720){
- // $( ".ticket_tipo" ).remove();
+if ($("#top-menu").width() < 700) {
+
+$("header").hide()
+s=$("#grupo").text()
+
+if (s=='Soporte'){
+
+   window.location.href = "/gilda"
 }
+else{
+
+   window.location.href = "/agregar_ticket_m"
+
+}
+
+
+}
+
 </script>
