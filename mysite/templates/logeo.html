@@ -34,17 +34,17 @@
       
       <form method="post" name="example form" class="form-signin" role="form">
 
-        {% csrf_token %}
+      	{% csrf_token %}
         <h2 class="form-signin-heading">Please sign in</h2>
         <label for="inputEmail" class="sr-only">Email address</label>
         <input  name="username"  type="text" id="username" class="form-control" placeholder="Username" required="" autofocus="">
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="password" class="form-control" placeholder="Password" required="">
-        <!--<div class="checkbox">
+        <div class="checkbox">
           <label>
             <input type="checkbox" value="remember-me"> Remember me
           </label>
-        </div>-->
+        </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit" id="button">Sign in</button>
       </form>
 
@@ -81,9 +81,9 @@
                                 $('#result').append(json);
                                 if (json=='Login') {
 
-                                 window.location.href = "/tickets_asignados"
+							     window.location.href = "/tickets_asignados"
                                 
-                                }
+								}
                             },
                     });
                     return false;

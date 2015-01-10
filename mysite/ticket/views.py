@@ -140,6 +140,10 @@ def realtime(request):
 
 	return render(request, 'realtime.html', {'noti':noti,'count':count,'estado_name':estado_name,'tipos':tipos,'username':username,'ticket':ticket,'grupo':grupo})
 
+def logeo(request):
+
+	return render(request, 'logeo.html', {})
+
 
 
 

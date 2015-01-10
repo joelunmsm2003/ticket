@@ -1,7 +1,7 @@
 
 …or create a new repository on the command line
 
-
+sudo apt-get install python-mysqldb
 
 lsof -i:22
 
