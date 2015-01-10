@@ -104,8 +104,26 @@ class Archivo(models.Model):
 	fecha_inicio = models.DateTimeField(null=True,blank=True)
 
 
+class Obs(models.Model):
+	
+	id = models.AutoField(max_length=100,primary_key=True)
+	user = models.ForeignKey(User)
+	fecha = models.DateTimeField(null=True,blank=True)
+	asunto = models.CharField(max_length=100,blank=True)
+	estado = models.ForeignKey(Estado)
+	descripcion = models.CharField(max_length=100,blank=True)
 
+	def __str__(self):              # __unicode__ on Python 2
+		return self.asunto
 
+class EstadoObs(models.Model):
+
+	id = models.AutoField(max_length=100,primary_key=True)
+	estado = models.CharField(max_length=100,blank=True)
+	fecha = models.DateTimeField(null=True,blank=True)
+	comentario = models.CharField(max_length=100,blank=True)
+	def __str__(self):              # __unicode__ on Python 2
+		return self.name
 
 
 

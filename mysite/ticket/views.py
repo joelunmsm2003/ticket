@@ -21,6 +21,11 @@ def webx(request):
 
 	return render(request, 'web/index.html')
 
+def obs(request):
+
+	
+	return render(request, 'obs.html')
+
 def email(request):
 
 	send_mail('MailGun works great!', 'It really really does.', 'xienwork@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org', ['joelunmsm@gmail.com'], fail_silently=False)

@@ -51,7 +51,7 @@ urlpatterns = patterns('',
 	url(r'^email/','ticket.views.email'),
 	url(r'^canvas/','ticket.views.canvas'),
 	url(r'^agregar_ticket_m/','ticket.views.agregar_ticket_m'),
-
+	url(r'^obs/','ticket.views.obs'),
 
 	
 
