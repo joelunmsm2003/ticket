@@ -11,14 +11,18 @@
     <title>Signin Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="http://getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
+    {% load static %} 
+
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type='text/css'>
+    <link href="{% static 'css/signin.css' %}" rel="stylesheet" type='text/css'>
+ 
+
+
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="./Signin Template for Bootstrap_files/ie-emulation-modes-warning.js"></script>
+    
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -32,23 +36,43 @@
     <div class="container">
 
       
-      <form method="post" name="example form" class="form-signin" role="form">
+
+
+        <form action="{% url "agregar_ticket_movil" %}" method="post" class="form-signin" role="form" enctype="multipart/form-data">
+
 
       	{% csrf_token %}
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input  name="username"  type="text" id="username" class="form-control" placeholder="Username" required="" autofocus="">
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="password" class="form-control" placeholder="Password" required="">
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" value="remember-me"> Remember me
-          </label>
-        </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit" id="button">Sign in</button>
+        <h2 class="form-signin-heading">Agregar un ticket</h2>
+        <label for="inputEmail" class="sr-only">Asunto</label>
+        <input  name="asunto"  type="text" id="asunto" class="form-control" placeholder="Asunto" required="" autofocus="">
+        <br>
+
+            <select name="tipo" id="tipo" class="form-control input-lg">
+   
+
+    <option value="1" selected >Incidencia</option>
+    <option value="2" >Requerimiento</option>
+    <option value="3" >Implementacion</option>
+  
+    </select>
+
+    <br>
+
+        <label for="inputEmail" class="sr-only">Descripcion</label>
+       
+    
+        <textarea id="descripcion" name="descripcion" class="form-control" placeholder="Descripcion" rows="5" cols="10"></textarea><br>
+        <input type='hidden' name='cont' value='0' id='cont'>
+    
+        <button class="btn btn-lg btn-primary btn-block" type="submit" id="submit">Enviar Ticket</button>
       </form>
 
+  
+
       <div id='contenedor'>
+
+
+
 
 
 
@@ -57,40 +81,29 @@
     </div> <!-- /container -->
 
 
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script>
+    
+$("#enviar").click(function() {
 
-        <script type="text/javascript">
-        $(document).ready(function() {
-            var id_ori_llamada = 'xxx';
+    asunto=$("#asunto").val()
+    descripcion = $("#descripcion").val()
+    asunto = asunto.replace(" ", "w");
+    window.location.href = "/agregarm/"+String(asunto)+"/"+String(descripcion)
 
-            $("#button").click(function() {
-                    var username = $("#username").val();
-                    var password = $("#password").val();
-                    $.ajax({
-                        url : "/push", 
-                        type : "POST", 
-                        dataType:"json",
-                        data : {
-                            username: username,
-                            password: password,
-                            csrfmiddlewaretoken: '{{ csrf_token }}'
-                            },
-                            success : function(json) {
+});
 
-                                console.log(json)
-                                $('#result').append(json);
-                                if (json=='Login') {
+ $( ".tipos" ).click(function() {
 
-							     window.location.href = "/tickets_asignados"
-                                
-								}
-                            },
-                    });
-                    return false;
-            });
-        });
+    tipos = $(this).children().html()
+    console.log(tipos)
+});
+
+
+setInterval('moverItem()',2000);
+
+
+
 </script>
-
 
 
 <div id="feedly-mini" title="feedly Mini tookit"></div></body></html>
