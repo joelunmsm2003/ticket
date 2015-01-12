@@ -21,10 +21,7 @@ def webx(request):
 
 	return render(request, 'web/index.html')
 
-def obs(request):
 
-	
-	return render(request, 'obs.html')
 
 def email(request):
 
@@ -277,6 +274,11 @@ def ticket(request,estado):
 def logeate(request):
  
 	return render_to_response('logeate.html', context_instance=RequestContext(request))
+
+
+def logeate_m(request):
+ 
+	return render_to_response('logeate_m.html', context_instance=RequestContext(request))
 
 def push(request):
 
