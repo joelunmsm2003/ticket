@@ -790,6 +790,35 @@ def detalle_ticket(request,id):
 
 	return render(request, 'detalle_ticket.html', {'estado':estado,'event':event,'noti':noti,'soportes':soportes,'username':username,'grupo':grupo,'tipos':tipos,'ticket':ticket})
 
+def mdetalle_ticket(request,id):
+
+	ticket= Ticket.objects.get(id=id)
+	soportes = ticket.soporte_set.all()
+
+	ticket.save()
+	username = request.user.username
+	tipos=Tipo.objects.all()
+	x=User.objects.get(username=username)
+	grupo =x.groups.get()
+	grupo= str(grupo)
+	estado= str(ticket.estado)
+
+
+	if grupo == 'Soporte':
+
+		noti = Notificaciones.objects.all().order_by('-id')[:8]
+
+	if grupo == 'Clientes':
+
+		noti = Notificaciones.objects.filter(ticket__cliente=request.user.id).order_by('-id')[:8]
+		
+	
+	event = Evento.objects.count()
+
+	return render(request, 'mdetalle_ticket.html', {'estado':estado,'event':event,'noti':noti,'soportes':soportes,'username':username,'grupo':grupo,'tipos':tipos,'ticket':ticket})
+
+
+
 def evento(request,id,id_ticket):
 
 	soporte = Soporte.objects.get(id=id)

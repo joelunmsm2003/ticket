@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Xiencias</title>
+
+  {% load static %} 
+
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type='text/css'>
+    <link href="{% static 'css/signin.css' %}" rel="stylesheet" type='text/css'>
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/nav.css' %}" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="{% static 'js/hello.js' %}"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+     {% include "mheader.html" %}
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+     <script src="{% static 'js/hello1.js' %}"></script>
+     <script src="{% static 'js/bootstrap.js' %}"></script>
+
+<table class ='table'>
+    <tr>
+      Ticket {{ticket.asunto}}
+    </tr>
+    <br>
+
+      <tr>
+      <td >Usuario</td>
+      <td ><a href='/ver_usuario/{{ticket.cliente_id}}/'>{{ticket.cliente}}</a></td>
+      </tr>
+
+      <tr>
+      <td >Tipo</td> 
+      <td >{{ticket.tipo}}</td>
+      </tr>
+
+      <tr>
+      <td >Fecha de Inicio</td>
+      <td >{{ticket.fecha_inicio}}</td>
+      
+      </tr>
+
+      <tr>
+      <td >Fecha de Fin</td>
+      <td >{{ticket.fecha_fin}}</td>
+      
+      </tr>
+      <tr>
+      <td >{{ticket.estado}}</td>
+      <td  >Estado</td>
+      <tr>
+
+      <tr>
+      <td  >Accion</td>  
+
+         {% if grupo == 'Soporte' %}
+
+        {% if estado == 'Nuevo' %}
+         <td width='20%'><a href="/atender/{{ticket.id}}" >Atender</a></td>
+
+        {% else %}
+        <td width='20%'>-</td>
+        {% endif %}
+
+      {% else %}
+      <td ><a href="/validar/{{ticket.id}}" >Cerrar</a> </td>
+      {% endif %} 
+
+      </tr>
+      <tr> 
+      <td  >Documentos</td>
+      <td ><a href='/documentos/{{ticket.id}}'>Documentos</a></td>
+      </tr>
+      <tr>
+      <td >{{ticket.descripcion}}</td>
+
+      <td >Descripcion</td>
+      </tr>
+
+    
+   
+      
+      
+      
+      
+   
+      
+     
+
+</table>
+
+
+
+
+  </body>
+</html>
