@@ -1013,7 +1013,7 @@ def agregar_ticket(request):
 
 		cuerpo =  chr(10)+chr(10)+'Asunto : '+ str(asunto)+ chr(10) + 'Generado por : ' + str(username)+chr(10)+ 'Tipo : ' +str(tipo)+chr(10)+'Descripcion : '+str(descripcion)+chr(10)+'Fecha : '+str(fecha_inicio)+chr(10)+'Archivos adjuntos : ' + doc 
 
-		send_mail('Xiencias Ticket Nuevo', 'Se agrego un ticket' + cuerpo, 'xienwork@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org', ['joelunmsm@gmail.com'], fail_silently=False)
+		send_mail('Xiencias Ticket Nuevo', 'Se agrego un ticket' + cuerpo, 'xienwork@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org', ['joelunmsm@gmail.com','xiencias@gmail.com'], fail_silently=False)
 
 		# Redirect to the document list after POST
 		
@@ -1078,7 +1078,7 @@ def agregar_ticket_movil(request):
 
 		cuerpo =  chr(10)+chr(10)+'Asunto : '+ str(asunto)+ chr(10) + 'Generado por : ' + str(username)+chr(10)+ 'Tipo : ' +str(tipo)+chr(10)+'Descripcion : '+str(descripcion)+chr(10)+'Fecha : '+str(fecha_inicio)+chr(10)+'Archivos adjuntos : ' + doc 
 
-		send_mail('Xiencias Ticket Nuevo', 'Se agrego un ticket' + cuerpo, 'xienwork@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org', ['joelunmsm@gmail.com'], fail_silently=False)
+		send_mail('Xiencias Ticket Nuevo', 'Se agrego un ticket' + cuerpo, 'xienwork@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org', ['joelunmsm@gmail.com','xiencias@gmail.com'], fail_silently=False)
 
 		# Redirect to the document list after POST
 		
