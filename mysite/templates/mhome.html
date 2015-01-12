@@ -121,8 +121,7 @@ Tickets {{estado_name}}
 	{% endif %}-->
 
    
-    <td>Estado</td>
-    <td>Detalle</td>
+
     <td>Documentos</td>
     <td>Accion</td>
 
@@ -154,8 +153,6 @@ Tickets {{estado_name}}
 		{% endfor %}-->
 
 
-	<td width='6%'>{{ticket.estado}}</td>
-	<td width='10%'><a href='/detalle_ticket/{{ticket.id}}'>Mas detalle</a></td>
 	<td width='10%'><a href='/documentos/{{ticket.id}}'>Documentos</a></td>
 
 	{% if grupo == 'Soporte' %}
