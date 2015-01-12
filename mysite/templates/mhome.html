@@ -152,46 +152,7 @@ Tickets {{estado_name}}
 		{% endfor %}-->
 
 
-	{% if grupo == 'Soporte' %}
-		{% if estado_name == 'Nuevos' %}
-		<td width='10%'><a href='/atender/{{ticket.id}}'>Atender</a></td>
-		{% endif %}
-		{% if estado_name == 'Atendidos' %}
-		<td width='12%'><a href='/cerrar/{{ticket.id}}'>Enviar a validar</a></td>
-		{% endif %}
-		{% if estado_name == 'En Prueba' %}
-		<td width='20%'><a href=''>-</td>
-		{% endif %}
-		{% if estado_name == 'Cerrados' %}
-		<td width='20%'><a href=''>-</a></td>
-		{% endif %}
-		{% if estado_name == 'Reasignado' %}
-		<td width='20%'><a href=''>-</a></td>
-		{% endif %}
 
-		{% if estado_name == 'Preatendido' %}
-		<td width='20%'><a href='/atender/{{ticket.id}}'>Atender</a></td>
-		{% endif %}
-	{% else %}
-
-
-	{% if estado_name == 'Nuevos' %}
-		<td width='10%'><a href='/validar/{{ticket.id}}'>Cerrar</a></td>
-		{% endif %}
-		{% if estado_name == 'Atendidos' %}
-		<td width='20%'><a href='/validar/{{ticket.id}}'>Cerrar</a></td>
-		{% endif %}
-		{% if estado_name == 'En Prueba' %}
-		<td width='20%'><a href='/validar/{{ticket.id}}'>Cerrar</a></td>
-		{% endif %}
-		{% if estado_name == 'Cerrados' %}
-		<td width='20%'><a href=''>-</a></td>
-		{% endif %}
-
-		{% if estado_name == 'Preatendido' %}
-		<td width='20%'><a href=''>-</a></td>
-		{% endif %}
-	{% endif %}
 	</tr>
 {% endfor %}
 
