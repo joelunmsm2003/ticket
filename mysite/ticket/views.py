@@ -368,6 +368,13 @@ def salir(request):
 
 	return render_to_response('logeate.html', context_instance=RequestContext(request))
 
+
+def msalir(request):
+
+	logout(request)
+
+	return render_to_response('logeate_m.html', context_instance=RequestContext(request))
+
 def canvas(request):
 
 	return render_to_response('canvas.html', context_instance=RequestContext(request))

@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Navbar Template for Bootstrap</title>
+    <title>Xiencias</title>
 
   {% load static %} 
 
@@ -43,13 +43,15 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Project name</a>
+            <a class="navbar-brand" href="#">Xiencias</a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#">About</a></li>
-              <li><a href="#">Contact</a></li>
+              <li class="active"><a href="/mticket/1">Tickets Nuevo</a></li>
+              <li><a href="/mticket/2">Tickets Atendidos</a></li>
+              <li><a href="/mticket/3">Tickets En Prueba</a></li>
+               <li><a href="/mticket/4">Tickets Cerrados</a></li>
+               <!--
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
@@ -61,11 +63,12 @@
                   <li><a href="#">Separated link</a></li>
                   <li><a href="#">One more separated link</a></li>
                 </ul>
-              </li>
+              </li>-->
             </ul>
+            
             <ul class="nav navbar-nav navbar-right">
-              <li class="active"><a href="./">Default <span class="sr-only">(current)</span></a></li>
-              <li><a href="../navbar-static-top/">Static top</a></li>
+              <li class="active"><a href="./">{{username}} <span class="sr-only"></span></a></li>
+              <li><a href="/msalir">Salir</a></li>
               <li><a href="../navbar-fixed-top/">Fixed top</a></li>
             </ul>
           </div><!--/.nav-collapse -->
@@ -74,10 +77,10 @@
 
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-        <h1>Navbar example</h1>
-        <p>This example is a quick exercise to illustrate how the default, static navbar and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
+        <h1>{{username}}</h1>
+   
         <p>
-          <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
+          <a class="btn btn-lg btn-primary" href="/agregar_ticket_m" role="button">Generar Ticket &raquo;</a>
         </p>
       </div>
 
@@ -88,8 +91,125 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+
+
+     <script src="{% static 'js/hello1.js' %}"></script>
+     <script src="{% static 'js/bootstrap.js' %}"></script>
+
+     {% if ticket %}
+<table class="table">
+ <tr>
+Tickets {{estado_name}}
+  </tr>
+   <tr>
+    <td>Usuario</td>
+    <td>Asunto</td>
+    <td>Tipo</td> 
+
+    <td>Fecha de Inicio</td>
+
+	{% if estado_name == 'Cerrados' %}
+		 <td>Fecha de Fin</td>
+	{% endif %}
+<!--
+	{% if estado_name == 'Atendidos' %}
+		  <td>Soporte Asignado</td>
+	{% endif %}
+
+	{% if estado_name == 'En Prueba' %}
+		  <td>Soporte Asignado</td>
+	{% endif %}-->
+
+   
+    <td>Estado</td>
+    <td>Detalle</td>
+    <td>Documentos</td>
+    <td>Accion</td>
+
+  </tr>
+
+
+{% for ticket in ticket%}
+	
+	
+	<tr>
+	
+	<td width='6%'><a href='/ver_usuario/{{ticket.cliente_id}}/'>{{ticket.cliente}}</a></td>
+	<td width='10%'>{{ticket.asunto}}</td>
+	<td width='10%'>{{ticket.tipo}}</td>
+	<td width='15%'>{{ticket.fecha_inicio}}</td>
+	{% if estado_name == 'Cerrados' %}
+	<td width='18%'>{{ticket.fecha_fin}}</td>
+	{% endif %}
+
+
+<!--
+		{% for soporte in soporte %}
+
+			{% if soporte.ticket_id == ticket.id %}
+			<td width='10%'><a href='/ver_usuario/{{soporte.soporte_id}}/'>{{soporte.soporte}}</a></td>
+
+			{% endif %}
+			
+		{% endfor %}-->
+
+
+	<td width='6%'>{{ticket.estado}}</td>
+	<td width='10%'><a href='/detalle_ticket/{{ticket.id}}'>Mas detalle</a></td>
+	<td width='10%'><a href='/documentos/{{ticket.id}}'>Documentos</a></td>
+
+	{% if grupo == 'Soporte' %}
+		{% if estado_name == 'Nuevos' %}
+		<td width='10%'><a href='/atender/{{ticket.id}}'>Atender</a></td>
+		{% endif %}
+		{% if estado_name == 'Atendidos' %}
+		<td width='12%'><a href='/cerrar/{{ticket.id}}'>Enviar a validar</a></td>
+		{% endif %}
+		{% if estado_name == 'En Prueba' %}
+		<td width='20%'><a href=''>-</td>
+		{% endif %}
+		{% if estado_name == 'Cerrados' %}
+		<td width='20%'><a href=''>-</a></td>
+		{% endif %}
+		{% if estado_name == 'Reasignado' %}
+		<td width='20%'><a href=''>-</a></td>
+		{% endif %}
+
+		{% if estado_name == 'Preatendido' %}
+		<td width='20%'><a href='/atender/{{ticket.id}}'>Atender</a></td>
+		{% endif %}
+	{% else %}
+
+
+	{% if estado_name == 'Nuevos' %}
+		<td width='10%'><a href='/validar/{{ticket.id}}'>Cerrar</a></td>
+		{% endif %}
+		{% if estado_name == 'Atendidos' %}
+		<td width='20%'><a href='/validar/{{ticket.id}}'>Cerrar</a></td>
+		{% endif %}
+		{% if estado_name == 'En Prueba' %}
+		<td width='20%'><a href='/validar/{{ticket.id}}'>Cerrar</a></td>
+		{% endif %}
+		{% if estado_name == 'Cerrados' %}
+		<td width='20%'><a href=''>-</a></td>
+		{% endif %}
+
+		{% if estado_name == 'Preatendido' %}
+		<td width='20%'><a href=''>-</a></td>
+		{% endif %}
+	{% endif %}
+	</tr>
+{% endfor %}
+
+
+</table>
+
+
+
+{% else %}
+<a>No hay tickets</a>
+{% endif %}
+
+
   </body>
 </html>
