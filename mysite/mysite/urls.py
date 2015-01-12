@@ -12,6 +12,7 @@ urlpatterns = patterns('',
 
 	url(r'^admin/', include(admin.site.urls)),
  	url(r'^logeate/', 'ticket.views.logeate', name='reporte'),
+ 	url(r'^mticket/(\d+)/$', 'ticket.views.mticket'),
 
 	url(r'^push$', 'ticket.views.push'),
 	url(r'^ticket/(\d+)/$', 'ticket.views.ticket'),

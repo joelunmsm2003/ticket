@@ -271,6 +271,63 @@ def ticket(request,estado):
 
 	return render(request, 'home.html', {'event':event,'noti':noti,'nsoporte':nsoporte,'count':count,'soporte':soporte,'estado_name':estado_name,'tipos':tipos,'form': form,'username':username,'ticket':ticket,'grupo':grupo})
 
+def mticket(request,estado):
+
+	id = request.user.id
+	count= Ticket.objects.count()
+	nsoporte = Soporte.objects.count()
+	
+	soporte = Soporte.objects.filter(fecha_fin=None)
+
+
+	x=User.objects.get(pk=id)
+
+	grupo =x.groups.get()
+	grupo= str(grupo)
+
+	username = request.user.username
+	tipos=Tipo.objects.all()
+	
+	if grupo == 'Clientes':
+		
+		ticket = Ticket.objects.filter(estado=estado,cliente_id=id).order_by('-id')
+	else:
+		ticket = Ticket.objects.filter(estado=estado).order_by('-id')
+
+	
+
+	form = FormTicket()
+
+	if str(estado)=='1': 
+		estado_name= 'Nuevos'
+	if str(estado)=='2': 
+		estado_name= 'Atendidos'
+	if str(estado)=='3': 
+		estado_name= 'En Prueba'
+	if str(estado)=='4': 
+		estado_name= 'Cerrados'
+	if str(estado)=='5': 
+		estado_name= 'Preatendido'
+	if str(estado)=='6': 
+		estado_name= 'Reasignado'
+
+	event = Evento.objects.count()
+
+
+
+	if grupo == 'Soporte':
+
+		noti = Notificaciones.objects.all().order_by('-id')[:8]
+
+	if grupo == 'Clientes':
+
+		noti = Notificaciones.objects.filter(ticket__cliente=request.user.id).order_by('-id')[:8]
+		
+
+	return render(request, 'mhome.html', {'event':event,'noti':noti,'nsoporte':nsoporte,'count':count,'soporte':soporte,'estado_name':estado_name,'tipos':tipos,'form': form,'username':username,'ticket':ticket,'grupo':grupo})
+
+
+
 def logeate(request):
  
 	return render_to_response('logeate.html', context_instance=RequestContext(request))
