@@ -16,7 +16,7 @@
 <META HTTP-EQUIV="REFRESH" CONTENT="60;URL=/gilda">
 <table class ='titulo' >
 <tr >
-    <td width='8%' class ='titulo'>Id</td>
+   
     <td width='25%' class ='titulo'>Asunto</td>
     <td width='25%' class ='titulo'>Soporte</td>
     <td width='25%' class ='titulo'>Tiempo de Espera</td>
@@ -33,7 +33,7 @@
 
     <tr class='aaa'>
 
-    <td width='8%'>{{ticket_nuevo.id}}</td>
+    <td width='8%' class='id'>{{ticket_nuevo.id}}</td>
     <td width='25%'>{{ticket_nuevo.asunto}}</td>
     <td width='25%'>-</td>
     <td width='25%'>{{ticket_nuevo.dif_fecha}}</td>
@@ -54,7 +54,7 @@
 
     <tr class='sss'>
 
-    <td width='8%'>{{ticket_preatendido.ticket_id}}</td>
+    <td width='8%' class='id'>{{ticket_preatendido.ticket_id}}</td>
     <td width='25%'>{{ticket_preatendido.ticket__asunto}}</td>
     <td width='25%'>{{ticket_preatendido.soporte__username}}</td>
     <!--
@@ -81,7 +81,7 @@
 
     <tr class='atendido'>
 
-    <td width='8%'>{{ticket_atendido.ticket_id}}</td>
+    <td width='8%' class='id'>{{ticket_atendido.ticket_id}}</td>
     <td width='25%'>{{ticket_atendido.ticket__asunto}}</td>
     <td width='25%'>{{ticket_atendido.soporte__username}}</td>
     <td width='25%'>{{ticket_atendido.dif_fecha}}</td>
@@ -98,7 +98,7 @@
 
     <tr class='atendido'>
 
-    <td width='8%'>{{ticket_reasignado.ticket_id}}</td>
+    <td width='8%' class='id'>{{ticket_reasignado.ticket_id}}</td>
     <td width='25%'>{{ticket_reasignado.ticket__asunto}}</td>
     <td width='25%'>{{ticket_reasignado.soporte__username}}</td>
     <td width='25%'>{{ticket_reasignado.dif_fecha}}</td>
@@ -118,7 +118,7 @@
 
     <tr class='porvalidars'>
 
-    <td width='8%'>{{ticket_cerrados.ticket_id}}</td>
+    <td width='8%' class='id'>{{ticket_cerrados.ticket_id}}</td>
     <td width='25%'>{{ticket_cerrados.ticket__asunto}}</td>
     <td width='25%'>{{ticket_cerrados.soporte__username}}</td>
     <td width='25%'>{{ticket_cerrados.dif_fecha}}</td>
@@ -133,6 +133,8 @@
 
 
 <script type="text/javascript">
+
+    $(".id").hide()
     
     $( ".sss" ).mouseover(function() {
 
