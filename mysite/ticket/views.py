@@ -285,10 +285,18 @@ def push(request):
 	username = request.POST['username']
 	password = request.POST['password']
 	user = authenticate(username=username, password=password)
+
+	x= User.objects.get(username=str(user))
+	groups=x.groups.get()
+	groups =str(groups)
+
+
+
+
 	if user is not None:
 		if user.is_active:
 			login(request, user)
-			return HttpResponse(simplejson.dumps('Login')) 
+			return HttpResponse(simplejson.dumps(groups)) 
 		else:
 			return HttpResponse(simplejson.dumps('Desactivado')) 
 	else:
