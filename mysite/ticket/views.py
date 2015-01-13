@@ -16,11 +16,40 @@ from ticket.forms import DocumentForm
 from django.core.urlresolvers import reverse
 from django.db.models import Max,Count
 from django.core.mail import send_mail
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def webx(request):
 
 	return render(request, 'web/index.html')
 
+
+def ticketscerrados(request):
+
+	ticket = Ticket.objects.filter(estado_id=4)
+	print ticket
+	
+	id = request.user.id
+	x=User.objects.get(pk=id)
+	grupo =x.groups.get()
+	grupo=str(grupo)
+	username = request.user.username
+
+
+	paginator = Paginator(ticket, 20) # Show 25 contacts per page
+
+	page = request.GET.get('page')
+
+	try:
+		contacts = paginator.page(page)
+	except PageNotAnInteger:
+    # If page is not an integer, deliver first page.
+		contacts = paginator.page(1)
+	except EmptyPage:
+    # If page is out of range (e.g. 9999), deliver last page of results.
+		contacts = paginator.page(paginator.num_pages)
+
+
+	return render(request,'ticketscerrados.html', {'username':username,'grupo':grupo,'contacts':contacts})
 
 
 def email(request):
@@ -46,6 +75,7 @@ def tickets_asignados(request):
 	grupo= str(grupo)
 
 	username = request.user.username
+	first_name = request.user.first_name
 
 	for i in range(len(ticket_preatendido)):
 
@@ -89,7 +119,7 @@ def tickets_asignados(request):
 		
 
 
-	return render(request,'tickets_asignados.html', {'ticket_reasignado':ticket_reasignado,'noti':noti,'grupo':grupo,'username':username,'ticket_cerrados':ticket_cerrados,'ticket_atendido':ticket_atendido,'ticket_nuevo':ticket_nuevo,'ticket_preatendido':ticket_preatendido})
+	return render(request,'tickets_asignados.html', {'ticket_reasignado':ticket_reasignado,'noti':noti,'grupo':grupo,'first_name':first_name,'username':username,'ticket_cerrados':ticket_cerrados,'ticket_atendido':ticket_atendido,'ticket_nuevo':ticket_nuevo,'ticket_preatendido':ticket_preatendido})
 
 def ver_usuario(request,id):
 
@@ -1044,6 +1074,8 @@ def agregar_ticket(request):
 def agregar_ticket_movil(request):
     # Handle file upload
 	
+	username = request.user.username
+
 	if request.method == 'POST':
 
 		id = request.user.id
@@ -1168,8 +1200,9 @@ def list1(request):
 def agregar_ticket_m(request):
 
 	tipos=Tipo.objects.all()
+	username = request.user.username
 
-	return render(request, 'agregar_ticket_m.html', {'tipos':tipos})
+	return render(request, 'agregar_ticket_m.html', {'tipos':tipos,'username':username})
 
 def agregarm(request,a,b):
 

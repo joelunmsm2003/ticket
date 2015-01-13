@@ -9,8 +9,18 @@
     <link rel="icon" href="http://www.iconsdb.com/icons/download/dark-gray/x-mark-4-512.png" type="image/gif" sizes="16x16">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Varela' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
 
     <script type='text/javascript' src='http://code.jquery.com/jquery-1.8.2.js'></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
     {% load static %} 
 
@@ -34,6 +44,12 @@
 <div id="top-menu">
     <ul class="nav">
 
+
+
+    
+
+
+<li><a href="/tickets_asignados"><span class="glyphicon glyphicon-home" aria-hidden="true">&nbspHome</span></a></li>
 <li><a href="/agregar_ticket">Agregar Ticket</a></li>
 
 
@@ -47,7 +63,7 @@
             <!--<li><a href="/ticket/5">Preatendido</a></li>-->
             <li><a href="/ticket/2">Atendidos</a></li>
             <li><a href="/ticket/3">En Prueba</a></li>
-            <li><a href="/ticket/4">Cerrados</a></li>
+            <li><a href="/ticketscerrados/">Cerrados</a></li>
             <li><a href="/ticket/6">Reasignados</a></li>
             <li><a href="/realtime">RealTime</a></li>
           
@@ -64,16 +80,7 @@
 
       </li>
    
-      <!--
-      
-      <li><a href="">Logos</a>
-        <ul class ='ticket_tipo'>
-          <li><a href="">Monitoreo</a></li>
-          <li><a href="">Reportes</a></li>
-     
-          
-        </ul>
-      </li>-->
+
 
    <li><a href="">Bienvenido, {{username}}</a>
 
@@ -86,6 +93,11 @@
 
    </li>
     <li><a href="">Notificaciones  <div id ='numero_notis'></div></a>
+
+
+    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+
+
  <ul class ='ticket_tipo'>
          <div id='notificacion'></div>
 

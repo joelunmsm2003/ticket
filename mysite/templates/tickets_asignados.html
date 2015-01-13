@@ -5,6 +5,7 @@
 {{msj}}
 
 
+
 {% if ticket_preatendido %}
 Tickets Asignados
 <table>
@@ -13,7 +14,7 @@ Tickets Asignados
   
     <td>Cliente</td>
     <td>Asunto</td>
-    <td>Soporte Asignado</td>
+
     <td>Fecha Inicio Ticket</td>
     <td>Fecha Inicio de Asignacion</td>
     <td>Detalle</td>
@@ -29,7 +30,7 @@ Tickets Asignados
    
     <td width='6%'><a href='/ver_usuario/{{ticket_preatendido.ticket__cliente}}'>{{ticket_preatendido.ticket__cliente}}</a></td>
     <td width='20%'>{{ticket_preatendido.ticket__asunto}}</td>
-    <td width='10%'>{{ticket_preatendido.soporte__username}}</td>
+
     <td width='20%'>{{ticket_preatendido.ticket__fecha_inicio}}</td>
     <td width='20%'>{{ticket_preatendido.dcount}}</td>
     <td width='10%'><a href="/detalle_ticket/{{ticket_preatendido.ticket_id}}" >Detalle</a></td>

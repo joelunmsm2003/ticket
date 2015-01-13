@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tickets Cerrados</title>
+
+	
+</head>
+<body>
+
+{% include "header.html" %}
+
+<div class="pagination">
+    <span class="step-links">
+        {% if contacts.has_previous %}
+            <a href="?page={{ contacts.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Pagina {{ contacts.number }} de {{ contacts.paginator.num_pages }}.
+        </span>
+
+        {% if contacts.has_next %}
+            <a href="?page={{ contacts.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+    <a href='?page={{contacts.paginator.num_pages}}'>Ultima Pagina</a>
+</div>
+
+
+<table>
+
+   <tr class='titulo'>
+    <td>Usuario</td>
+    <td>Asunto</td>
+    <td>Tipo</td> 
+
+    <td>Fecha de Inicio</td>
+
+	{% if estado_name == 'Cerrados' %}
+		 <td>Fecha de Fin</td>
+	{% endif %}
+
+
+   
+   
+    <td>Detalle</td>
+    <td>Documentos</td>
+    <td>Accion</td>
+
+  </tr>
+
+{% for contact in contacts%}
+
+<tr>
+    <td width="10%" >{{ contact.cliente }}</td>
+    <td width="20%" >{{ contact.asunto}}</td>
+    <td width="10%">{{ contact.tipo }}</td>
+    <td width="20%">{{ contact.fecha_inicio }}</td>
+    	{% if estado_name == 'Cerrados' %}
+		 <td width="20%">{{ contact.fecha_fin }}</td>
+		{% endif %}
+    <td width="10%" ><a href='/detalle_ticket/{{contact.id}}'>Detalle</a></td>
+    <td width="10%" ><a href='/documentos/{{contact.id}}'>Documentos</a></td>
+    <td width="10%" >-</td>
+</tr>
+    
+{% endfor %}
+</table>
+
+</body>
+</html>

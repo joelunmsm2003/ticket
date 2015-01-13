@@ -19,7 +19,7 @@ input#button{
     border-style: solid;
     border-width: 1px;
     
-    font-family: 'Varela', sans-serif;
+    font-family: 'Arial', sans-serif;
     height: 20px;
     width: 325px;
     color: #0082D8;
@@ -28,7 +28,7 @@ input#button{
 
 }
 
-a.archivo{
+.archivo{
 
   cursor: pointer;
 }
@@ -81,7 +81,10 @@ a.archivo{
   color: #123;
 }
 
+#notificacion {
 
+  margin-top: -21px;
+}
 
 #notificaciones li a{
 
@@ -128,12 +131,20 @@ a{
 .logos{
   color:white;
   font-size: 18px;
+  text-decoration: none;
+
+}
+
+.logos:hover{
+  color:white;
+  font-size: 18px;
+  text-decoration: none;
 
 }
 header{
 
   width: 100%;
-  background: black;
+  background: #337ab7;
   text-align: center;
   position: fixed;
  margin-top: -5em;
@@ -213,8 +224,8 @@ ul,ol{
   width:170px;
   text-shadow: 0px 0px 1.5px #fff;
 
-  height: 2.0em;
-  background-color: #000;
+  height: 56px;
+  background-color: #337ab7;
   color: #fff;
   text-decoration: none;
   padding:15px 15px;
@@ -247,6 +258,7 @@ width:170px;
 .nav > li{
 
   float: left;
+  height: 56px;
 
 
 
@@ -327,7 +339,7 @@ select#tipo,input#field1{
 height: 38px;
 padding: 4px;
 text-align: center;
-font-family: 'Varela', sans-serif;
+font-family: 'Arial', sans-serif;
 background: #0082D8;;
 
 }
@@ -355,7 +367,7 @@ input#field{
     border-style: solid;
     border-width: 1px;
     
-    font-family: 'Varela', sans-serif;
+    font-family: 'Arial', sans-serif;
     height: 20px;
     width: 325px;
     color: #0082D8;
@@ -367,7 +379,7 @@ textarea#field{
     border-style: solid;
     border-width: 1px;
     
-    font-family: 'Varela', sans-serif;
+    font-family: 'Arial', sans-serif;
 
     width: 325px;
 
@@ -445,18 +457,18 @@ table{
     border-width: 1px;
     color: #0082D8;
     border-collapse: collapse;
-    font-family: 'Varela', sans-serif;
-    font-size: 12px;
+    font-family: 'Arial', sans-serif;
+    font-size: 11px;
     width: 98%;
     visibility: visible;
     opacity: 7;
     transition: opacity 12s linear;
     margin: 1em;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 tr{
- font-family: 'Varela', sans-serif;
+ font-family: 'Arial', sans-serif;
  color: #000;
  width: 100%;
 
@@ -489,7 +501,7 @@ font-size: 11px;
 header{
 
   width: 100%;
-  background: black;
+  background: #337ab7;
   text-align: center;
 
 
@@ -646,7 +658,7 @@ input#username,input#password,input#button,.file{
 
   width: 100px;
   height: 20px;
-  font-family: 'Varela', sans-serif;
+  font-family: 'Arial', sans-serif;
   font-size: 50px;
   text-align: center;
   border-style: solid;
@@ -661,7 +673,7 @@ input#username,input#password,input#button,.file{
 #contenedor{
 
   padding: 2em;
-  font-family: 'Varela', sans-serif;
+  font-family: 'Arial', sans-serif;
   font-size: 30px;
   border: 1px;
     border-style: solid;
@@ -689,7 +701,7 @@ form.ticket{
 
 
 body{
- font-family: 'Varela', sans-serif;
+ font-family: 'Arial', sans-serif;
  
  width: 100%;
 

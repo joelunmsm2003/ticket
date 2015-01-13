@@ -16,8 +16,8 @@
     <tr class='titulo'>
       <td width='6%'>Usuario</td>
       <td width='6%'>Tipo</td> 
-      <td width='10%'>Fecha de Inicio</td>
-      <td width='10%'>Fecha de Fin</td>
+      <td width='13%'>Fecha de Inicio</td>
+      <td width='13%'>Fecha de Fin</td>
       <td width='10%' >Estado</td>
       <td width='10%' >Accion</td>    
       <td width='10%' >Documentos</td>
@@ -27,8 +27,8 @@
     <tr>
       <td width='6%'><a href='/ver_usuario/{{ticket.cliente_id}}/'>{{ticket.cliente}}</a></td>
       <td width='6%'>{{ticket.tipo}}</td>
-      <td width='10%'>{{ticket.fecha_inicio}}</td>
-      <td width='10%'>{{ticket.fecha_fin}}</td>
+      <td width='13%'>{{ticket.fecha_inicio}}</td>
+      <td width='13%'>{{ticket.fecha_fin}}</td>
       <td width='10%'>{{ticket.estado}}</td>
       {% if grupo == 'Soporte' %}
 
@@ -43,22 +43,22 @@
         {% endif %}
 
         {% if estado == 'Atendido' %}
-        <td width='10%'><a href="/atender/{{ticket.id}}" >-</a></td>
+        <td width='10%'><a href="#" >-</a></td>
 
         {% endif %}
 
         {% if estado == 'Prueba' %}
-        <td width='10%'><a href="/atender/{{ticket.id}}" >-</a></td>
+        <td width='10%'><a href="#" >-</a></td>
 
         {% endif %}
 
         {% if estado == 'Cerrado' %}
-        <td width='10%'><a href="/atender/{{ticket.id}}" >-</a></td>
+        <td width='10%'><a href="#" >-</a></td>
 
         {% endif %}
 
         {% if estado == 'Reasignado' %}
-        <td width='10%'><a href="/atender/{{ticket.id}}" >Reasignado</a></td>
+        <td width='10%'><a href="/atender/{{ticket.id}}" >Atender</a></td>
 
         {% endif %}
 

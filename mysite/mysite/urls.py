@@ -56,6 +56,8 @@ urlpatterns = patterns('',
 	url(r'^agregar_ticket_m/','ticket.views.agregar_ticket_m'),
 
 	url(r'^mlogeate/','ticket.views.logeate_m'),
+	url(r'^ticketscerrados/','ticket.views.ticketscerrados'),
+
 	
 
 	url(r'^arduino/$','ticket.views.arduino'),
