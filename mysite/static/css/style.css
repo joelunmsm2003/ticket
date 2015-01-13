@@ -335,12 +335,13 @@ div#top-menu ul li a.selected {
 
 select#tipo,input#field1{
   width:100px;
-  width: 337px;
-height: 38px;
+  width: 327px;
+height: 33px;
 padding: 4px;
 text-align: center;
 font-family: 'Arial', sans-serif;
-background: #0082D8;;
+background: #337ab7;
+color:white;
 
 }
 
@@ -370,7 +371,7 @@ input#field{
     font-family: 'Arial', sans-serif;
     height: 20px;
     width: 325px;
-    color: #0082D8;
+    
     height: 24px;
     padding: 5px;
 
