@@ -28,6 +28,26 @@ input#button{
 
 }
 
+a.archivo{
+
+  cursor: pointer;
+}
+
+
+
+#logo_gila,#gila_actualizar{
+
+  vertical-align: middle;
+  display: inline-block;
+  width:20%;
+
+
+}
+#logo_gila{
+  width: 70%
+}
+
+
 .nuevos{
 
   background: #990099;

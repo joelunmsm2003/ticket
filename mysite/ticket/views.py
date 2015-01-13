@@ -213,7 +213,9 @@ def ticket(request,estado):
 	if grupo == 'Clientes':
 		
 		ticket = Ticket.objects.filter(estado=estado,cliente_id=id).order_by('-id')
+
 	else:
+
 		ticket = Ticket.objects.filter(estado=estado).order_by('-id')
 
 	
@@ -986,6 +988,8 @@ def agregar_ticket(request):
 
 		fecha_inicio = datetime.datetime.today()
 
+
+
 		print fecha_inicio
 		#estado 1=Nuevo	2=Atendido 3=Prueba 4=Cerrado
 		#tipo 1=Incidencia 2=Requerimento
@@ -1010,6 +1014,10 @@ def agregar_ticket(request):
 
 			doc = doc + 'http://www.xiencias.org/html/'+str(newdoc.docfile)+chr(10)
 
+		s= str(fecha_inicio)
+
+		fecha_inicio=str(s.split('.')[0])
+		
 
 		cuerpo =  chr(10)+chr(10)+'Asunto : '+ str(asunto)+ chr(10) + 'Generado por : ' + str(username)+chr(10)+ 'Tipo : ' +str(tipo)+chr(10)+'Descripcion : '+str(descripcion)+chr(10)+'Fecha : '+str(fecha_inicio)+chr(10)+'Archivos adjuntos : ' + doc 
 

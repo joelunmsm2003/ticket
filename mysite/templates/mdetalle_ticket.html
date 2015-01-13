@@ -33,7 +33,18 @@
 
      {% include "mheader.html" %}
 
+       <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        
+   
+        <p>
+          <a class="btn btn-lg btn-primary" href="/agregar_ticket_m" role="button">Generar Ticket &raquo;</a>
+        </p>
 
+        <h1>{{estado_name}}</h1>
+      </div>
+
+    </div> <!-- /container -->
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -81,10 +92,10 @@
          {% if grupo == 'Soporte' %}
 
         {% if estado == 'Nuevo' %}
-         <td width='20%'><a href="/atender/{{ticket.id}}" >Atender</a></td>
+         <td ><a href="/atender/{{ticket.id}}" >Atender</a></td>
 
         {% else %}
-        <td width='20%'>-</td>
+        <td >-</td>
         {% endif %}
 
       {% else %}
@@ -97,9 +108,11 @@
       <td ><a href='/documentos/{{ticket.id}}'>Documentos</a></td>
       </tr>
       <tr>
+
+       <td >Descripcion</td>
       <td >{{ticket.descripcion}}</td>
 
-      <td >Descripcion</td>
+     
       </tr>
 
     
