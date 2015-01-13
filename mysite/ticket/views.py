@@ -62,10 +62,10 @@ def tickets_asignados(request):
 
 	id = request.user.id
 	ticket_nuevo= Ticket.objects.filter(estado=1).order_by('-id')
-	ticket_preatendido= Soporte.objects.filter(ticket__estado=5,soporte_id=id).values('ticket__cliente','soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
-	ticket_atendido= Soporte.objects.filter(ticket__estado=2,soporte_id=id).values('ticket__cliente','soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
-	ticket_cerrados= Soporte.objects.filter(ticket__estado=3,soporte_id=id).values('ticket__cliente','soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
-	ticket_reasignado= Soporte.objects.filter(ticket__estado=6,soporte_id=id,fecha_fin=None).values('ticket__cliente','soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
+	ticket_preatendido= Soporte.objects.filter(ticket__estado=5,soporte_id=id).values('ticket__cliente__username','soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
+	ticket_atendido= Soporte.objects.filter(ticket__estado=2,soporte_id=id).values('ticket__cliente__username','soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
+	ticket_cerrados= Soporte.objects.filter(ticket__estado=3,soporte_id=id).values('ticket__cliente__username','soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
+	ticket_reasignado= Soporte.objects.filter(ticket__estado=6,soporte_id=id,fecha_fin=None).values('ticket__cliente__username','soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
 		
 	print request.user.username
 
@@ -117,6 +117,7 @@ def tickets_asignados(request):
 
 		noti = Notificaciones.objects.filter(ticket__cliente=request.user.id).order_by('-id')[:8]
 		
+
 
 
 	return render(request,'tickets_asignados.html', {'ticket_reasignado':ticket_reasignado,'noti':noti,'grupo':grupo,'first_name':first_name,'username':username,'ticket_cerrados':ticket_cerrados,'ticket_atendido':ticket_atendido,'ticket_nuevo':ticket_nuevo,'ticket_preatendido':ticket_preatendido})

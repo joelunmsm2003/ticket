@@ -28,7 +28,7 @@ Tickets Asignados
 
 
    
-    <td width='6%'><a href='/ver_usuario/{{ticket_preatendido.ticket__cliente}}'>{{ticket_preatendido.ticket__cliente}}</a></td>
+    <td width='6%'><a href='/ver_usuario/{{ticket_preatendido.ticket__cliente}}'>{{ticket_preatendido.ticket__cliente__username}}</a></td>
     <td width='20%'>{{ticket_preatendido.ticket__asunto}}</td>
 
     <td width='20%'>{{ticket_preatendido.ticket__fecha_inicio}}</td>
@@ -65,7 +65,7 @@ Tickets Asignados
     <tr class='ticket'>
 
   
-     <td width='6%'><a href='/ver_usuario/{{ticket_reasignado.ticket__cliente}}'>{{ticket_reasignado.ticket__cliente}}</a></td>
+     <td width='6%'><a href='/ver_usuario/{{ticket_reasignado.ticket__cliente}}'>{{ticket_reasignado.ticket__cliente__username}}</a></td>
     <td width='20%'>{{ticket_reasignado.ticket__asunto}}</td>
     <td width='20%'>{{ticket_reasignado.ticket__fecha_inicio}}</td>
     <td width='20%'><a href="/detalle_ticket/{{ticket_reasignado.ticket_id}}" >Detalle</a></td>
@@ -121,7 +121,7 @@ Tickets Asignados
 
     <tr class='ticket'>
 
-     <td width='6%'><a href='/ver_usuario/{{ticket_atendido.ticket__cliente}}'>{{ticket_atendido.ticket__cliente}}</a></td>
+     <td width='6%'><a href='/ver_usuario/{{ticket_atendido.ticket__cliente}}'>{{ticket_atendido.ticket__cliente__username}}</a></td>
     <td width='20%'>{{ticket_atendido.ticket__asunto}}</td>
     <td width='10%'>{{ticket_atendido.ticket__fecha_inicio}}</td>
     <td width='10%'><a href="/detalle_ticket/{{ticket_atendido.ticket_id}}" >Detalle</a></td>
@@ -153,7 +153,7 @@ Tickets Asignados
 
     <tr class='ticket'>
 
-    <td width='6%'><a href='/ver_usuario/{{ticket_cerrados.ticket__cliente}}'>{{ticket_cerrados.ticket__cliente}}</a></td>
+    <td width='6%'><a href='/ver_usuario/{{ticket_cerrados.ticket__cliente}}'>{{ticket_cerrados.ticket__cliente__username}}</a></td>
     <td width='20%'>{{ticket_cerrados.ticket__asunto}}</td>
     <td width='10%'>{{ticket_cerrados.ticket__fecha_inicio}}</td>
     <td width='10%'><a href='/detalle_ticket/{{ticket_cerrados.ticket__cliente}}'>Detalle</a></td>
