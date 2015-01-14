@@ -1,13 +1,23 @@
 
 <body>
 
-{% include "header.html" %}
+{% include "mheader.html" %}
+
+    <script type='text/javascript' src='http://code.jquery.com/jquery-1.8.2.js'></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
 <div id='contenedor'>
 
 
 {% if evento %}
-<table>
+<table class ='table'>
 
  <tr>
 Soporte del ticket <a href='/detalle_ticket/{{ticket.id}}/'>{{ticket.asunto}}</a>
@@ -29,11 +39,11 @@ Soporte del ticket <a href='/detalle_ticket/{{ticket.id}}/'>{{ticket.asunto}}</a
 
 	{% for evento in evento%}
 	<tr>
-	<td width='5%'>{{evento.user}}</td>
-	<td width='10%'>{{soporte.soporte}}</td>
-	<td width='10%'>{{evento.fecha_inicio}}</td>
-	<td width='10%'><a href='/documentos/{{ticket.id}}'>Documentos</a></td>
-	<td width='50%'>{{evento.name}}</td>
+	<td>{{evento.user}}</td>
+	<td >{{soporte.soporte}}</td>
+	<td>{{evento.fecha_inicio}}</td>
+	<td><a href='/documentos/{{ticket.id}}'>Documentos</a></td>
+	<td>{{evento.name}}</td>
 	{% endfor %}
 </table>
 {% else %}

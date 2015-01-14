@@ -1,19 +1,31 @@
 
 <body>
 
-{% include "header.html" %}
+{% include "mheader.html" %}
 
-Archivos del Ticket {{ticket.asunto}} {{ticket.id}}
+    <!-- Bootstrap core CSS -->
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<table>
+    <!-- Custom styles for this template -->
+    <link href="http://getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="./Signin Template for Bootstrap_files/ie-emulation-modes-warning.js"></script>
+
+
+
+
+
+{% if documentos %}
+
+	<table class='table'>
 
 <tr>
 	<td>Usuario que subio el archivo</td>
 	<td>Ruta</td>
 
 </tr>
-
-{% if documentos %}
 	
 	{% for document in documentos %}
 		<tr>
@@ -23,7 +35,7 @@ Archivos del Ticket {{ticket.asunto}} {{ticket.id}}
 	{% endfor %}
 	
 {% else %}
-	<p>No documents.</p>
+	<p>No existen documentos</p>
 {% endif %}
 
 </table>
@@ -45,7 +57,7 @@ Archivos del Ticket {{ticket.asunto}} {{ticket.id}}
 				<div id='files'></div>
 				<br>
 			</p>
-			<p><input type="submit" value="Upload"  id="field1" /></p>
+			<p><input type="submit" value="Upload" class="btn btn-lg btn-primary btn-block"  id="field1" /></p>
 		</form>
 
 

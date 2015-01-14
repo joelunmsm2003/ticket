@@ -340,7 +340,7 @@ def mticket(request,estado):
 	if str(estado)=='4': 
 		estado_name= 'Cerrados'
 	if str(estado)=='5': 
-		estado_name= 'Preatendido'
+		estado_name= 'Asignado'
 	if str(estado)=='6': 
 		estado_name= 'Reasignado'
 
@@ -514,7 +514,7 @@ def atender(request,id):
 		noti.save()
 
 
-	return HttpResponseRedirect("/tickets_asignados")
+	return HttpResponseRedirect("/mticket/2")
 
 def cerrar(request,id):
 
@@ -522,7 +522,7 @@ def cerrar(request,id):
 	ticket.estado_id = 3
 	ticket.save()
 
-	return HttpResponseRedirect("/tickets_asignados")
+	return HttpResponseRedirect("/mticket/5")
 
 
 
@@ -774,7 +774,7 @@ def reasignar_add(request):
 		
 		noti.save()
 
-		return HttpResponseRedirect("/detalle_ticket/"+id_ticket+"/")
+		return HttpResponseRedirect("/mdetalle_ticket/"+id_ticket+"/")
 
 
 
@@ -800,7 +800,7 @@ def validar(request,id):
 	
 	ticket.save()
 
-	return HttpResponseRedirect("/tickets_asignados")
+	return HttpResponseRedirect("/mticket/5")
 
 def detalle_ticket(request,id):
 
@@ -865,6 +865,15 @@ def evento(request,id,id_ticket):
 	#soporte.evento_set.create(fecha_inicio=fecha_inicio,name=name)
 
 	return render(request, 'evento_add.html', {'ticket':ticket,'soporte':soporte})
+
+def soportes(request,id):
+
+	ticket= Ticket.objects.get(id=id)
+	soportes = ticket.soporte_set.all()
+
+
+	return render(request, 'soportes.html', {'ticket':ticket,'soportes':soportes})
+
 
 def evento_add(request):
 

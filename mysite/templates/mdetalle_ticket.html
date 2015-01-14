@@ -56,7 +56,8 @@
 
 <table class ='table'>
     <tr>
-      Ticket {{ticket.asunto}}
+      <td>Asunto</td>
+      <td>{{ticket.asunto}}</td>
     </tr>
     <br>
 
@@ -82,25 +83,17 @@
       
       </tr>
       <tr>
-      <td >{{ticket.estado}}</td>
+      
       <td  >Estado</td>
-      <tr>
+      <td >{{ticket.estado}}</td>
+
+      </tr>
 
       <tr>
-      <td  >Accion</td>  
+        <td>Soporte Actual</td>
+      <td >{{ticket.soporte_actual}}</td>
 
-         {% if grupo == 'Soporte' %}
 
-        {% if estado == 'Nuevo' %}
-         <td ><a href="/atender/{{ticket.id}}" >Atender</a></td>
-
-        {% else %}
-        <td >-</td>
-        {% endif %}
-
-      {% else %}
-      <td ><a href="/validar/{{ticket.id}}" >Cerrar</a> </td>
-      {% endif %} 
 
       </tr>
       <tr> 
@@ -116,21 +109,17 @@
       </tr>
 
     
-   
-      
-       
-   
 
-     
-      
-      
-   
-      
-     
 
 </table>
 
-        <div id='b1'>
+   
+
+
+      {% if grupo == 'Soporte' %}
+
+        {% if estado == 'Nuevo' %}
+        <div id='b'>
 
         <p>
           <a class="btn btn-lg btn-primary" href="/atender/{{ticket.id}}" role="button">Atender &raquo;</a>
@@ -138,26 +127,186 @@
 
         </div>
 
-        <div id='b2'>
+
+
+  
+        {% endif %}
+
+          {% if estado == 'Preatendido' %}
+          <div id='b'>
+
+          <p>
+          <a class="btn btn-lg btn-primary" href="/atender/{{ticket.id}}" role="button">Atender &raquo;</a>
+
+          </p>
+          </div>
+
+          <div id ='b'>
+          <p>
+          <a class="btn btn-lg btn-primary" href="/validar/{{ticket.id}}" role="button">Cerrar &raquo;</a>
+          
+          </p>
+
+          </div>
+
+
+
+          {% endif %}
+
+    
+
+
+
+
+
+          {% if estado == 'Atendido' %}
+
+          <div id='b'>
+
+          <p>
+          <a class="btn btn-lg btn-primary" href="/cerrar/{{ticket.id}}" role="button">Validar &raquo;</a>
+          </p>
+
+          </div>
+
+          <div id='b'>
+
+          <p>
+          <a class="btn btn-lg btn-primary" href="/validar/{{ticket.id}}" role="button">Cerrar &raquo;</a>
+          </p>
+
+          </div>
+
+  
+          {% endif %}
+
+          {% if estado == 'Prueba' %}
+
+          <div id='b'>
+
+          <p>
+          <a class="btn btn-lg btn-primary" href="/validar/{{ticket.id}}" role="button">Cerrar &raquo;</a>
+          </p>
+
+          </div>
+
+  
+          {% endif %}
+
+          {% if estado == 'Reasignado' %}
+
+          <div id='b'>
+
+          <p>
+          <a class="btn btn-lg btn-primary" href="/validar/{{ticket.id}}" role="button">Cerrar &raquo;</a>
+          </p>
+
+          </div>
+
+  
+          {% endif %}
+
+      {% else %}
+
+
+        <div id='b'>
+
         <p>
           <a class="btn btn-lg btn-primary" href="/validar/{{ticket.id}}" role="button">Cerrar &raquo;</a>
         </p>
+
         </div>
+      {% endif %} 
+
+
+<br>
+{% if soportes %}
+<table class='table'>
+  
+  <tr>
+  Historial de Soporte
+  </tr>
+  
+  <tr >
+
+    <td>Soporte</td>
+    
+
+
+    {% if grupo == 'Soporte' %}
+      <td>Reasignar</td>
+   
+    {% endif %}
+
+    <td>Evento</td>
+   
+  
+  </tr>
+
+
+  {% for soportes in soportes%}
+  <tr>
+
+    <td ><a href='/ver_usuario/{{soportes.soporte_id}}/'>{{soportes.soporte}}</a></td>
+  
+
+    {% if soportes.fecha_fin == None %}
+      
+      {% if grupo == 'Soporte' %}
+      <td ><a href='/reasignar/{{soportes.id}}/{{ticket.id}}'>Reasignar</a></td>
+
+      
+      {% endif %}
+    
+      <td ><a href='/evento/{{soportes.id}}/{{ticket.id}}'>Agregar un evento</a></td>
+    
+    {% else %}
+
+      {% if grupo == 'Soporte' %}
+        <td><a href=''>-</a></td>
+
+      {% endif %}
+        <td ><a href=''>-</a></td>
+    
+    {% endif %}
+
+
+
+  </tr>
+
+  {% endfor %}
+
+
+</table>
+
+{% else %}
+
+<p>Este ticket no ha sido asignado</p>
+
+{% endif %}
+
+
+
+
+
+
+
+
+
+
 
 
 <style type="text/css">
   
-  #b1,#b2{
+  #b{
 
   vertical-align: middle;
   display: inline-block;
-  width:10%;
+  width:40%;
   text-align: center;
   }
 
-  #b2{
-    width: 70%;
-  }
+
 
 </style>
 

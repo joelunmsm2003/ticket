@@ -1,9 +1,22 @@
 
 
 
-<body>
 
-{% include "header.html" %}
+  <body data-feedly-mini="yes">
+
+    <div class="container">
+
+{% include "mheader.html" %}
+
+    <script type='text/javascript' src='http://code.jquery.com/jquery-1.8.2.js'></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
 <p>REASIGNAR TICKET</p>
 
@@ -11,21 +24,21 @@
 {{msj}}
 
 
-<form action="/reasignar_add/" method="post" class='ticket'>
+<form action="/reasignar_add/" method="post" class="form-signin">
     
     {% csrf_token %}
     
-    <label class='etiqueta'></label><div id='field'><input value="{{id_ticket}}" id="field" type="hidden" name="id_ticket" maxlength="100"></div>
-    <label class='etiqueta'></label><div id='field'><input readonly value="{{soporte.id}}" id="field" type="hidden" name="id" maxlength="100"></div>
-    <label class='etiqueta'>Ticket :</label><div id='field'><input  readonly value="{{soporte.ticket}}" id="field" type="text" name="ticket" maxlength="100"></div>
-    <label class='etiqueta'>Fecha Inicio :</label><div id='field'><input readonly value="{{soporte.fecha_inicio}}" id="field" type="text" name="fecha_inicio" maxlength="100"></div>
+    <label class='etiqueta'></label><div id='field'><input value="{{id_ticket}}" id="field" type="hidden" name="id_ticket" maxlength="100" class="form-control" ></div>
+    <label class='etiqueta'></label><div id='field'><input readonly value="{{soporte.id}}" id="field" type="hidden" name="id" maxlength="100" class="form-control"></div>
+    <label class='etiqueta'>Ticket :</label><div id='field'><input  class="form-control" readonly value="{{soporte.ticket}}" id="field" type="text" name="ticket" maxlength="100"></div>
+    <label class='etiqueta'>Fecha Inicio :</label><div id='field'><input class="form-control" readonly value="{{soporte.fecha_inicio}}" id="field" type="text" name="fecha_inicio" maxlength="100"></div>
 
 
 
 
     <label class='etiqueta'>Soporte :</label><br>
 
-    <select name="soporte" id="tipo">
+    <select class="form-control" name="soporte" id="tipo">
     {% for user_soporte in user_soporte%}
      <option value="{{user_soporte.id}}">{{user_soporte.username}}</option>
 	{% endfor %}
@@ -34,12 +47,12 @@
      <br>
   
 
-    <label class='etiqueta'></label><div id='field'><br><input  id="field1" type="submit" value="Reasignar Ticket" /></div>
+    <label class='etiqueta'></label><div id='field'><br><input  class="btn btn-lg btn-primary btn-block" id="field1" type="submit" value="Reasignar Ticket" /></div>
 
 </form>
 
 
-
+</div>
 
 
 
