@@ -118,7 +118,10 @@
     
    
       
-      
+       
+   
+
+     
       
       
    
@@ -127,8 +130,36 @@
 
 </table>
 
+        <div id='b1'>
+
+        <p>
+          <a class="btn btn-lg btn-primary" href="/atender/{{ticket.id}}" role="button">Atender &raquo;</a>
+        </p>
+
+        </div>
+
+        <div id='b2'>
+        <p>
+          <a class="btn btn-lg btn-primary" href="/validar/{{ticket.id}}" role="button">Cerrar &raquo;</a>
+        </p>
+        </div>
 
 
+<style type="text/css">
+  
+  #b1,#b2{
+
+  vertical-align: middle;
+  display: inline-block;
+  width:10%;
+  text-align: center;
+  }
+
+  #b2{
+    width: 70%;
+  }
+
+</style>
 
   </body>
 </html>

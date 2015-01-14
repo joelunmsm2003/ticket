@@ -386,11 +386,17 @@ def push(request):
 	if user is not None:
 		if user.is_active:
 			login(request, user)
+			if (str(username)=='root'):
+				return HttpResponse(simplejson.dumps('Admin')) 
+
+
 			return HttpResponse(simplejson.dumps(groups)) 
 		else:
 			return HttpResponse(simplejson.dumps('Desactivado')) 
 	else:
 		return HttpResponse(simplejson.dumps('Usuario Incorrecto'))
+
+
 
 
 

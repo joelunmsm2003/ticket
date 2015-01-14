@@ -79,17 +79,31 @@
 
                                 console.log(json)
                                 $('#result').append(json);
+
+                                if (json=='Admin') {
+
+                                        window.location.href = "/gilda"
+
+                                }
+
                                 if (json=='Soporte') {
 
-                                 window.location.href = "/gilda"
+                                   
+
+                                        window.location.href = "/mticket/5"
+
+       
+                                }
+
+        
+                                if (json=='Clientes') {
+
+                                window.location.href = "/mticket/5"
                                 
                                 }
-                                else{
-
-                                window.location.href = "/mticket/1"
 
 
-                                }
+
                             },
                     });
                     return false;

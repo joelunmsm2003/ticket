@@ -34,3 +34,28 @@ git push xdev master
 
 
 df -h
+
+Ir a un commit anterior y crear una rama
+git checkout -b <commit>
+
+Cambiar de nombre de la rama
+
+git branch <commit actual> <commit nuevo>
+ver las ramas
+
+Hacer un commit en la rama
+
+git commit -m -a 'name'
+
+Traer los cambios del pasado
+
+git checkout master
+git merge <rama>
+
+
+
+
+
+
+
+
