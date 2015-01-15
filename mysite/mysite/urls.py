@@ -58,6 +58,9 @@ urlpatterns = patterns('',
 	url(r'^mlogeate/','ticket.views.logeate_m'),
 
 	url(r'^soportes/(\d+)/$', 'ticket.views.soportes'),
+	url(r'^soporte/(\d+)/$', 'ticket.views.soporte'),
+	url(r'^eventos/(\d+)/$', 'ticket.views.eventos'),
+
 	url(r'^ticketscerrados/','ticket.views.ticketscerrados'),
 
 	

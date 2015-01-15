@@ -1,37 +1,38 @@
-
-<body>
+<!DOCTYPE html>
 
 {% include "mheader.html" %}
 
 <script type='text/javascript' src='http://code.jquery.com/jquery-1.8.2.js'></script>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+    {% load static %} 
 
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type='text/css'>
+    <link href="{% static 'css/signin.css' %}" rel="stylesheet" type='text/css'>
 
-<div id='contenedor'>
-<div id='form'>
+<body  data-feedly-mini="yes">
+
+
+
+<div class="container">
+
 
 <a>Soporte del ticket {{ticket.asunto}}</a>
 
 
-<form action="/evento_add/" method="post" class='ticket' enctype="multipart/form-data">
+<form action="/evento_add/" method="post" class='form-signin' enctype="multipart/form-data">
     
     {% csrf_token %}
     
-    <label class='etiqueta'></label><div id='field'><input value="{{ticket.id}}" id="field" type="hidden" name="id_ticket" maxlength="100"></div>
+    <label class="sr-only"></label><div id='field'><input  class="form-control" value="{{ticket.id}}" id="field" type="hidden" name="id_ticket" maxlength="100"></div>
 
-    <label class='etiqueta'></label><div id='field'><input value="{{soporte.id}}" id="field" type="hidden" name="id" maxlength="100"></div>
+    <label class="sr-only"></label><div id='field'><input  class="form-control"value="{{soporte.id}}" id="field" type="hidden" name="id" maxlength="100"></div>
 
         <br>
     
 
-    <label class='etiqueta'>Evento :</label><br>
-    <textarea id="field" name="name" rows="10" cols="30">
+    <label class="sr-only">Evento :</label><br>
+    <textarea id="field" name="name" rows="10" cols="30" class="form-control" required="">
 
     </textarea>
   
@@ -39,14 +40,13 @@
     <div class='file_upload'><a> Adjuntar Archivo</a></div>
     <br>
     <div id='files'></div>
-    <input type='hidden' name='cont' value='0' id='cont'></input>
+    <input class="form-control" type='hidden' name='cont' value='0' id='cont' required=""></input>
 
-    <label class='etiqueta'></label><div id='field'><br><input  id="field1" type="submit" value="Agregar Evento" /></div>
+    <label class="sr-only"></label><div id='field'><br><input  class="btn btn-lg btn-primary btn-block" id="field1" type="submit" value="Agregar Evento" /></div>
 
 </form>
 
 
-</div>
 </div>
 
 
@@ -61,7 +61,7 @@ $( ".file_upload" ).click(function() {
 	x=i
 	console.log(i)
 
-	$("#files").append('<input type="file" id="file" name="docfile'+i+'">')
+	$("#files").append('<input required="" class="form-control" type="file" id="file" name="docfile'+i+'">')
 	
 
 	$("input#cont").val(i)

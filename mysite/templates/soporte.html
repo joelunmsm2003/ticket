@@ -1,0 +1,101 @@
+
+    {% load static %} 
+
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type='text/css'>
+    <link href="{% static 'css/signin.css' %}" rel="stylesheet" type='text/css'>
+
+{% include "mheader.html" %}
+
+<table class ='table'>
+
+
+
+
+    <tr class='evento'>
+
+      <td class ='id'>{{soporte.id}}</td>
+      <td>Eventos</td>
+    </tr>
+    <br>
+
+      <tr>
+      <td >Ticket</td>
+      <td >{{soporte.ticket}}</a></td>
+      </tr>
+
+      <tr>
+      <td >Tipo</td> 
+      <td >{{soporte.tipo}}</td>
+      </tr>
+
+      <tr>
+      <td >Fecha de Inicio</td>
+      <td >{{soporte.fecha_inicio}}</td>
+      
+      </tr>
+
+      <tr>
+      <td >Fecha de Fin</td>
+      <td >{{soporte.fecha_fin}}</td>
+      
+      </tr>
+  
+
+      <tr> 
+      <td  >soporte</td>
+      <td >{{soporte.soporte}}</td>
+      </tr>
+      <tr>
+
+       <td >Comentario</td>
+      <td >{{ticket.comentario}}</td>
+
+     
+      </tr>
+
+    
+
+
+</table>
+
+
+<script type="text/javascript">
+
+   
+    $( ".evento" ).click(function() {
+    $(this).css("background",'#5C84C2');
+    window.location.href = "/eventos/"+$(this).children().html()
+
+});
+
+</script>
+
+    {% if soporte.fecha_fin == None %}
+      
+      {% if grupo == 'Soporte' %}
+
+
+          <div id='b'>
+
+          <p>
+          <a class="btn btn-lg btn-primary" href="/reasignar/{{soporte.id}}/{{ticket.id}}" role="button">Reasignar &raquo;</a>
+          </p>
+
+          </div>
+
+
+
+      
+      {% endif %}
+    
+      <td ><a href='/evento/{{soportes.id}}/{{ticket.id}}'>Agregar un evento</a></td>
+    
+    {% else %}
+
+      {% if grupo == 'Soporte' %}
+        <td><a href=''>-</a></td>
+
+      {% endif %}
+        <td ><a href=''>-</a></td>
+    
+    {% endif %}

@@ -1,0 +1,46 @@
+
+    {% load static %} 
+
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type='text/css'>
+    <link href="{% static 'css/signin.css' %}" rel="stylesheet" type='text/css'>
+
+{% include "mheader.html" %}
+
+{% if soportes %}
+<table class='table'>
+  
+  <tr>
+  Historial de Eventos
+  </tr>
+  
+
+
+  {% for eventos in eventos%}
+
+  <td class='id'>{{eventos.id}}</td>
+   <td>{{eventos.evento}}</td>
+   <td>{{eventos.name}}</td>
+
+  {% endfor %}
+
+
+</table>
+
+{% else %}
+
+<p>Este soporte no tiene eventos</p>
+
+{% endif %}
+
+
+
+<script type="text/javascript">
+
+    $('.id').hide()
+    $( ".soporte" ).click(function() {
+    $(this).css("background",'#5C84C2');
+    window.location.href = "/mdetalle_ticket/"+$(this).children().html()
+
+});
+
+</script>

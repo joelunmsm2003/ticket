@@ -27,9 +27,9 @@ Soporte del ticket <a href='/detalle_ticket/{{ticket.id}}/'>{{ticket.asunto}}</a
    <tr>
     
 		<td>Usuario</td> 
-		<td>Soporte Asignado</td>
+	
 		<td>Fecha</td>
-		<td>Documentos</td> 
+		
 		<td>Evento</td> 
    
 
@@ -40,9 +40,9 @@ Soporte del ticket <a href='/detalle_ticket/{{ticket.id}}/'>{{ticket.asunto}}</a
 	{% for evento in evento%}
 	<tr>
 	<td>{{evento.user}}</td>
-	<td >{{soporte.soporte}}</td>
+
 	<td>{{evento.fecha_inicio}}</td>
-	<td><a href='/documentos/{{ticket.id}}'>Documentos</a></td>
+
 	<td>{{evento.name}}</td>
 	{% endfor %}
 </table>
@@ -50,7 +50,13 @@ Soporte del ticket <a href='/detalle_ticket/{{ticket.id}}/'>{{ticket.asunto}}</a
 <a>No existen eventos</a>
 {% endif %}
 
+ <div id='b'>
 
+        <p>
+          <a class="btn btn-lg btn-primary" href="/documentos/{{ticket.id}}" role="button">Documentos &raquo;</a>
+        </p>
+
+ </div>
 
 
 </div>

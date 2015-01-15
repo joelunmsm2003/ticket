@@ -548,6 +548,7 @@ def reasignar(request,id,id_ticket):
 
 	return render(request,'reasignar.html', {'id_ticket':id_ticket ,'user_soporte':user_soporte,'soporte':soporte,'username':username,'grupo':grupo,'tipo':tipo})
 
+
 def asignar_gilda(request,id_ticket):
 
 	ticket = Ticket.objects.get(id=id_ticket)
@@ -842,6 +843,12 @@ def mdetalle_ticket(request,id):
 	grupo= str(grupo)
 	estado= str(ticket.estado)
 
+	fit=ticket.fecha_inicio
+	today = datetime.datetime.today()
+
+	x=str(today-fit)
+	espera=x.split('.')[0]
+
 
 	if grupo == 'Soporte':
 
@@ -854,7 +861,7 @@ def mdetalle_ticket(request,id):
 	
 	event = Evento.objects.count()
 
-	return render(request, 'mdetalle_ticket.html', {'estado':estado,'event':event,'noti':noti,'soportes':soportes,'username':username,'grupo':grupo,'tipos':tipos,'ticket':ticket})
+	return render(request, 'mdetalle_ticket.html', {'espera':espera,'estado':estado,'event':event,'noti':noti,'soportes':soportes,'username':username,'grupo':grupo,'tipos':tipos,'ticket':ticket})
 
 
 
@@ -873,6 +880,23 @@ def soportes(request,id):
 
 
 	return render(request, 'soportes.html', {'ticket':ticket,'soportes':soportes})
+
+def soporte(request,id):
+
+
+	soporte= Soporte.objects.get(id=id)
+
+	return render(request, 'soporte.html', {'soporte':soporte})
+
+
+def eventos(request,id):
+
+	soporte= Soporte.objects.get(id=id)
+	eventos = soporte.evento_set.all()
+
+
+	return render(request, 'eventos.html', {'soporte':ticket,'eventos':eventos})
+
 
 
 def evento_add(request):

@@ -1,0 +1,113 @@
+
+    {% load static %} 
+
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type='text/css'>
+    <link href="{% static 'css/signin.css' %}" rel="stylesheet" type='text/css'>
+
+{% include "mheader.html" %}
+
+
+
+
+      <div class="jumbotron">
+        
+        
+        <h4>{{ticket.id}}</h4>
+
+        <h1>{{ticket.asunto}}</h1>
+      </div>
+
+{% if soportes %}
+<table class='table'>
+  
+  <tr>
+  Historial de Soporte
+  </tr>
+  
+  <tr >
+
+      <td>Id</td>
+    <td>Soporte</td>
+    
+
+
+    {% if grupo == 'Soporte' %}
+      <td>Reasignar</td>
+   
+    {% endif %}
+
+    <td>Evento</td>
+   
+  
+  </tr>
+
+
+  {% for soportes in soportes%}
+  <tr class='soporte'>
+
+  <td >{{soportes.id}}</td>
+
+
+    <td ><a href='/ver_usuario/{{soportes.soporte_id}}/'>{{soportes.soporte}}</a></td>
+  
+
+    {% if soportes.fecha_fin == None %}
+      
+      {% if grupo == 'Soporte' %}
+      <td ><a href='/reasignar/{{soportes.id}}/{{ticket.id}}'>Reasignar</a></td>
+
+      
+      {% endif %}
+    
+      <td ><a href='/evento/{{soportes.id}}/{{ticket.id}}'>Agregar un evento</a></td>
+    
+    {% else %}
+
+      {% if grupo == 'Soporte' %}
+        <td><a href=''>-</a></td>
+
+      {% endif %}
+        <td ><a href=''>-</a></td>
+    
+    {% endif %}
+
+
+
+  </tr>
+
+  {% endfor %}
+
+
+</table>
+
+{% else %}
+
+<p>Este ticket no ha sido asignado</p>
+
+{% endif %}
+
+
+
+
+
+<script type="text/javascript">
+
+    
+    $( ".soporte" ).click(function() {
+    $(this).css("background",'#5C84C2');
+    window.location.href = "/soporte/"+$(this).children().html()
+
+});
+
+</script>
+
+    {% if soportes.fecha_fin == None %}
+      
+      {% if grupo == 'Soporte' %}
+      <td ><a href='/reasignar/{{soportes.id}}/{{ticket.id}}'>Reasignar</a></td>
+
+      
+      {% endif %}
+    
+    
+    {% endif %}

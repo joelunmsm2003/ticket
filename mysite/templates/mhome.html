@@ -58,7 +58,7 @@ Tickets {{estado_name}}
     <td>Asunto</td>
    
 
-    <td>Fecha de Inicio</td>
+    <td>Descripcion</td>
 
 	{% if estado_name == 'Cerrados' %}
 		 <td>Fecha de Fin</td>
@@ -82,13 +82,13 @@ Tickets {{estado_name}}
 	
 	
 	<tr class='sss'>
-	<td width='25%' class='id'>{{ticket.id}}</td>
-	<td width='6%'><a href='/ver_usuario/{{ticket.cliente_id}}/'>{{ticket.cliente}}</a></td>
-	<td width='25%'>{{ticket.asunto}}</td>
+	<td class='id'>{{ticket.id}}</td>
+	<td ><a href='/ver_usuario/{{ticket.cliente_id}}/'>{{ticket.cliente}}</a></td>
+	<td >{{ticket.asunto}}</td>
 	
-	<td width='25%'>{{ticket.fecha_inicio}}</td>
+	<td >{{ticket.descripcion}}</td>
 	{% if estado_name == 'Cerrados' %}
-	<td width='25%'>{{ticket.fecha_fin}}</td>
+	<td >{{ticket.fecha_fin}}</td>
 	{% endif %}
 
 

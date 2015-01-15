@@ -41,7 +41,8 @@
           <a class="btn btn-lg btn-primary" href="/agregar_ticket_m" role="button">Generar Ticket &raquo;</a>
         </p>
 
-        <h1>{{estado_name}}</h1>
+        <h1>{{ticket.asunto}}</h1>
+        <h3>Tiempo de espera : {{espera}}</h3>
       </div>
 
     </div> <!-- /container -->
@@ -54,11 +55,20 @@
      <script src="{% static 'js/hello1.js' %}"></script>
      <script src="{% static 'js/bootstrap.js' %}"></script>
 
+
+
 <table class ='table'>
-    <tr>
-      <td>Asunto</td>
-      <td>{{ticket.asunto}}</td>
-    </tr>
+
+
+        <tr>
+
+       <td >Descripcion</td>
+      <td >{{ticket.descripcion}}</td>
+
+     
+      </tr>
+
+ 
     <br>
 
       <tr>
@@ -89,7 +99,9 @@
 
       </tr>
 
-      <tr>
+      <tr class='soporte'>
+
+      <td class='id'>{{ticket.id}}</td>
         <td>Soporte Actual</td>
       <td >{{ticket.soporte_actual}}</td>
 
@@ -100,13 +112,7 @@
       <td  >Documentos</td>
       <td ><a href='/documentos/{{ticket.id}}'>Documentos</a></td>
       </tr>
-      <tr>
 
-       <td >Descripcion</td>
-      <td >{{ticket.descripcion}}</td>
-
-     
-      </tr>
 
     
 
@@ -270,7 +276,7 @@
     
     {% endif %}
 
-
+   <td ><a href='/ver_evento/{{soportes.id}}/{{ticket.id}}'>Detalle</a></td>
 
   </tr>
 
@@ -287,7 +293,17 @@
 
 
 
+<script type="text/javascript">
 
+    
+    $( ".id" ).hide()
+    $( ".soporte" ).click(function() {
+    $(this).css("background",'#5C84C2');
+    window.location.href = "/soportes/"+$(this).children().html()
+
+});
+
+</script>
 
 
 
