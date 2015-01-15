@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,6 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
+    <script type='text/javascript' src='http://code.jquery.com/jquery-1.8.2.js'></script>
 
     <title>Xiencias</title>
 
@@ -31,10 +33,23 @@
 
   <body>
 
-     {% include "mheader.html" %}
+{% include "mheader.html" %}
+  {% load static %} 
 
-       <!-- Main component for a primary marketing message or call to action -->
-      <div class="jumbotron">
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type='text/css'>
+    <link href="{% static 'css/signin.css' %}" rel="stylesheet" type='text/css'>
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/nav.css' %}" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="{% static 'js/hello.js' %}"></script>
+
+
+
+
+     <!-- Main component for a primary marketing message or call to action -->
+   <div class="jumbotron">
         
    
         <p>
@@ -44,16 +59,6 @@
         <h1>{{ticket.asunto}}</h1>
         <h3>Tiempo de espera : {{espera}}</h3>
       </div>
-
-    </div> <!-- /container -->
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
-
-     <script src="{% static 'js/hello1.js' %}"></script>
-     <script src="{% static 'js/bootstrap.js' %}"></script>
 
 
 
@@ -69,7 +74,7 @@
       </tr>
 
  
-    <br>
+  
 
       <tr>
       <td >Usuario</td>
@@ -298,7 +303,7 @@
     
     $( ".id" ).hide()
     $( ".soporte" ).click(function() {
-    $(this).css("background",'#5C84C2');
+    $(this).css("background",'#2e6da4');
     window.location.href = "/soportes/"+$(this).children().html()
 
 });

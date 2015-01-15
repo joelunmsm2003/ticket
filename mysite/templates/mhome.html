@@ -32,7 +32,19 @@
 
   <body>
 
-  {% include "mheader.html" %}
+{% include "mheader.html" %}
+  {% load static %} 
+
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type='text/css'>
+    <link href="{% static 'css/signin.css' %}" rel="stylesheet" type='text/css'>
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/nav.css' %}" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="{% static 'js/hello.js' %}"></script>
+
+
 
 
      <!-- Main component for a primary marketing message or call to action -->
@@ -46,13 +58,11 @@
         <h1>{{estado_name}}</h1>
       </div>
 
-    </div> <!-- /container -->
+  
 
      {% if ticket %}
 <table class="table">
- <tr>
-Tickets {{estado_name}}
-  </tr>
+
    <tr>
     <td>Usuario</td>
     <td>Asunto</td>
@@ -63,16 +73,6 @@ Tickets {{estado_name}}
 	{% if estado_name == 'Cerrados' %}
 		 <td>Fecha de Fin</td>
 	{% endif %}
-<!--
-	{% if estado_name == 'Atendidos' %}
-		  <td>Soporte Asignado</td>
-	{% endif %}
-
-	{% if estado_name == 'En Prueba' %}
-		  <td>Soporte Asignado</td>
-	{% endif %}-->
-
-   
 
 
   </tr>
@@ -92,17 +92,6 @@ Tickets {{estado_name}}
 	{% endif %}
 
 
-<!--
-		{% for soporte in soporte %}
-
-			{% if soporte.ticket_id == ticket.id %}
-			<td width='10%'><a href='/ver_usuario/{{soporte.soporte_id}}/'>{{soporte.soporte}}</a></td>
-
-			{% endif %}
-			
-		{% endfor %}-->
-
-
 
 	</tr>
 {% endfor %}
@@ -118,15 +107,17 @@ Tickets {{estado_name}}
 
 
   </body>
-</html>
+
 
 <script type="text/javascript">
 
 	$('.id').hide()
     $( ".sss" ).click(function() {
-    $(this).css("background",'#5C84C2');
+    $(this).css("background",'#2e6da4');
     window.location.href = "/mdetalle_ticket/"+$(this).children().html()
 
 });
 
 </script>
+
+</html>

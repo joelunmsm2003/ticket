@@ -1,35 +1,75 @@
 
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <script type='text/javascript' src='http://code.jquery.com/jquery-1.8.2.js'></script>
+
+    <title>Xiencias</title>
+
+  {% load static %} 
+
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type='text/css'>
+    <link href="{% static 'css/signin.css' %}" rel="stylesheet" type='text/css'>
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/nav.css' %}" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="{% static 'js/hello.js' %}"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+
 <body>
 
-{% include "header.html" %}
+{% include "mheader.html" %}
 
 
+       <div class="jumbotron">
+        
+   
+        <p>
+          <a class="btn btn-lg btn-primary" href="/agregar_ticket_m" role="button">Generar Ticket &raquo;</a>
+        </p>
 
-
-<table>
-
-
-   <tr>
-    
-    <td>Id</td> 
-    <td>Nombre</td>
-    <td>Grupo</td>
+        <h1>{{first_name}}</h1>
      
-    <td>Correo</td> 
-   <td>Direccion</td>
+      </div>
 
-    
-  </tr>
+<table class='table'>
 
 
 
 	<tr>
-	<td width='20%'>{{usuario.id}}</td>
-	<td width='20%'>{{usuario.username}}</td>
-	<td width='20%'>{{grupo}}</td>
-		
-	<td width='20%'>-</td>
-	<td width='20%'>-</td>
+	<td>Id</td> 
+	<td >{{usuario.id}}</td>
+	</tr>
+	<tr>
+	<td>Nombre</td>
+	<td >{{usuario.username}}</td>
+	</tr>
+
+	<tr>
+	<td>Grupo</td>
+	<td >{{grupo}}</td>
+	</tr>
+	
+	<tr>
+	<td>Correo</td>
+	<td >{{usuario.email}}</td>
+	</tr>
 	
 
 

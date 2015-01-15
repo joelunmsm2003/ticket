@@ -129,8 +129,8 @@ def ver_usuario(request,id):
 	grupo =x.groups.get()
 	grupo=str(grupo)
 	username = request.user.username
-
-	return render(request,'ver_usuario.html', {'username':username,'usuario':usuario,'grupo':grupo})
+	first_name = request.user.first_name
+	return render(request,'ver_usuario.html', {'first_name':first_name,'username':username,'usuario':usuario,'grupo':grupo})
 
 
 
@@ -484,7 +484,7 @@ def atender(request,id):
 		noti=ticket.notificaciones_set.create(name='Ticket atendido -',fecha_inicio=fecha_inicio)
 		noti.save()
 		
-		return HttpResponseRedirect("/tickets_asignados")
+		return HttpResponseRedirect("/mticket/2")
 
 	if ticket.estado_id ==5 :
 
@@ -514,7 +514,7 @@ def atender(request,id):
 		noti.save()
 
 
-	return HttpResponseRedirect("/mticket/2")
+	return HttpResponseRedirect("/mdetalle_ticket/"+id+"/")
 
 def cerrar(request,id):
 
@@ -835,8 +835,10 @@ def mdetalle_ticket(request,id):
 	ticket= Ticket.objects.get(id=id)
 	soportes = ticket.soporte_set.all()
 
-	ticket.save()
+	id = request.user.id
+	user = User.objects.get(id=id)
 	username = request.user.username
+	
 	tipos=Tipo.objects.all()
 	x=User.objects.get(username=username)
 	grupo =x.groups.get()
@@ -861,7 +863,7 @@ def mdetalle_ticket(request,id):
 	
 	event = Evento.objects.count()
 
-	return render(request, 'mdetalle_ticket.html', {'espera':espera,'estado':estado,'event':event,'noti':noti,'soportes':soportes,'username':username,'grupo':grupo,'tipos':tipos,'ticket':ticket})
+	return render(request, 'mdetalle_ticket.html', {'user':user,'espera':espera,'estado':estado,'event':event,'noti':noti,'soportes':soportes,'username':username,'grupo':grupo,'tipos':tipos,'ticket':ticket})
 
 
 
