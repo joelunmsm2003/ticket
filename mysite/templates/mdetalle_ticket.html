@@ -31,22 +31,16 @@
     <![endif]-->
   </head>
 
-  <body>
+  <body data-feedly-mini="yes">
 
 {% include "mheader.html" %}
   {% load static %} 
 
     <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type='text/css'>
-    <link href="{% static 'css/signin.css' %}" rel="stylesheet" type='text/css'>
-    <!-- Custom styles for this template -->
-    <link href="{% static 'css/nav.css' %}" rel="stylesheet">
-
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="{% static 'js/hello.js' %}"></script>
 
 
 
+<div class="container">
 
      <!-- Main component for a primary marketing message or call to action -->
    <div class="jumbotron">
@@ -60,6 +54,7 @@
         <h3>Tiempo de espera : {{espera}}</h3>
       </div>
 
+      </div>
 
 
 <table class ='table'>
@@ -104,9 +99,9 @@
 
       </tr>
 
-      <tr class='soporte'>
+      <tr>
 
-      <td class='id'>{{ticket.id}}</td>
+
         <td>Soporte Actual</td>
       <td >{{ticket.soporte_actual}}</td>
 
@@ -250,7 +245,7 @@
     {% endif %}
 
     <td>Evento</td>
-   
+   <td>Detalle</td>
   
   </tr>
 
@@ -298,17 +293,6 @@
 
 
 
-<script type="text/javascript">
-
-    
-    $( ".id" ).hide()
-    $( ".soporte" ).click(function() {
-    $(this).css("background",'#2e6da4');
-    window.location.href = "/soportes/"+$(this).children().html()
-
-});
-
-</script>
 
 
 
