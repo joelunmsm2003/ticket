@@ -47,15 +47,15 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-            
+
             {% if grupo == 'Soporte' %}
                <li><a href="/mticket/5">Tickets Asignados</a></li>
               
         {% endif %}
-              <li class="active"><a href="/mticket/1">Tickets Nuevos</a></li>
+              <li><a href="/mticket/1">Tickets Nuevos</a></li>
               <li><a href="/mticket/2">Tickets Atendidos</a></li>
               <li><a href="/mticket/3">Tickets En Prueba</a></li>
-               <li><a href="/mticket/4">Tickets Cerrados</a></li>
+               <li><a href="/ticketscerrados">Tickets Cerrados</a></li>
                <!--
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
@@ -91,7 +91,15 @@
      <script src="{% static 'js/hello1.js' %}"></script>
      <script src="{% static 'js/bootstrap.js' %}"></script>
 
-     
+     <script type="text/javascript">
+
+    $(".nav a").on("click", function(){
+    $(".nav").find(".active").removeClass("active");
+    $(this).parent().addClass("active");
+    });
+
+     </script>
+
 
      </body>
 

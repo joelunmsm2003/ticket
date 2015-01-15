@@ -1,13 +1,49 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Tickets Cerrados</title>
 
-	
-</head>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <script type='text/javascript' src='http://code.jquery.com/jquery-1.8.2.js'></script>
+
+    <title>Xiencias</title>
+
+  {% load static %} 
+
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type='text/css'>
+    <link href="{% static 'css/signin.css' %}" rel="stylesheet" type='text/css'>
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/nav.css' %}" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="{% static 'js/hello.js' %}"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
 <body>
 
-{% include "header.html" %}
+{% include "mheader.html" %}
+
+      <div class="jumbotron">
+        
+   
+        <p>
+          <a class="btn btn-lg btn-primary" href="/agregar_ticket_m" role="button">Generar Ticket &raquo;</a>
+        </p>
+
+        <h1>Cerrados</h1>
+     
+      </div>
+
 
 <div class="pagination">
     <span class="step-links">
@@ -27,45 +63,42 @@
 </div>
 
 
-<table>
+<table class='table'>
 
    <tr class='titulo'>
     <td>Usuario</td>
     <td>Asunto</td>
-    <td>Tipo</td> 
-
-    <td>Fecha de Inicio</td>
-
-	{% if estado_name == 'Cerrados' %}
-		 <td>Fecha de Fin</td>
-	{% endif %}
+    <td>Descripcion</td> 
 
 
-   
-   
-    <td>Detalle</td>
-    <td>Documentos</td>
-    <td>Accion</td>
 
   </tr>
 
 {% for contact in contacts%}
 
-<tr>
-    <td width="10%" >{{ contact.cliente }}</td>
-    <td width="20%" >{{ contact.asunto}}</td>
-    <td width="10%">{{ contact.tipo }}</td>
-    <td width="20%">{{ contact.fecha_inicio }}</td>
-    	{% if estado_name == 'Cerrados' %}
-		 <td width="20%">{{ contact.fecha_fin }}</td>
-		{% endif %}
-    <td width="10%" ><a href='/detalle_ticket/{{contact.id}}'>Detalle</a></td>
-    <td width="10%" ><a href='/documentos/{{contact.id}}'>Documentos</a></td>
-    <td width="10%" >-</td>
+<tr class='sss'>
+    <td class='id' >{{ contact.id}}</td>
+    <td class='id' >{{ contact.cliente }}</td>
+    <td>{{ contact.cliente }}</td>
+    <td  >{{ contact.asunto}}</td>
+    <td>{{ contact.descripcion }}</td>
+
 </tr>
     
 {% endfor %}
 </table>
 
+
+
+<script type="text/javascript">
+
+    $('.id').hide()
+    $( ".sss" ).click(function() {
+    $(this).css("background",'#2e6da4');
+    window.location.href = "/mdetalle_ticket/"+$(this).children().html()
+
+});
+
+</script>
 </body>
 </html>
