@@ -1,7 +1,20 @@
 <!DOCTYPE html>
 
-{% include "mheader.html" %}
 
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <script type='text/javascript' src='http://code.jquery.com/jquery-1.8.2.js'></script>
+
+    <title>Xiencias</title>
+
+
+  </head>
 <script type='text/javascript' src='http://code.jquery.com/jquery-1.8.2.js'></script>
 
 
@@ -12,12 +25,11 @@
 
 <body  data-feedly-mini="yes">
 
+{% include "mheader.html" %}
 
 
-<div class="container">
 
 
-<a>Soporte del ticket {{ticket.asunto}}</a>
 
 
 <form action="/evento_add/" method="post" class='form-signin' enctype="multipart/form-data">
@@ -36,8 +48,8 @@
 
     </textarea>
   
-    
-    <div class='file_upload'><a> Adjuntar Archivo</a></div>
+    <br>
+    <div class='file_upload'><a class='archivo'> Adjuntar Archivo</a></div>
     <br>
     <div id='files'></div>
     <input class="form-control" type='hidden' name='cont' value='0' id='cont' required=""></input>
@@ -46,8 +58,6 @@
 
 </form>
 
-
-</div>
 
 
 <script type="text/javascript">

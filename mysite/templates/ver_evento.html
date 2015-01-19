@@ -1,30 +1,53 @@
 
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <script type='text/javascript' src='http://code.jquery.com/jquery-1.8.2.js'></script>
+
+    <title>Xiencias</title>
+
+
+  </head>
+
 <body>
 
 {% include "mheader.html" %}
 
     <script type='text/javascript' src='http://code.jquery.com/jquery-1.8.2.js'></script>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  {% load static %} 
 
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+<link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type='text/css'>
 
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        
+   
+        <p>
+          <a class="btn btn-lg btn-primary" href="/agregar_ticket_m" role="button">Generar Ticket &raquo;</a>
+        </p>
 
+        <h1><a href='/mdetalle_ticket/{{ticket.id}}/'>{{ticket.asunto}}</a></h1>
+        <h2>Eventos</h2>
+      </div>
+
+
+  
 <div id='contenedor'>
 
 
 {% if evento %}
 <table class ='table'>
 
- <tr>
-Soporte del ticket <a href='/detalle_ticket/{{ticket.id}}/'>{{ticket.asunto}}</a>
 
-  </tr>
-  <tr></tr>
-   <tr>
+   <tr class="active">
     
 		<td>Usuario</td> 
 	
@@ -47,13 +70,14 @@ Soporte del ticket <a href='/detalle_ticket/{{ticket.id}}/'>{{ticket.asunto}}</a
 	{% endfor %}
 </table>
 {% else %}
-<a>No existen eventos</a>
+<p>No existen eventos</p>
 {% endif %}
+<br></br>
 
  <div id='b'>
 
         <p>
-          <a class="btn btn-lg btn-primary" href="/documentos/{{ticket.id}}" role="button">Documentos &raquo;</a>
+          <a class="btn btn-lg btn-primary" href="/evento/{{soporte.id}}/{{ticket.id}}" role="button">Agregar Evento &raquo;</a>
         </p>
 
  </div>

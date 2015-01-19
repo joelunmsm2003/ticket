@@ -22,7 +22,7 @@
         </p>
 
         <h1>Reasignar</h1>
-    
+        <h2>{{soporte.ticket}}</h2>
       </div>
 
       </div>
@@ -37,8 +37,8 @@
     
     <label class="sr-only"></label><input value="{{id_ticket}}" id="field" type="hidden" name="id_ticket" maxlength="100" class="form-control" ><br>
     <label class="sr-only"></label><input readonly value="{{soporte.id}}" id="field" type="hidden" name="id" maxlength="100" class="form-control"><br>
-    <label class="sr-only">Ticket :</label><input  class="form-control" readonly value="{{soporte.ticket}}" id="field" type="text" name="ticket" maxlength="100"><br>
-    <label class="sr-only">Fecha Inicio :</label><input class="form-control" readonly value="{{soporte.fecha_inicio}}" id="field" type="text" name="fecha_inicio" maxlength="100">
+  
+
 
 
 
@@ -47,7 +47,7 @@
 
     <select class="form-control" name="soporte" id="tipo">
     {% for user_soporte in user_soporte%}
-     <option value="{{user_soporte.id}}">{{user_soporte.username}}</option>
+     <option value="{{user_soporte.id}}">{{user_soporte.first_name}}</option>
 	{% endfor %}
     </select>
 

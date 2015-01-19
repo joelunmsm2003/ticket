@@ -12,13 +12,7 @@
 
     <!-- Bootstrap core CSS -->
 
-    {% load static %} 
-
-    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type='text/css'>
-    <link href="{% static 'css/signin.css' %}" rel="stylesheet" type='text/css'>
- 
-
-     {% include "mheader.html" %}
+   
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -31,7 +25,13 @@
     <![endif]-->
   </head>
 
-  <body data-feedly-mini="yes">
+  <body>
+
+{% include "mheader.html" %}
+
+  {% load static %} 
+
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type='text/css'>
 
     <div class="container">
 

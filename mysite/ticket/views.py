@@ -872,8 +872,12 @@ def evento(request,id,id_ticket):
 	soporte = Soporte.objects.get(id=id)
 	ticket = Ticket.objects.get(id=id_ticket)
 	#soporte.evento_set.create(fecha_inicio=fecha_inicio,name=name)
+	username = request.user.username
+	x=User.objects.get(username=username)
+	grupo =x.groups.get()
+	grupo= str(grupo)
 
-	return render(request, 'evento_add.html', {'ticket':ticket,'soporte':soporte})
+	return render(request, 'evento_add.html', {'ticket':ticket,'soporte':soporte,'grupo':grupo})
 
 def soportes(request,id):
 
@@ -895,9 +899,15 @@ def eventos(request,id):
 
 	soporte= Soporte.objects.get(id=id)
 	eventos = soporte.evento_set.all()
+	username = request.user.username
+
+	x=User.objects.get(username=username)
+	grupo =x.groups.get()
+	grupo= str(grupo)
 
 
-	return render(request, 'eventos.html', {'soporte':ticket,'eventos':eventos})
+
+	return render(request, 'eventos.html', {'soporte':ticket,'eventos':eventos,'grupo':grupo})
 
 
 
@@ -1244,7 +1254,12 @@ def agregar_ticket_m(request):
 	tipos=Tipo.objects.all()
 	username = request.user.username
 
-	return render(request, 'agregar_ticket_m.html', {'tipos':tipos,'username':username})
+	x=User.objects.get(username=username)
+	grupo =x.groups.get()
+	grupo= str(grupo)
+
+
+	return render(request, 'agregar_ticket_m.html', {'tipos':tipos,'username':username,'grupo':grupo})
 
 def agregarm(request,a,b):
 
