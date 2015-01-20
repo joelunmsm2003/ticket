@@ -214,14 +214,22 @@
 
       {% else %}
 
+          {% if estado == 'Cerrado' %}
 
-        <div id='b'>
 
-        <p>
+          {% else %}
+
+
+          <div id='b'>
+
+          <p>
           <a class="btn btn-lg btn-primary" href="/validar/{{ticket.id}}" role="button">Cerrar &raquo;</a>
-        </p>
+          </p>
 
-        </div>
+          </div>
+
+          {% endif %}
+
       {% endif %} 
 
 
