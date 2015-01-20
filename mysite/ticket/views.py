@@ -595,6 +595,8 @@ def reasignar_gilda(request,id_ticket):
 
 def gilda(request):
 
+
+
 	ticket_nuevo= Ticket.objects.filter(estado=1).values('id','asunto','fecha_inicio').order_by('-id')
 	ticket_atendido= Soporte.objects.filter(ticket__estado=2).values('soporte','soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
 	ticket_preatendido= Soporte.objects.filter(ticket__estado=5).values('soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
@@ -674,10 +676,13 @@ def gilda(request):
 		noti = Notificaciones.objects.filter(ticket__cliente=request.user.id).order_by('-id')[:8]
 		
 
-	print noti 
-	return render(request,'gilda.html', {'noti':noti,'ticket_reasignado':ticket_reasignado,'ticket_cerrados':ticket_cerrados,'ticket_preatendido':ticket_preatendido,'ticket_atendido':ticket_atendido,'ticket_nuevo':ticket_nuevo,'user_soporte':user_soporte,'username':username,'grupo':grupo,'tipo':tipo})
+	if grupo == 'Soporte':
 
+		return render(request,'gilda.html', {'noti':noti,'ticket_reasignado':ticket_reasignado,'ticket_cerrados':ticket_cerrados,'ticket_preatendido':ticket_preatendido,'ticket_atendido':ticket_atendido,'ticket_nuevo':ticket_nuevo,'user_soporte':user_soporte,'username':username,'grupo':grupo,'tipo':tipo})
 
+	if grupo == 'Clientes':
+
+		return render(request,'error.html', {'noti':noti,'ticket_reasignado':ticket_reasignado,'ticket_cerrados':ticket_cerrados,'ticket_preatendido':ticket_preatendido,'ticket_atendido':ticket_atendido,'ticket_nuevo':ticket_nuevo,'user_soporte':user_soporte,'username':username,'grupo':grupo,'tipo':tipo})
 
 
 def asignar_post_gilda_new(request,soporte,ticket):
