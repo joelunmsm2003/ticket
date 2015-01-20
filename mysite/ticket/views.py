@@ -325,7 +325,7 @@ def mticket(request,estado):
 		
 		ticket = Ticket.objects.filter(estado=estado,cliente_id=id).order_by('-id')
 	else:
-		ticket = Ticket.objects.filter(estado=estado).order_by('-id')
+		ticket = Ticket.objects.filter(estado=estado,soporte_actual=username).order_by('-id')
 
 	
 
@@ -801,7 +801,17 @@ def validar(request,id):
 	
 	ticket.save()
 
-	return HttpResponseRedirect("/mticket/5")
+	ta = Ticket.objects.filter(estado_id=5)
+	ta=ta.count()
+
+	if (ta==0):
+
+		return HttpResponseRedirect("/mticket/5")
+
+	else:
+
+		return HttpResponseRedirect("/mticket/6")
+
 
 def detalle_ticket(request,id):
 

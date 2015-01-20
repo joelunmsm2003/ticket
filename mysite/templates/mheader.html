@@ -59,7 +59,12 @@
                 <li><a href="/mticket/6"> Reasignados</a></li>
               
         {% endif %}
-              <li><a href="/mticket/1"> Nuevos</a></li>
+
+          {% if grupo == 'Clientes' %}
+                <li><a href="/mticket/1"> Nuevos</a></li>
+              
+        {% endif %}
+           
               <li><a href="/mticket/2"> Atendidos</a></li>
               <li><a href="/mticket/3"> En Prueba</a></li>
                <li><a href="/ticketscerrados"> Cerrados</a></li>
