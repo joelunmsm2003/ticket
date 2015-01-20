@@ -828,7 +828,10 @@ def validar(request,id):
 	user = User.objects.get(username=ticket.cliente)
 
 	if user.username == username :
-		email= User.objects.get(username=ticket.soporte_actual).email
+		if ticket.soporte_actual != '' :
+			email= User.objects.get(username=ticket.soporte_actual).email
+		else:
+			email='xiencias@gmail.com'
 	else:
 		email= User.objects.get(username=ticket.cliente).email
 
@@ -845,6 +848,7 @@ def validar(request,id):
 
 
 	cuerpo =  chr(10)+chr(10)+'Ticket : '+ str(ticket.asunto)+chr(10)+'Fecha Cierre: '+str(ticket.fecha_fin)+chr(10)+'Fecha Inicio: '+str(ticket.fecha_inicio)+chr(10)+'Soporte Actual: '+ str(ticket.soporte_actual)
+
 
 	send_mail('Xiencias Ticket Cerrado '+first_name, 'El ticket fue cerrado' + cuerpo, 'xienwork@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org', [str(email)], fail_silently=False)
 
