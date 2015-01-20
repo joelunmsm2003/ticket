@@ -991,7 +991,7 @@ def evento_add(request):
 		fecha_inicio = datetime.datetime.today()
 		c=Ticket.objects.get(id=evento_id)
 
-		name =str(c.cliente.first_name)
+		name1 =str(c.cliente.first_name)
 
 	
 		email2 =str(c.cliente.email)
@@ -1027,7 +1027,7 @@ def evento_add(request):
 
 		cuerpo =  chr(10)+chr(10)+'Evento : '+ str(evento.name)+chr(10)+'Ticket'+chr(10)+'Asunto : '+ str(c.asunto)+ chr(10) + 'Cliente : ' + str(username)+chr(10)+ 'Tipo : ' +str(c.tipo)+chr(10)+'Descripcion : '+str(c.descripcion)+chr(10)+'Fecha : '+str(evento.fecha_inicio) +chr(10)+'Archivos adjuntos : ' + doc
 
-		send_mail('Xiencias Ticket Evento '+first_name, 'Se agrego un nuevo evento por ' +str(name)+ cuerpo, 'xienwork@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org', [email], fail_silently=False)
+		send_mail('Xiencias Ticket Evento '+first_name, 'Se agrego un nuevo evento por ' +str(name1)+ cuerpo, 'xienwork@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org', [email], fail_silently=False)
 
 
 		noti=soporte.ticket.notificaciones_set.create(name='Ticket evento ',fecha_inicio=fecha_inicio)
