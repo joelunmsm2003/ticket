@@ -34,11 +34,11 @@ def ticketscerrados(request):
 
 	if grupo=='Soporte' :
 
-		ticket = Ticket.objects.filter(estado_id=4,soporte_actual=username)
+		ticket = Ticket.objects.filter(estado_id=4,soporte_actual=username).order_by('-fecha_fin')
 
 	if grupo=='Clientes' :
 
-		ticket = Ticket.objects.filter(estado_id=4,cliente_id=id)
+		ticket = Ticket.objects.filter(estado_id=4,cliente_id=id).order_by('-fecha_fin')
 
 
 	paginator = Paginator(ticket, 20) # Show 25 contacts per page
@@ -812,8 +812,22 @@ def validar(request,id):
 	
 	ticket.save()
 
+	if ticket.soporte_actual != '' :
+
+		soporte = Soporte.objects.get(soporte__username=ticket.soporte_actual,ticket=id)
+		soporte.fecha_fin = fecha_fin
+		soporte.save()
+
+
+
 	ta = Ticket.objects.filter(estado_id=5)
 	ta=ta.count()
+
+
+	cuerpo =  chr(10)+chr(10)+'Ticket : '+ str(ticket.asunto)+chr(10)+'Fecha Cierre: '+str(ticket.fecha_fin)+chr(10)+'Fecha Inicio: '+str(ticket.fecha_inicio)+chr(10)+'Soporte Actual: '+ str(ticket.soporte_actual)
+
+	send_mail('Xiencias Ticket Cerrado', 'El ticket fue cerrado' + cuerpo, 'xienwork@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org', ['joelunmsm@gmail.com'], fail_silently=False)
+
 
 	if (ta==0):
 
