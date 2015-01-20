@@ -819,6 +819,9 @@ def validar(request,id):
 	ticket.fecha_fin = fecha_fin
 	username = request.user.username
 	first_name = str(ticket.cliente.first_name)
+	x=User.objects.get(username=username)
+	grupo =x.groups.get()
+	grupo= str(grupo)
 	
 	ticket.save()
 
@@ -845,14 +848,20 @@ def validar(request,id):
 
 	send_mail('Xiencias Ticket Cerrado '+first_name, 'El ticket fue cerrado' + cuerpo, 'xienwork@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org', [str(email)], fail_silently=False)
 
+	if grupo =='Soporte':
 
-	if (ta==0):
+		if (ta==0):
 
-		return HttpResponseRedirect("/mticket/5")
+			return HttpResponseRedirect("/mticket/5")
 
+		else:
+
+			return HttpResponseRedirect("/mticket/6")
 	else:
 
-		return HttpResponseRedirect("/mticket/6")
+		return HttpResponseRedirect("/mticket/3")
+
+
 
 
 def detalle_ticket(request,id):
