@@ -481,10 +481,11 @@ def atender(request,id):
 		soporte=ticket.soporte_set.create(fecha_inicio=fecha_inicio,soporte_id=id_soporte)
 		ticket.estado_id = 2
 		ticket.save()
+		first_name = str(ticket.cliente.first_name)
 
 		cuerpo =  chr(10)+chr(10)+'Soporte : '+ str(soporte.soporte)+chr(10)+'Asunto : '+ str(ticket.asunto)+ chr(10) + 'Cliente : ' + str(ticket.cliente)+chr(10)+ 'Tipo : ' +str(ticket.tipo)+chr(10)+'Descripcion : '+str(ticket.descripcion)+chr(10)+'Fecha : '+str(soporte.fecha_inicio) +chr(10)
 
-		send_mail('Xiencias Ticket Atendido', 'El ticket fue atendido' + cuerpo, 'xienwork@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org', [email_cliente,email_root], fail_silently=False)
+		send_mail('Xiencias Ticket Atendido '+first_name, 'El ticket fue atendido' + cuerpo, 'xienwork@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org', [email_cliente,email_root], fail_silently=False)
 
 
 		noti=ticket.notificaciones_set.create(name='Ticket atendido -',fecha_inicio=fecha_inicio)
@@ -497,10 +498,11 @@ def atender(request,id):
 		ticket.estado_id = 2
 
 		ticket.save()
+		first_name = str(ticket.cliente.first_name)
 
 		cuerpo =  chr(10)+chr(10)+'Ticket Atendido  : '+chr(10)+'Asunto : '+ str(ticket.asunto)+ chr(10) + 'Cliente : ' + str(ticket.cliente)+chr(10)+ 'Tipo : ' +str(ticket.tipo)+chr(10)+'Descripcion : '+str(ticket.descripcion)+chr(10)
 
-		send_mail('Xiencias Ticket Atendido', 'El ticket fue atendido' + cuerpo, 'xienwork@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org', ['joelunmsm@gmail.com'], fail_silently=False)
+		send_mail('Xiencias Ticket Atendido '+first_name, 'El ticket fue atendido' + cuerpo, 'xienwork@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org', [email_cliente,email_root], fail_silently=False)
 
 
 		noti=ticket.notificaciones_set.create(name='Ticket atendido -',fecha_inicio=fecha_inicio)
@@ -510,13 +512,14 @@ def atender(request,id):
 
 		ticket.estado_id = 2
 		ticket.save()
+		first_name = str(ticket.cliente.first_name)
 
-		cuerpo =  chr(10)+chr(10)+'Ticket Reatendido  : '+chr(10)+'Asunto : '+ str(ticket.asunto)+ chr(10) + 'Cliente : ' + str(ticket.cliente)+chr(10)+ 'Tipo : ' +str(ticket.tipo)+chr(10)+'Descripcion : '+str(ticket.descripcion)+chr(10)
+		cuerpo =  chr(10)+chr(10)+'Ticket Atendido  : '+chr(10)+'Asunto : '+ str(ticket.asunto)+ chr(10) + 'Cliente : ' + str(ticket.cliente)+chr(10)+ 'Tipo : ' +str(ticket.tipo)+chr(10)+'Descripcion : '+str(ticket.descripcion)+chr(10)
 
-		send_mail('Xiencias Ticket Reatendido', 'El ticket fue reatendido' + cuerpo, 'xienwork@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org', ['joelunmsm@gmail.com'], fail_silently=False)
+		send_mail('Xiencias Ticket Atendido '+first_name, 'El ticket fue atendido' + cuerpo, 'xienwork@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org', [email_cliente,email_root], fail_silently=False)
 
 
-		noti=ticket.notificaciones_set.create(name='Ticket reatendido -',fecha_inicio=fecha_inicio)
+		noti=ticket.notificaciones_set.create(name='Ticket atendido -',fecha_inicio=fecha_inicio)
 		noti.save()
 
 
@@ -590,6 +593,8 @@ def reasignar_gilda(request,id_ticket):
 	grupo =x.groups.get()
 	grupo= str(grupo)
 
+
+
 	return render(request,'reasignar_gilda.html', {'soporte':soporte,'ticket':ticket,'user_soporte':user_soporte,'username':username,'grupo':grupo,'tipo':tipo})
 
 
@@ -598,10 +603,10 @@ def gilda(request):
 
 
 	ticket_nuevo= Ticket.objects.filter(estado=1).values('id','asunto','fecha_inicio').order_by('-id')
-	ticket_atendido= Soporte.objects.filter(ticket__estado=2).values('soporte','soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
-	ticket_preatendido= Soporte.objects.filter(ticket__estado=5).values('soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
-	ticket_cerrados= Soporte.objects.filter(ticket__estado=3).values('soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
-	ticket_reasignado= Soporte.objects.filter(ticket__estado=6,fecha_fin=None).values('ticket__cliente','soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
+	ticket_atendido= Soporte.objects.filter(ticket__estado=2).values('soporte','soporte__first_name','soporte__username','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
+	ticket_preatendido= Soporte.objects.filter(ticket__estado=5).values('soporte__username','soporte__first_name','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
+	ticket_cerrados= Soporte.objects.filter(ticket__estado=3).values('soporte__username','soporte__first_name','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
+	ticket_reasignado= Soporte.objects.filter(ticket__estado=6,fecha_fin=None).values('ticket__cliente','soporte__username','soporte__first_name','ticket__fecha_inicio','ticket_id','ticket__asunto').annotate(dcount=Max('fecha_inicio')).order_by('-id')
 	
 	for i in range(len(ticket_nuevo)):
 
@@ -690,13 +695,13 @@ def asignar_post_gilda_new(request,soporte,ticket):
 	user_soporte = User.objects.get(id=soporte)
 	email = str(user_soporte.email)
 
-	
-
 	fecha_inicio = datetime.datetime.today()
 	ticket = Ticket.objects.get(id=ticket)
 	ticket.estado_id = 5
 	ticket.soporte_actual = str(user_soporte.username)
 	ticket.save()
+
+	first_name = str(ticket.cliente.first_name)
 
 	sa = ticket.soporte_set.create(fecha_inicio=fecha_inicio,soporte_id=soporte)
 	noti=ticket.notificaciones_set.create(name='Ticket by cellphone',fecha_inicio=fecha_inicio)
@@ -704,10 +709,7 @@ def asignar_post_gilda_new(request,soporte,ticket):
 
 	cuerpo =  chr(10)+chr(10)+'Soporte asignado  : '+ str(sa.soporte)+chr(10)+'Ticket'+chr(10)+'Asunto : '+ str(ticket.asunto)+ chr(10) + 'Cliente : ' + str(ticket.cliente)+chr(10)+ 'Tipo : ' +str(ticket.tipo)+chr(10)+'Descripcion : '+str(ticket.descripcion)+chr(10)+'Fecha : '+str(sa.fecha_inicio) +chr(10)
 
-	send_mail('Xiencias Ticket Asignado', 'El ticket fue asignado' + cuerpo, 'xienwork@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org', [email], fail_silently=False)
-
-
-
+	send_mail('Xiencias Ticket Asignado '+first_name, 'El ticket fue asignado' + cuerpo, 'xienwork@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org', [email], fail_silently=False)
 
 	return HttpResponseRedirect("/gilda")
 
@@ -726,6 +728,10 @@ def reasignar_post_gilda_new(request,soporte_act,ticket,soporte):
 
 	sa.save()
 
+	user =User.objects.get(username=sa.soporte)
+	email=str(user.email)
+	print email
+
 	user_soporte = User.objects.get(id=soporte)
 	
 
@@ -736,9 +742,11 @@ def reasignar_post_gilda_new(request,soporte_act,ticket,soporte):
 	ticket.soporte_actual = str(user_soporte.username)
 	ticket.save()
 
+	first_name = str(ticket.cliente.first_name)
+
 	cuerpo =  chr(10)+chr(10)+'Soporte reasignado  : '+ str(sa.soporte)+chr(10)+'Ticket'+chr(10)+'Asunto : '+ str(ticket.asunto)+ chr(10) + 'Cliente : ' + str(ticket.cliente)+chr(10)+ 'Tipo : ' +str(ticket.tipo)+chr(10)+'Descripcion : '+str(ticket.descripcion)+chr(10)+'Fecha : '+str(sa.fecha_inicio) +chr(10)
 
-	send_mail('Xiencias Ticket Reasignado', 'El ticket fue reasignado' + cuerpo, 'xienwork@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org', ['joelunmsm@gmail.com'], fail_silently=False)
+	send_mail('Xiencias Ticket Reasignado '+first_name, 'El ticket fue reasignado' + cuerpo, 'xienwork@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org', [email], fail_silently=False)
 
 
 	noti=ticket.notificaciones_set.create(name='Ticket by cellphone',fecha_inicio=fecha_inicio)
@@ -761,7 +769,7 @@ def reasignar_add(request):
 		
 		id_ticket = request.POST['id_ticket']
 		ticket = Ticket.objects.get(id=id_ticket)
-
+		first_name = str(ticket.cliente)
 
 		id = request.POST['id']
 		fecha_inicio = datetime.datetime.today()
@@ -780,7 +788,7 @@ def reasignar_add(request):
 
 		cuerpo =  chr(10)+chr(10)+'Soporte reasignado  : '+ str(soporte_r.soporte)+chr(10)+'Ticket'+chr(10)+'Asunto : '+ str(ticket.asunto)+ chr(10) + 'Cliente : ' + str(username)+chr(10)+ 'Tipo : ' +str(ticket.tipo)+chr(10)+'Descripcion : '+str(ticket.descripcion)+chr(10)+'Fecha : '+str(soporte.fecha_inicio) +chr(10)
 
-		send_mail('Xiencias Ticket Reasignado', 'El ticket fue reasignado' + cuerpo, 'xienwork@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org', ['joelunmsm@gmail.com'], fail_silently=False)
+		send_mail('Xiencias Ticket Reasignado '+first_name, 'El ticket fue reasignado' + cuerpo, 'xienwork@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org', ['joelunmsm@gmail.com'], fail_silently=False)
 
 		noti=ticket.notificaciones_set.create(name='Ticket reasignado ',fecha_inicio=fecha_inicio)
 		
@@ -809,8 +817,17 @@ def validar(request,id):
 	ticket.estado_id = 4
 	fecha_fin = datetime.datetime.today()
 	ticket.fecha_fin = fecha_fin
+	username = request.user.username
+	first_name = str(ticket.cliente.first_name)
 	
 	ticket.save()
+
+	user = User.objects.get(username=ticket.cliente)
+
+	if user.username == username :
+		email= User.objects.get(username=ticket.soporte_actual).email
+	else:
+		email= User.objects.get(username=ticket.cliente).email
 
 	if ticket.soporte_actual != '' :
 
@@ -826,7 +843,7 @@ def validar(request,id):
 
 	cuerpo =  chr(10)+chr(10)+'Ticket : '+ str(ticket.asunto)+chr(10)+'Fecha Cierre: '+str(ticket.fecha_fin)+chr(10)+'Fecha Inicio: '+str(ticket.fecha_inicio)+chr(10)+'Soporte Actual: '+ str(ticket.soporte_actual)
 
-	send_mail('Xiencias Ticket Cerrado', 'El ticket fue cerrado' + cuerpo, 'xienwork@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org', ['joelunmsm@gmail.com'], fail_silently=False)
+	send_mail('Xiencias Ticket Cerrado '+first_name, 'El ticket fue cerrado' + cuerpo, 'xienwork@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org', [str(email)], fail_silently=False)
 
 
 	if (ta==0):
@@ -956,10 +973,12 @@ def evento_add(request):
 		user = 	request.user.id	
 		email1 = request.user.email
 		username = 	request.user.username
+
 		name = request.POST['name']
 		fecha_inicio = datetime.datetime.today()
 		c=Ticket.objects.get(id=evento_id)
 
+		first_name =str(c.cliente.first_name)
 
 	
 		email2 =str(c.cliente.email)
@@ -996,7 +1015,7 @@ def evento_add(request):
 
 		cuerpo =  chr(10)+chr(10)+'Evento : '+ str(evento.name)+chr(10)+'Ticket'+chr(10)+'Asunto : '+ str(c.asunto)+ chr(10) + 'Cliente : ' + str(username)+chr(10)+ 'Tipo : ' +str(c.tipo)+chr(10)+'Descripcion : '+str(c.descripcion)+chr(10)+'Fecha : '+str(evento.fecha_inicio) +chr(10)+'Archivos adjuntos : ' + doc
 
-		send_mail('Xiencias Ticket Evento', 'Se agrego un nuevo evento' + cuerpo, 'xienwork@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org', [email], fail_silently=False)
+		send_mail('Xiencias Ticket Evento '+first_name, 'Se agrego un nuevo evento' + cuerpo, 'xienwork@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org', [email], fail_silently=False)
 
 
 		noti=soporte.ticket.notificaciones_set.create(name='Ticket evento ',fecha_inicio=fecha_inicio)
@@ -1085,6 +1104,7 @@ def agregar_ticket(request):
 	grupo =x.groups.get()
 	grupo=str(grupo)
 	username = request.user.username
+	
 	tipos=Tipo.objects.all()
 	estado_name=str('Nuevos')
 
@@ -1114,6 +1134,8 @@ def agregar_ticket(request):
 		c=User.objects.get(pk=id).ticket_set.create(cliente=username,asunto=asunto,tipo_id=1,descripcion=descripcion,fecha_inicio=fecha_inicio,estado_id=1)
 		
 		c.save()	
+
+		first_name =str(c.cliente.first_name)
 		
 		noti=c.notificaciones_set.create(name='Ticket nuevo ',fecha_inicio=fecha_inicio)
 		
@@ -1138,7 +1160,7 @@ def agregar_ticket(request):
 
 		cuerpo =  chr(10)+chr(10)+'Asunto : '+ str(asunto)+ chr(10) + 'Generado por : ' + str(username)+chr(10)+ 'Tipo : ' +str(tipo)+chr(10)+'Descripcion : '+str(descripcion)+chr(10)+'Fecha : '+str(fecha_inicio)+chr(10)+'Archivos adjuntos : ' + doc 
 
-		send_mail('Xiencias Ticket Nuevo', 'Se agrego un ticket' + cuerpo, 'xienwork@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org', ['joelunmsm@gmail.com','xiencias@gmail.com'], fail_silently=False)
+		send_mail('Xiencias Ticket Nuevo '+first_name, 'Se agrego un ticket' + cuerpo, 'xienwork@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org', ['joelunmsm@gmail.com','xiencias@gmail.com'], fail_silently=False)
 
 		# Redirect to the document list after POST
 		
@@ -1169,6 +1191,8 @@ def agregar_ticket_movil(request):
 		form = DocumentForm(request.POST, request.FILES)
 
 		username = request.user.username
+		first_name = str(request.user.first_name)
+
 		asunto = request.POST['asunto']
 		tipo = request.POST['tipo']
 
@@ -1205,7 +1229,7 @@ def agregar_ticket_movil(request):
 
 		cuerpo =  chr(10)+chr(10)+'Asunto : '+ str(asunto)+ chr(10) + 'Generado por : ' + str(username)+chr(10)+ 'Tipo : ' +str(tipo)+chr(10)+'Descripcion : '+str(descripcion)+chr(10)+'Fecha : '+str(fecha_inicio)+chr(10)+'Archivos adjuntos : ' + doc 
 
-		send_mail('Xiencias Ticket Nuevo', 'Se agrego un ticket' + cuerpo, 'xienwork@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org', ['joelunmsm@gmail.com','xiencias@gmail.com'], fail_silently=False)
+		send_mail('Xiencias Ticket Nuevo '+first_name, 'Se agrego un ticket' + cuerpo, 'xienwork@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org', ['joelunmsm@gmail.com','xiencias@gmail.com'], fail_silently=False)
 
 		# Redirect to the document list after POST
 		
@@ -1252,6 +1276,7 @@ def list1(request):
 		ticket = request.POST['ticket']
 		print ticket
 		username = request.user.username
+		first_name = str(request.user.first_name)
 		c= Ticket.objects.get(id=ticket)
 
 		fecha_inicio = datetime.datetime.today()
@@ -1277,7 +1302,7 @@ def list1(request):
 
 		cuerpo =  chr(10)+chr(10)+'Archivos adjuntos : ' + doc+chr(10)+'Asunto : '+ str(c.asunto)+ chr(10) + 'Cliente : ' + str(username)+chr(10)+ 'Tipo : ' +str(c.tipo)+chr(10)+'Descripcion : '+str(c.descripcion)+chr(10)+'Fecha : '+str(c.fecha_inicio) 
 
-		send_mail('Xiencias Ticket Document', 'Se agrego un nuevo documento adjunto' + cuerpo, 'xienwork@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org', ['joelunmsm@gmail.com','xiencias@gmail.com'], fail_silently=False)
+		send_mail('Xiencias Ticket Document '+first_name, 'Se agrego un nuevo documento adjunto' + cuerpo, 'xienwork@sandboxbb5414fe26d94969aa76e2ece53f668e.mailgun.org', ['joelunmsm@gmail.com','xiencias@gmail.com'], fail_silently=False)
 
 
 		
