@@ -25,7 +25,8 @@ def webx(request):
 
 def ticketscerrados(request):
 
-	ticket = Ticket.objects.filter(estado_id=4)
+	username = request.user.username
+	ticket = Ticket.objects.filter(estado_id=4,soporte_actual=username)
 	print ticket
 	
 	id = request.user.id
