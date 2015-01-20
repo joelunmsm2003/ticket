@@ -1,34 +1,72 @@
 
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <script type='text/javascript' src='http://code.jquery.com/jquery-1.8.2.js'></script>
+
+    <title>Xiencias</title>
+
+
+  </head>
+
+
+  <body>
+
+{% include "mheader.html" %}
+
+  {% load static %} 
+
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type='text/css'>
+  
+
+
+     <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        
+   
+        <p>
+          <a class="btn btn-lg btn-primary" href="/agregar_ticket_m" role="button">Generar Ticket &raquo;</a>
+        </p>
+
+         <h1><a href='/mdetalle_ticket/{{ticket.id}}/'>{{ticket.asunto}}</a></h1>
+        <h2>Asignar un soporte</h2>
+      </div>
 
 
 <script type='text/javascript' src='http://code.jquery.com/jquery-1.8.2.js'></script>
  
 <div id='movil'>
-<p class='rg'>Escoja un soporte</p>
+
 <div id='ticket_id'>{{ticket.id}}</div>
 
 
-<table>
+<table class ='table'>
     
  {% for user_soporte in user_soporte%}
     <tr class='reasignar'>
-     <td >{{user_soporte.id}}</td>
-     <td >{{user_soporte.username}}</td>
+     <td class='id'>{{user_soporte.id}}</td>
+     <td >{{user_soporte.first_name}}</td>
      </tr>
 {% endfor %}
 
 </table>
 </div>
 
+<!--
 
-<div id='contenedor'>
-{% include "header.html" %}
-<div id='form'>
-<form action="/asignar_post_gilda/" method="post" class='ticket'>
+
+<div class="container">
+<form action="/asignar_post_gilda/" method="post" class='ticket' class="form-signin">
     
     {% csrf_token %}
     
-    Ticket {{ticket.asunto}}
+
     
  
 
@@ -36,9 +74,9 @@
     <br>
     
     <input value="{{ticket.id}}" id="field" type="hidden" name="ticket" maxlength="100">
-    <label class='etiqueta'>Soporte :</label><br>
+    <label  class="sr-only">Soporte :</label><br>
 
-    <select name="soporte" id="tipo">
+    <select name="soporte" id="tipo" class="form-control input-lg">
     {% for user_soporte in user_soporte%}
      <option value="{{user_soporte.id}}">{{user_soporte.username}}</option>
 	{% endfor %}
@@ -47,39 +85,23 @@
      <br>
   
 
-    <label class='etiqueta'></label><div id='field'><br><input  id="field1" type="submit" value="Asignar Ticket" /></div>
+    <label class="sr-only"></label><input class="btn btn-lg btn-primary btn-block" type="submit" value="Asignar Ticket" /></div>
 
 </form>
 
 </div>
-</div>
 
-<div id = "detalle">
-
+-->
 
 
 
-<table>
-<tr><td>Detalle ticket</td><td></td></tr>
-<tr><td>Asunto</td> <td>{{ticket.asunto}}</td></tr>
-<tr>
-
-<td>Id</td> <td>{{ticket.id}}</td></tr>
-<tr><td>Cliente</td> <td>{{ticket.cliente}}</td></tr>
-<tr><td>Asunto</td> <td>{{ticket.asunto}}</td></tr>
-<tr><td>Tipo</td> <td>{{ticket.tipo}}</td></tr>
-<tr><td>Soporte Actual</td> <td>{{ticket.soporte_actual}}</td></tr>
-<tr><td>Descripcion</td> <td>{{ticket.descripcion}}</td></tr>
-<tr><td>Fecha Inicio</td> <td>{{ticket.fecha_inicio}}</td></tr>
-<tr><td>Fecha Fin</td> <td>{{ticket.fecha_fin}}</td></tr>
-<tr><td>Estado</td> <td>{{ticket.estado}}</td></tr>
 
 
 
-</table>
-</div>
 
 <script>
+
+$('.id').hide()
 
 ticket = $("#ticket_id").text()
 $("#ticket_id").hide()
@@ -115,3 +137,15 @@ if ($("#form").width() > 700) {
 
 
 </script>
+
+
+<style>
+
+.reasignar{
+
+    background: #5C84C2;
+    color:white;
+    text-align: center;
+}
+
+</style>

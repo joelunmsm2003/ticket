@@ -1,66 +1,63 @@
 
-<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Varela' rel='stylesheet' type='text/css'>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <script type='text/javascript' src='http://code.jquery.com/jquery-1.8.2.js'></script>
+
+    <title>Xiencias</title>
+
+  </head>
 
 <script type='text/javascript' src='http://code.jquery.com/jquery-1.8.2.js'></script>
+
+
+<body>
+
+{% include "mheader.html" %}
+
 {% load static %} 
-<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type='text/css'>
+
+      <div class="jumbotron">
+        
+   
+        <p>
+          <a class="btn btn-lg btn-primary" href="/agregar_ticket_m" role="button">Generar Ticket &raquo;</a>
+        </p>
+
+        <h1>Asignar ticket</h1>
+     
+    </div>
 
 
 
-
-{{msj}}
-
-
-
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-
-
-<div id="logo_gila">
-
-<a class ='logos' href='/mticket/1'><IMG SRC="/static/img/BOLA8.png" width='70px'>&nbsp<IMG SRC="/static/img/LETRASXIENCIAS1.png" width='450px'></a>
-
-</div>
-
-
-<div id="gila_actualizar">
-
-<a href="/gilda">
-<span class="glyphicon glyphicon-refresh" aria-hidden="true" style="font-size:50px"></span></a>
-
-</div>
 
 <META HTTP-EQUIV="REFRESH" CONTENT="60;URL=/gilda">
-<table class ='titulo' >
-<tr >
-   
-    <td width='25%' class ='titulo'>Asunto</td>
-    <td width='25%' class ='titulo'>Soporte</td>
-    <td width='25%' class ='titulo'>Tiempo de Espera</td>
-   
+
+<table class ='table'>
+
+<tr>
+<td width="20">Asunto</td>
+<td width="20">Soporte</td>
+<td width="20">Tiempo de Espera</td>
+
 </tr>
-
-</table>
-
-<table class ='nuevos'>
-
-
 
 {% for ticket_nuevo in ticket_nuevo %}
 
     <tr class='aaa'>
 
-    <td width='8%' class='id'>{{ticket_nuevo.id}}</td>
-    <td width='25%'>{{ticket_nuevo.asunto}}</td>
-    <td width='25%'>-</td>
-    <td width='25%'>{{ticket_nuevo.dif_fecha}}</td>
+    <td width="20" class='id'>{{ticket_nuevo.id}}</td>
+    <td width="20">{{ticket_nuevo.asunto}}</td>
+    <td width="20">-</td>
+    <td width="20">{{ticket_nuevo.dif_fecha}}</td>
    
 
     </tr>
@@ -70,7 +67,7 @@
 </table >
 
 
-<table class ='preatendidos'>
+<table class ='table'>
 
 
 
@@ -78,16 +75,11 @@
 
     <tr class='sss'>
 
-    <td width='8%' class='id'>{{ticket_preatendido.ticket_id}}</td>
-    <td width='25%'>{{ticket_preatendido.ticket__asunto}}</td>
-    <td width='25%'>{{ticket_preatendido.soporte__username}}</td>
-    <!--
-    <td width='6%'>{{ticket_preatendido.ticket__fecha_inicio}}</td>
-    <td width='10%'>{{ticket_preatendido.dcount}}</td>-->
-    <td width='25%'>{{ticket_preatendido.dif_fecha}}</td>
-
-    <!--
-    <td width='10%' class='d'><a href="/reasignar_gilda/{{ticket_preatendido.ticket_id}}" >Reasignar</a></td>-->
+    <td width="20" class='id'>{{ticket_preatendido.ticket_id}}</td>
+    <td width="20">{{ticket_preatendido.ticket__asunto}}</td>
+    <td width="20">{{ticket_preatendido.soporte__username}}</td>
+    
+    <td width="20">{{ticket_preatendido.dif_fecha}}</td>
 
     </tr>
 
@@ -95,20 +87,20 @@
 
 </table>
 
-</table>
 
 
-<table class ='atendidos'>
+
+<table class ='table'>
 
 
 {% for ticket_atendido in ticket_atendido %}
 
     <tr class='atendido'>
 
-    <td width='8%' class='id'>{{ticket_atendido.ticket_id}}</td>
-    <td width='25%'>{{ticket_atendido.ticket__asunto}}</td>
-    <td width='25%'>{{ticket_atendido.soporte__username}}</td>
-    <td width='25%'>{{ticket_atendido.dif_fecha}}</td>
+    <td  width="20" class='id'>{{ticket_atendido.ticket_id}}</td>
+    <td width="20" >{{ticket_atendido.ticket__asunto}}</td>
+    <td width="20">{{ticket_atendido.soporte__username}}</td>
+    <td width="20">{{ticket_atendido.dif_fecha}}</td>
     
 
     </tr>
@@ -116,16 +108,19 @@
 {% endfor %}
 
 
+</table>
+
+<table class='table'>
 
 
 {% for ticket_reasignado in ticket_reasignado %}
 
     <tr class='atendido'>
 
-    <td width='8%' class='id'>{{ticket_reasignado.ticket_id}}</td>
-    <td width='25%'>{{ticket_reasignado.ticket__asunto}}</td>
-    <td width='25%'>{{ticket_reasignado.soporte__username}}</td>
-    <td width='25%'>{{ticket_reasignado.dif_fecha}}</td>
+    <td  width="20" class='id'>{{ticket_reasignado.ticket_id}}</td>
+    <td width="20">{{ticket_reasignado.ticket__asunto}}</td>
+    <td width="20">{{ticket_reasignado.soporte__username}}</td>
+    <td width="20">{{ticket_reasignado.dif_fecha}}</td>
     
 
     </tr>
@@ -135,17 +130,16 @@
 </table>
 
 
-<table class ='porvalidar'>
-
+<table class ='table'>
 
 {% for ticket_cerrados in ticket_cerrados %}
 
     <tr class='porvalidars'>
 
-    <td width='8%' class='id'>{{ticket_cerrados.ticket_id}}</td>
-    <td width='25%'>{{ticket_cerrados.ticket__asunto}}</td>
-    <td width='25%'>{{ticket_cerrados.soporte__username}}</td>
-    <td width='25%'>{{ticket_cerrados.dif_fecha}}</td>
+    <td width="20" class='id'>{{ticket_cerrados.ticket_id}}</td>
+    <td width="20">{{ticket_cerrados.ticket__asunto}}</td>
+    <td width="20">{{ticket_cerrados.soporte__username}}</td>
+    <td width="20">{{ticket_cerrados.dif_fecha}}</td>
     
   
 
@@ -199,7 +193,7 @@
     $( ".atendido" ).click(function() {
     
     $(this).css("background","#5C84C2");
-    window.location.href = "/ver_ticket_gilda/"+$(this).children().html()
+    window.location.href = "/mdetalle_ticket/"+$(this).children().html()
 
 
 });
@@ -215,7 +209,7 @@
     $( ".porvalidars" ).click(function() {
     
     $(this).css("background","#5C84C2");
-    window.location.href = "/ver_ticket_gilda/"+$(this).children().html()
+    window.location.href = "/mdetalle_ticket/"+$(this).children().html()
 
 
 });
@@ -228,6 +222,34 @@
       
 </script>
 
+
+<style type="text/css">
+    
+
+    .aaa{
+
+  background: #990099;
+  color:white;
+  
+}
+.sss{
+
+  background: #ff0000;
+  color:white;
+}
+.atendido{
+
+  background: #33cc33;
+  color:white;
+}
+.porvalidars{
+
+  background: #6600ff;
+  color:white;
+}
+
+
+</style>
 
 </body>
 </html>

@@ -26,14 +26,19 @@ def webx(request):
 def ticketscerrados(request):
 
 	username = request.user.username
-	ticket = Ticket.objects.filter(estado_id=4,soporte_actual=username)
-	print ticket
 	
 	id = request.user.id
 	x=User.objects.get(pk=id)
 	grupo =x.groups.get()
 	grupo=str(grupo)
-	username = request.user.username
+
+	if grupo=='Soporte' :
+
+		ticket = Ticket.objects.filter(estado_id=4,soporte_actual=username)
+
+	if grupo=='Clientes' :
+
+		ticket = Ticket.objects.filter(estado_id=4,cliente_id=id)
 
 
 	paginator = Paginator(ticket, 20) # Show 25 contacts per page
