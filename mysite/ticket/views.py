@@ -820,7 +820,16 @@ def reasignar_add(request):
 		
 		noti.save()
 
-		return HttpResponseRedirect("/mticket/3")
+		x=User.objects.get(username=username)
+
+		grupo =x.groups.get()
+		grupo= str(grupo)
+
+		if grupo=='Soporte':
+
+			return HttpResponseRedirect("/mticket/5")
+		else:
+			return HttpResponseRedirect("/mticket/3")
 
 
 
