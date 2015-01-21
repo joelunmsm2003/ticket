@@ -45,3 +45,6 @@ group by
 Soporte.objects.values('ticket_id').annotate(dcount=Count('ticket_id'))
 
 Soporte.objects.values('ticket_id').annotate(dcount=Max('fecha_inicio'))
+
+
+django-admin.py startproject mysite

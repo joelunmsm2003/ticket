@@ -25,17 +25,7 @@
     <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type='text/css'>
 
 
-    <div class="jumbotron">
-        
-   
-        <p>
-          <a class="btn btn-lg btn-primary" href="/agregar_ticket_m" role="button">Generar Ticket &raquo;</a>
-        </p>
 
-        <h1><a href='/mdetalle_ticket/{{ticket.id}}/'>{{ticket.asunto}}</a></h1>
-        <h2>Reasignar un soporte</h2>
-   
-      </div>
 
 
 
@@ -56,6 +46,18 @@
 </table>
 </div>
 
+
+    <div class="jumbotron">
+        
+   
+        <p>
+          <a class="btn btn-lg btn-primary" href="/agregar_ticket_m" role="button">Generar Ticket &raquo;</a>
+        </p>
+
+        <h1><a href='/mdetalle_ticket/{{ticket.id}}/'>{{ticket.asunto}}</a></h1>
+        <h2>Reasignar un soporte</h2>
+   
+      </div>
 <!--
 <div id='contenedor'>
 
