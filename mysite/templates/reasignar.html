@@ -1,5 +1,22 @@
 
 
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <script type='text/javascript' src='http://code.jquery.com/jquery-1.8.2.js'></script>
+
+    <title>Xiencias</title>
+
+
+  </head>
+
+<body>
 
 
   <body data-feedly-mini="yes">
@@ -21,7 +38,8 @@
           <a class="btn btn-lg btn-primary" href="/agregar_ticket_m" role="button">Generar Ticket &raquo;</a>
         </p>
 
-        <h1>{{soporte.ticket}}</h1>
+       
+        <h1><a href='/mdetalle_ticket/{{soporte.ticket_id}}/'>{{soporte.ticket}}</a></h1>
         <h2>Reasignar</h2>
         
       </div>
@@ -36,11 +54,9 @@
     
     {% csrf_token %}
     
-    <label class="sr-only"></label><input value="{{id_ticket}}" id="field" type="hidden" name="id_ticket" maxlength="100" class="form-control" ><br>
-    <label class="sr-only"></label><input readonly value="{{soporte.id}}" id="field" type="hidden" name="id" maxlength="100" class="form-control"><br>
-  
-
-
+    <input value="{{id_ticket}}" id="field" type="hidden" name="id_ticket" maxlength="100" class="form-control" >
+    <input readonly value="{{soporte.id}}" id="field" type="hidden" name="id" maxlength="100" class="form-control"><br>
+ 
 
 
 
@@ -50,11 +66,13 @@
     {% for user_soporte in user_soporte%}
      <option value="{{user_soporte.id}}">{{user_soporte.first_name}}</option>
 	{% endfor %}
-    </select>
+    </select> 
+   
+   <textarea required="" id="file" id="descripcion" name="descripcion" class="form-control" placeholder="Descripcion" rows="5" cols="30"></textarea><br>
 
     
   
-    <br>
+  
     <label class='etiqueta'></label><input  class="btn btn-lg btn-primary btn-block" id="field1" type="submit" value="Reasignar Ticket" /></div>
 
 </form>

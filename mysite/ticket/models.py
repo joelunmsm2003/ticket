@@ -45,7 +45,7 @@ class Soporte(models.Model):
 
 	id = models.AutoField(max_length=100,primary_key=True)
 	ticket = models.ForeignKey(Ticket)
-	titulo = models.CharField(max_length=100,blank=True)
+	titulo = models.CharField(max_length=1000,blank=True)
 	fecha_inicio = models.DateTimeField()
 	fecha_fin= models.DateTimeField(null=True,blank=True)
 	soporte = models.ForeignKey(User,)

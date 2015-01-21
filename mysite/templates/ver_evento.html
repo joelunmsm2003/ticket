@@ -35,13 +35,63 @@
         </p>
 
         <h1><a href='/mdetalle_ticket/{{ticket.id}}/'>{{ticket.asunto}}</a></h1>
-        <h2>Eventos</h2>
+        <h2>Detalle del Soporte</h2>
+    
       </div>
 
-
+<table class='table'>
   
+<tr>
+  <td>Soporte</td>
+  <td>{{soporte.soporte.first_name}}</td>
+</tr>
+
+<tr>
+  <td>Descripcion</td>
+  <td>{{soporte.titulo}}</td>
+</tr>
+
+<tr>
+  <td>Ticket</td>
+  <td>{{soporte.ticket}}</td>
+  
+</tr>
+
+
+
+<tr>
+  <td>Fecha Inicio</td>
+  <td>{{soporte.fecha_inicio}}</td>
+</tr>
+
+<tr>
+  <td>Fecha Fin</td>
+  <td>{{soporte.fecha_fin}}</td>
+</tr>
+
+ <tr> 
+      <td  >Documentos</td>
+      <td ><a href='/documentos/{{ticket.id}}'>Documentos</a></td>
+      </tr>
+
+
+
+</table>
+
+{% if soporte.fecha_fin == None %}
+ <div id='b'>
+
+        <p>
+          <a class="btn btn-lg btn-primary" href="/reasignar/{{soporte.id}}/{{ticket.id}}" role="button">Reasignar &raquo;</a>
+        </p>
+
+ </div>
+
+ {% endif %}
+
 <div id='contenedor'>
 
+<h3>Historial de Eventos</h3>
 
 {% if evento %}
 <table class ='table'>
@@ -50,10 +100,10 @@
    <tr class="active">
     
 		<td>Usuario</td> 
-	
+	 <td>Evento</td>
 		<td>Fecha</td>
 		
-		<td>Evento</td> 
+		 
    
 
     
@@ -62,11 +112,11 @@
 
 	{% for evento in evento%}
 	<tr>
-	<td>{{evento.user}}</td>
+	<td>{{evento.user.first_name}}</td>
 
+  <td>{{evento.name}}</td>
 	<td>{{evento.fecha_inicio}}</td>
 
-	<td>{{evento.name}}</td>
 	{% endfor %}
 </table>
 {% else %}

@@ -768,6 +768,9 @@ def reasignar_add(request):
 		soporte_user = request.POST['soporte']
 		
 		id_ticket = request.POST['id_ticket']
+
+		titulo = request.POST['descripcion']
+
 		ticket = Ticket.objects.get(id=id_ticket)
 		first_name = str(ticket.cliente)
 
@@ -781,7 +784,7 @@ def reasignar_add(request):
 
 
 
-		soporte_r= ticket.soporte_set.create(fecha_inicio=fecha_fin,soporte_id=soporte_user)
+		soporte_r= ticket.soporte_set.create(fecha_inicio=fecha_fin,soporte_id=soporte_user,titulo=titulo)
 
 		ticket.soporte_actual = str(soporte_r.soporte)
 		ticket.save()
@@ -794,7 +797,7 @@ def reasignar_add(request):
 		
 		noti.save()
 
-		return HttpResponseRedirect("/mdetalle_ticket/"+id_ticket+"/")
+		return HttpResponseRedirect("/mticket/3")
 
 
 
@@ -898,7 +901,7 @@ def detalle_ticket(request,id):
 def mdetalle_ticket(request,id):
 
 	ticket= Ticket.objects.get(id=id)
-	soportes = ticket.soporte_set.all()
+	soportes = ticket.soporte_set.all().order_by('-id')
 
 	id = request.user.id
 	user = User.objects.get(id=id)
@@ -1044,6 +1047,8 @@ def ver_evento(request,id,id_ticket):
 	event = Evento.objects.count()
 	noti = Notificaciones.objects.all().order_by('-id')[:8]
 	soporte_abierto = Soporte.objects.filter(fecha_fin=None)
+
+	
 
 	username = request.user.username
 	tipos=Tipo.objects.all()

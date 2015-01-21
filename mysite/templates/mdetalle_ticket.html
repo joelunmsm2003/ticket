@@ -16,13 +16,6 @@
   {% load static %} 
 
     <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type='text/css'>
-    <link href="{% static 'css/signin.css' %}" rel="stylesheet" type='text/css'>
-    <!-- Custom styles for this template -->
-    <link href="{% static 'css/nav.css' %}" rel="stylesheet">
-
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="{% static 'js/hello.js' %}"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -39,7 +32,7 @@
     <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type='text/css'>
 
 
-
+<div id='ticket'>{{ticket.id}}</div>
 <div class="container">
 
      <!-- Main component for a primary marketing message or call to action -->
@@ -73,7 +66,7 @@
 
       <tr>
       <td >Usuario</td>
-      <td ><a href='/ver_usuario/{{ticket.cliente_id}}/'>{{ticket.cliente}}</a></td>
+      <td ><a href='/ver_usuario/{{ticket.cliente_id}}/'>{{ticket.cliente.first_name}}</a></td>
       </tr>
 
       <tr>
@@ -201,6 +194,15 @@
 
           {% if estado == 'Reasignado' %}
 
+           <div id='b'>
+
+          <p>
+          <a class="btn btn-lg btn-primary" href="/atender/{{ticket.id}}" role="button">Atender &raquo;</a>
+
+          </p>
+          </div>
+
+
           <div id='b'>
 
           <p>
@@ -236,56 +238,39 @@
 
 
 <br></br>
+ <h3> Historial de Soporte</h3>
 {% if soportes %}
 <table class='table'>
   
-  <tr>
-  Historial de Soporte
-  </tr>
-  
-  <tr >
+  <tr class="active">
+
+
 
     <td>Soporte</td>
     
 
 
-    {% if grupo == 'Soporte' %}
-      <td>Reasignar</td>
    
-    {% endif %}
+      <td>Descripcion</td>
+      <td>Fecha</td>
 
-    <td>Evento</td>
-   <td>Detalle</td>
+
   
   </tr>
 
 
   {% for soportes in soportes%}
-  <tr>
+  <tr class='sss'>
 
-    <td ><a href='/ver_usuario/{{soportes.soporte_id}}/'>{{soportes.soporte}}</a></td>
+  <td class='id'>{{soportes.id}}</td>
+ 
 
-    {% if soportes.fecha_fin == None %}
-      
-      {% if grupo == 'Soporte' %}
-      <td ><a href='/reasignar/{{soportes.id}}/{{ticket.id}}'>Reasignar</a></td>
+    <td>{{soportes.soporte.first_name}}</td>
 
-      
-      {% endif %}
+    <td>{{soportes.titulo}}</td>
+    <td>{{soportes.fecha_inicio}}</td>
     
-      <td ><a href='/evento/{{soportes.id}}/{{ticket.id}}'>Agregar un evento</a></td>
-    
-    {% else %}
-
-      {% if grupo == 'Soporte' %}
-        <td><a href=''>-</a></td>
-
-      {% endif %}
-        <td ><a href=''>-</a></td>
-    
-    {% endif %}
-
-   <td ><a href='/ver_evento/{{soportes.id}}/{{ticket.id}}'>Detalle</a></td>
+     
 
   </tr>
 
@@ -301,7 +286,20 @@
 {% endif %}
 
 
+<script type="text/javascript">
 
+    $('.id').hide()
+    $('#ticket').hide()
+
+    t=$('#ticket').text()
+    $( ".sss" ).click(function() {
+    $(this).css("background",'#2e6da4');
+    $(this).css("color",'#fff');
+    window.location.href = "/ver_evento/"+$(this).children().html()+'/'+t
+
+});
+
+</script>
 
 
 
