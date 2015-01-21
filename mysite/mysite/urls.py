@@ -56,7 +56,7 @@ urlpatterns = patterns('',
 	url(r'^agregar_ticket_m/','ticket.views.agregar_ticket_m'),
 
 	url(r'^mlogeate/','ticket.views.logeate_m'),
-
+	url(r'^post/','ticket.views.post'),
 	url(r'^soportes/(\d+)/$', 'ticket.views.soportes'),
 	url(r'^soporte/(\d+)/$', 'ticket.views.soporte'),
 	url(r'^eventos/(\d+)/$', 'ticket.views.eventos'),

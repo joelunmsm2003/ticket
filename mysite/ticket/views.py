@@ -23,6 +23,11 @@ def webx(request):
 	return render(request, 'web/index.html')
 
 
+def post(request):
+
+	return HttpResponseRedirect('/email')
+
+
 def ticketscerrados(request):
 
 	username = request.user.username
@@ -772,7 +777,7 @@ def reasignar_add(request):
 		titulo = request.POST['descripcion']
 
 		ticket = Ticket.objects.get(id=id_ticket)
-		first_name = str(ticket.cliente)
+		first_name = str(ticket.cliente.first_name)
 
 		id = request.POST['id']
 		fecha_inicio = datetime.datetime.today()
